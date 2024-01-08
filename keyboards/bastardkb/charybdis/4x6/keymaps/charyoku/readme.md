@@ -9,30 +9,34 @@ on Jan 2024. It forked-off from *Charybdis 3x5* QWERTY based layout,
 a much smaller split ergo keyboard which physically contains the exact same number of
 keys as the original Miryoku layout.  The extra keys were decided with ideas from
 the [Engram layout](https://sunaku.github.io/engram-keyboard-layout.html) regarding
-the placement of symbols in the 2 outer columns:
+the placement of symbols in the 2 outer columns, with x2 non-QWERTY shift-pairs
+(`'(` and `")`):
 
 ```txt
-`~ 1! 2@ 3# 4$ 5%    6^ 7& 8* 9/ 0? -_
-[{ qQ wW fF pP bB    jJ lL uU yY \| ]}
+`~ 1! 2@ 3# 4$ 5%    6^ 7& 8* 9/ 0? =+
+[{ qQ wW fF pP bB    jJ lL uU yY ;: ]}
 '( aA rR sS tT gG    mM nN eE iI oO ")
-,< zZ xX cC dD vV    kK hH ;: /? =+ .>
+,< zZ xX cC dD vV    kK hH \| /? -_ .>
 
-     Media / ESC     Symbols / ENTER
-Navigation / SPACE   Numeral / BACKSPACE
-     Mouse / TAB       FKeys / DELETE
-      RAlt / APP
-         ?????
+media/ESC                  num/Bksp
+    nav/SPACE          sym/Del
+        mouse/TAB        
+
+   RAlt/APP             fun/Enter  
+       RCtrl/PrtSc
 ```
 
 ## Features
 
 - [x] VIA enabled
 - [x] RGB matrix
-- [ ] ColemakDH
-- [ ] all x6 Miryoku-inspired layers (media, nav, mouse, sym, num, fun)
-- [ ] non-QWERTY shift-pairs (`'(` and `")`)
-- [ ] Auto-mouse, scroll, snipping
-- [ ] Achordion (or bilateral-combinations) home-fow-mods
+- [x] ColemakDH
+- [x] all x6 Miryoku-inspired layers (media, nav, mouse, sym, num, fun)
+- [ ] single-handed pointer (trackball) with mouse-buttons ergonomically close to home-row
+- [ ] x2 non-QWERTY shift-pairs (`'(` and `")`)
+- [ ] Decide auto-mouse impl (core vs charybdis), scroll, (auto)snipping
+- [ ] Achordion (or bilateral-combinations) home-row-mods
+- [ ] layer-state RGB indicators
 - ...
 
 ---
