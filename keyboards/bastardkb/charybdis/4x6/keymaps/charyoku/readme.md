@@ -1,10 +1,47 @@
-# Charybdis (3x5) `via` keymap
+# Charybdis 4x6 VIA-Miryoku-ColemakDH keymap
 
-The Charydbis (3x5) `via` keymap is based on a QWERTY layout with [home row mods](https://precondition.github.io/home-row-mods) and [Miryoku-inspired layers](https://github.com/manna-harbour/miryoku), and some features and changes specific to the Charybdis.
+A *ColemakDH-esque* keymap for the "big" *Charybdis 4x6*, with *VIA* support,
+[home row mods](https://precondition.github.io/home-row-mods) and
+[Miryoku-inspired layers](https://github.com/manna-harbour/miryoku).
 
-This layout supports RGB matrix. However, due to space constraints on the MCU, only a limited number of effect can be enabled at once. Look at the `config.h` file and enable your favorite effect.
+It was announced in [this *BastardKBD* discord thread](https://discordapp.com/channels/681309835135811648/1193692606568333342)
+on Jan 2024. It forked-off from *Charybdis 3x5* QWERTY based layout,
+a much smaller split ergo keyboard which physically contains the exact same number of
+keys as the original Miryoku layout.  The extra keys were decided with ideas from
+the [Engram layout](https://sunaku.github.io/engram-keyboard-layout.html) regarding
+the placement of symbols in the 2 outer columns:
 
-This layout also supports VIA.
+```txt
+`~ 1! 2@ 3# 4$ 5%    6^ 7& 8* 9/ 0? -_
+[{ qQ wW fF pP bB    jJ lL uU yY \| ]}
+'( aA rR sS tT gG    mM nN eE iI oO ")
+,< zZ xX cC dD vV    kK hH ;: /? =+ .>
+
+     Media / ESC     Symbols / ENTER
+Navigation / SPACE   Numeral / BACKSPACE
+     Mouse / TAB       FKeys / DELETE
+      RAlt / APP
+         ?????
+```
+
+## Features
+
+- [x] VIA enabled
+- [x] RGB matrix
+- [ ] ColemakDH
+- [ ] all x6 Miryoku-inspired layers (media, nav, mouse, sym, num, fun)
+- [ ] non-QWERTY shift-pairs (`'(` and `")`)
+- [ ] Auto-mouse, scroll, snipping
+- [ ] Achordion (or bilateral-combinations) home-fow-mods
+- ...
+
+---
+
+Original Charybdis 3x5 readme follows.
+
+This layout supports RGB matrix. However, due to space constraints on the MCU,
+only a limited number of effect can be enabled at once. Look at the `config.h` file and
+enable your favorite effect.
 
 ## Customizing the keymap
 
