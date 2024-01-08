@@ -1,8 +1,10 @@
-# Charybdis (4x6) `via` keymap
+# Charybdis (3x5) `via` keymap
 
-The Charydbis (4x6) `via` keymap is inspired from the original [Dactyl Manuform](../../../../../handwired/dactyl_manuform) default keymap, with some features and changes specific to the Charybdis.
+The Charydbis (3x5) `via` keymap is based on a QWERTY layout with [home row mods](https://precondition.github.io/home-row-mods) and [Miryoku-inspired layers](https://github.com/manna-harbour/miryoku), and some features and changes specific to the Charybdis.
 
 This layout supports RGB matrix. However, due to space constraints on the MCU, only a limited number of effect can be enabled at once. Look at the `config.h` file and enable your favorite effect.
+
+This layout also supports VIA.
 
 ## Customizing the keymap
 
@@ -58,4 +60,4 @@ The trigger sensibility can also be tuned. The lower the value, the more sensibl
 
 ## Layout
 
-![Keymap layout (generated with keyboard-layout-editor.com)](https://i.imgur.com/qI7phR7.png)
+![Keymap layout (generated with keyboard-layout-editor.com)](https://i.imgur.com/uHEnqEN.png)
