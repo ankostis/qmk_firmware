@@ -48,6 +48,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ESC_MED LT(LAYER_MEDIA, KC_ESC)
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define TAB_PTR LT(LAYER_POINTER, KC_TAB)
+#define LA2_PTR LT(LAYER_POINTER, KC_SLSH)
 #define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
 #define DEL_FUN LT(LAYER_FUNCTION, KC_DEL)
@@ -61,6 +62,10 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
+// Strange, but these do not work!?
+#define KC_UNDO LCTL(KC_Z)
+#define KC_AGIN LCTL(KC_Y)
+
 // clang-format off
 /** \brief NUM+ColemakDH layout (4 rows, 2x6 columns, 5+3 thumbs), punctuations
  * in the outer/surrounding keys, miryoku hold_n_tap in the thumbs.
@@ -69,7 +74,7 @@ static uint16_t auto_pointer_layer_timer = 0;
      KC_GRV,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0, KC_EQL, \
     KC_LBRC,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_SCLN,KC_RBRC, \
     KC_QUOT,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_QUOT, \
-    KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_BSLS,KC_SLSH,KC_MINS, KC_DOT, \
+    KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_BSLS,LA2_PTR,KC_MINS, KC_DOT, \
                             ESC_MED,SPC_NAV,TAB_PTR,                                  ENT_SYM,BSP_NUM, \
                                     APP_RAL,PRN_CTL,                                  DEL_FUN
 
@@ -120,13 +125,16 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 
 
-/** \brief Mouse emulation and pointer functions. */
+/** \brief Mouse emulation and pointer functions.  The mouse buttons are located
+ * above track ball close to the right side home-row, along with copy, paste, undo and
+ * redo keys, allowing one-hand editing & browsing.
+ */
 #define LAYOUT_LAYER_POINTER                                                                           \
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,DPI_MOD,S_D_MOD,  S_D_MOD,DPI_MOD,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX, \
-    ________________HOME_ROW_GACS_L________________,  ________________HOME_ROW_GACS_R________________, \
-    XXXXXXX,_______,DRGSCRL,SNIPING, EE_CLR,QK_BOOT,  QK_BOOT, EE_CLR,SNIPING,DRGSCRL,_______,XXXXXXX, \
-                           KC_BTN2, KC_BTN1,_______,                                  KC_BTN2,KC_BTN1, \
+    _________________DEAD_HALF_ROW_________________,   KC_CUT,DPI_MOD,KC_BTN3,S_D_MOD,KC_UNDO,KC_AGIN, \
+    ________________HOME_ROW_GACS_L________________,  KC_COPY,KC_BTN2,KC_BTN1,XXXXXXX, KC_SPC, KC_TAB, \
+    _________________DEAD_HALF_ROW_________________,  KC_PSTE,XXXXXXX,DRGSCRL,_______,SNIPING,KC_CAPS, \
+                            XXXXXXX,XXXXXXX,_______,                                  KC_BTN2,KC_BTN1, \
                                     APP_RAL,PRN_CTL,                                  KC_BTN3
 
 /**
