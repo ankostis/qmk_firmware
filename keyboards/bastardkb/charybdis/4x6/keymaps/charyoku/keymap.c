@@ -49,9 +49,10 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define TAB_PTR LT(LAYER_POINTER, KC_TAB)
 #define LA2_PTR LT(LAYER_POINTER, KC_SLSH)
-#define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
+#define DEL_SYM LT(LAYER_SYMBOLS, KC_DEL)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
-#define DEL_FUN LT(LAYER_FUNCTION, KC_DEL)
+#define ENT_FUN LT(LAYER_FUNCTION, KC_ENT)
+
 #define APP_RAL MT(MOD_RALT, KC_APP)
 #define PRN_CTL MT(MOD_RCTL, KC_PSCR)
 
@@ -75,8 +76,8 @@ static uint16_t auto_pointer_layer_timer = 0;
     KC_LBRC,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_SCLN,KC_RBRC, \
     KC_QUOT,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_QUOT, \
     KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_BSLS,LA2_PTR,KC_MINS, KC_DOT, \
-                            ESC_MED,SPC_NAV,TAB_PTR,                                  ENT_SYM,BSP_NUM, \
-                                    APP_RAL,PRN_CTL,                                  DEL_FUN
+                            ESC_MED,SPC_NAV,TAB_PTR,                                  DEL_SYM,BSP_NUM, \
+                                    APP_RAL,PRN_CTL,                                  ENT_FUN
 
 /** Convenience row shorthands. */
 #define _________________DEAD_HALF_ROW_________________  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX
