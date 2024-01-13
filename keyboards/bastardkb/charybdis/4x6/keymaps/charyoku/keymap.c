@@ -298,33 +298,45 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 
+
+/**
+ * Indicate *Caps_Word* with top-inner keys
+ * (left-side works only if `SPLIT_LAYER_STATE_ENABLE`)
+ */
+#define CAPS_WORD_LED_INDEX0 20  // inner-top-left
+#define CAPS_WORD_LED_INDEX1 49  // inner-top-right
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    for (uint8_t i = led_min; i < led_max; i++) {
-        switch (get_highest_layer(layer_state | default_layer_state)) {
-            case LAYER_POINTER:
-                rgb_matrix_set_color(i, RGB_YELLOW);
-                break;
-            case LAYER_FUNCTION:
-                rgb_matrix_set_color(i, RGB_MAGENTA);
-                break;
-            case LAYER_NAVIGATION:
-                rgb_matrix_set_color(i, RGB_CYAN);
-                break;
-            case LAYER_MEDIA:
-                // Leave colors of kbd funcs to shine.
-                // rgb_matrix_set_color(i, RGB_MAGENTA);
-                break;
-            case LAYER_NUMERAL:
-                rgb_matrix_set_color(i, RGB_BLUE);
-                break;
-            case LAYER_SYMBOLS:
-                rgb_matrix_set_color(i, RGB_CORAL);
-                break;
-            default:
-                break;
-        }
+    switch (get_highest_layer(layer_state | default_layer_state)) {
+        case LAYER_POINTER:
+            rgb_matrix_set_color_all(RGB_YELLOW);
+            break;
+        case LAYER_FUNCTION:
+            rgb_matrix_set_color_all(RGB_MAGENTA);
+            break;
+        case LAYER_NAVIGATION:
+            rgb_matrix_set_color_all(RGB_CYAN);
+            break;
+        case LAYER_MEDIA:
+            // Leave colors of kbd funcs to shine.
+            // rgb_matrix_set_color_all(RGB_MAGENTA);
+            break;
+        case LAYER_NUMERAL:
+            rgb_matrix_set_color_all(RGB_BLUE);
+            break;
+        case LAYER_SYMBOLS:
+            rgb_matrix_set_color_all(RGB_CORAL);
+            break;
+        default:
+            break;
     }
+    if (is_caps_word_on()) {
+        rgb_matrix_set_color(CAPS_WORD_LED_INDEX0, RGB_WHITE);
+        rgb_matrix_set_color(CAPS_WORD_LED_INDEX1, RGB_WHITE);
+    }
+
+
     return false;
 }
 
-#endif
+#endif      // RGB_MATRIX_ENABLE
