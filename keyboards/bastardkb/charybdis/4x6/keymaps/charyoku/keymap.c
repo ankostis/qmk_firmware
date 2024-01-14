@@ -47,8 +47,10 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define ESC_MED LT(LAYER_MEDIA, KC_ESC)
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
+#define LA2_NAV LT(LAYER_NAVIGATION, KC_MINS)
 #define TAB_PTR LT(LAYER_POINTER, KC_TAB)
 #define LA2_PTR LT(LAYER_POINTER, KC_SLSH)
+#define LA3_PTR LT(LAYER_POINTER, KC_END)
 #define DEL_SYM LT(LAYER_SYMBOLS, KC_DEL)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
 #define ENT_FUN LT(LAYER_FUNCTION, KC_ENT)
@@ -78,7 +80,7 @@ static uint16_t auto_pointer_layer_timer = 0;
      KC_GRV,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0, KC_EQL, \
     KC_LBRC,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_SCLN,KC_RBRC, \
     KC_QUOT,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_QUOT, \
-    KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_BSLS,LA2_PTR,KC_MINS, KC_DOT, \
+    KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_BSLS,LA2_PTR,LA2_NAV, KC_DOT, \
                             ESC_MED,SPC_NAV,TAB_PTR,                                  DEL_SYM,BSP_NUM, \
                                     APP_RAL,PRN_CTL,                                  ENT_FUN
 
@@ -132,39 +134,49 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 
 
-/** \brief Mouse emulation and pointer functions.
+/** \brief Mouse layer featuring common editing keys with *navigation layer*.
  *
- * The mouse buttons are located above track ball close to the right side home-row,
- * along with copy, paste, undo and redo keys, allowing one-hand editing & browsing.
+ * All mouse buttons & layer activator are located close and around the right trackball,
+ * along with copy, paste, undo and redo keys, to facilitate one-hand editing & browsing.
  *
- * Both thumb-clusters act as mouse buttons, plus, Esc for canceling menus & popups.
+ * Right thumb keys are duplicated from the base layer to avoid having to change layer
+ * mid edit just to press Enter or delete a char, and to enable auto-repeat.
+ *
+ * Without mouse emulation (useless with trackball).
+ *
+ * **Rational:** with the right-thumb occupied on the trackball, it's easier
+ * placing the x3 *mouse buttons* on the primary keys (vs on the right thumb-cluster).
+ * And to allow using trackball single-handedly (eg. when browsing),
+ * the *ring finger* is chosen as layer activator, as it provides better versasility vs
+ * pinning the "short" pinky, which would make the top-alphas row harder to reach and
+ * anything on the 5th column unreachable (the original *charybdis 4x6 uses the pinky).
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    _________________DEAD_HALF_ROW_________________,  KC_AGIN,DPI_MOD,KC_BTN3,S_D_MOD,XXXXXXX, KC_TAB, \
-    ________________HOME_ROW_GACS_L________________,  KC_UNDO,KC_BTN2,KC_BTN1,XXXXXXX,XXXXXXX, KC_SPC, \
-    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,DRGSCRL,_______,SNP_TOG,XXXXXXX, \
-                             KC_ESC,KC_BTN1,_______,                                  KC_BTN2,KC_BTN1, \
-                                    KC_BTN2,KC_BTN3,                                  KC_BTN3
+    _________________DEAD_HALF_ROW_________________,  KC_UNDO,KC_AGIN,KC_BTN3,XXXXXXX,DPI_MOD, KC_TAB, \
+    ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_BTN2,KC_BTN1,XXXXXXX,S_D_MOD, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,DRGSCRL,_______,SNP_TOG, QK_REP, \
+                             KC_ESC,KC_BTN1,_______,                                   KC_DEL,KC_BSPC, \
+                                    KC_BTN2,KC_BTN3,                                   KC_ENT
 
 /**
- * \brief Navigation layer.
+ * \brief Navigation layer featuring common editing keys with *mouse layer*.
  *
- * Primary right-hand layer (left home thumb) is navigation and editing. Cursor
- * keys and line and page movement are on a "cross" centered around the home position,.
- * Clipboard, undos and other editing utils *mimic the pointer layer*.
+ * Primary right-hand layer activated by left home thumb & right pinky is for navigation and
+ * editing. Cursor keys and line and page movement are on a "cross" centered around
+ * home position, while clipboard, undos and other editing keys on prinary & thumbs
+ * *mimic the pointer layer*.
+ * Practically, with alternating right ring & pinky pinning, single-handed
+ * editing & mouse is possible.
  *
- * Thumb keys are duplicated from the base layer to avoid having to layer change mid edit and
- * to enable auto-repeat.
- *
- * Notice the "Caps Word" (`CW_TOGG`) in the top-inner key (part of the `KEYB_CTRL_ROW`)
- * that spells just the next word in capital, including underscores.
+ * Notice the "Caps Word" (`CW_TOGG`) in the top-2nd key (part of the `KEYB_CTRL_ROW`)
+ * that types in capital just the next word (including underscores)
  */
 #define LAYOUT_LAYER_NAVIGATION                                                                        \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
-    _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_HOME,  KC_UP, KC_END,KC_PGUP, KC_TAB, \
-    ________________HOME_ROW_GACS_L________________,  KC_UNDO,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
-    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,XXXXXXX, KC_INS, QK_REP,QK_AREP, \
+    _________________DEAD_HALF_ROW_________________,  KC_UNDO,KC_AGIN,  KC_UP, KC_INS,KC_PGUP, KC_TAB, \
+    ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,KC_HOME,LA3_PTR,_______, QK_REP, \
                              KC_ESC,_______,XXXXXXX,                                   KC_DEL,KC_BSPC, \
                                     APP_RAL,PRN_CTL,                                   KC_ENT
 
