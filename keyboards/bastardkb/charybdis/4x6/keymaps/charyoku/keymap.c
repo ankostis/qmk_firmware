@@ -134,7 +134,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 
 
-/** \brief Mouse layer featuring common editing keys with *navigation layer*.
+/** \brief Mouse layer featuring common editing keys with *all other right layers*.
  *
  * All mouse buttons & layer activator are located close and around the right trackball,
  * along with copy, paste, undo and redo keys, to facilitate one-hand editing & browsing.
@@ -160,7 +160,7 @@ static uint16_t auto_pointer_layer_timer = 0;
                                     KC_BTN2,KC_BTN3,                                   KC_ENT
 
 /**
- * \brief Navigation layer featuring common editing keys with *mouse layer*.
+ * \brief Navigation layer featuring common editing keys with *all other right layers*.
  *
  * Primary right-hand layer activated by left home thumb & right pinky is for navigation and
  * editing. Cursor keys and line and page movement are on a "cross" centered around
@@ -187,12 +187,14 @@ static uint16_t auto_pointer_layer_timer = 0;
  * Primary left-hand layer (right home thumb) is numerals and symbols. Numerals
  * are in the standard numpad locations with symbols in the remaining positions.
  * `KC_DOT` is duplicated from the base layer.
+ *
+ * Editing keys (copy-paste, undo) shared with all other right layers.
  */
 #define LAYOUT_LAYER_NUMERAL                                                                           \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
-    XXXXXXX,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  _________________DEAD_HALF_ROW_________________, \
-    XXXXXXX,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  ________________HOME_ROW_GACS_R________________, \
-    XXXXXXX, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  _________________DEAD_HALF_ROW_________________, \
+    XXXXXXX,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  KC_UNDO,KC_AGIN,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
+    XXXXXXX,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
+    XXXXXXX, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
                              KC_DOT,   KC_0,KC_MINS,                                   KC_DEL,KC_BSPC, \
                                     KC_COMM,KC_QUOT,                                   KC_ENT
 
@@ -203,12 +205,14 @@ static uint16_t auto_pointer_layer_timer = 0;
  * Secondary left-hand layer has shifted symbols in the same locations to reduce
  * chording when using mods with shifted symbols. `KC_LPRN` is duplicated next to
  * `KC_RPRN`.
+ *
+ * Editing keys (copy-paste, undo) shared with all other right layers.
  */
 #define LAYOUT_LAYER_SYMBOLS                                                                           \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
-    XXXXXXX,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  _________________DEAD_HALF_ROW_________________, \
-    XXXXXXX,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,  ________________HOME_ROW_GACS_R________________, \
-    XXXXXXX,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,  _________________DEAD_HALF_ROW_________________, \
+    XXXXXXX,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  KC_UNDO,KC_AGIN,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
+    XXXXXXX,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
+    XXXXXXX,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
                             KC_LPRN,KC_RPRN,KC_UNDS,                                   KC_DEL,KC_BSPC, \
                                     APP_RAL,PRN_CTL,                                   KC_ENT
 
