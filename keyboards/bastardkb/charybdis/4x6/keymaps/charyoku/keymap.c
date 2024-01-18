@@ -128,7 +128,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
     _________________DEAD_HALF_ROW_________________,  RGB_VAI,RGB_HUI,RGB_SAI,RGB_MOD,RGB_SPI,RGB_TOG, \
     ________________HOME_ROW_GACS_L________________,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,RGB_M_P, \
-    _________________DEAD_HALF_ROW_________________,  QK_BOOT, EE_CLR,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX, \
+    _________________DEAD_HALF_ROW_________________,  XXXXXXX,KC_BRID,XXXXXXX,KC_BRIU,XXXXXXX,XXXXXXX, \
                             _______,KC_MPLY,KC_MSTP,                                  KC_MSTP,KC_MPLY, \
                                     APP_RAL,PRN_CTL,                                  XXXXXXX
 
