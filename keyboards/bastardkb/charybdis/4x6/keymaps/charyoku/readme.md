@@ -6,23 +6,25 @@ A *ColemakDH-esque* keymap for the "big" *Charybdis 4x6*, with *VIA* support,
 
 It was announced in [this *BastardKBD* discord thread](https://discordapp.com/channels/681309835135811648/1193692606568333342)
 on Jan 2024. It forked-off from *Charybdis 3x5* QWERTY based layout,
-a much smaller split ergo keyboard which physically contains the exact same number of
-keys as the original Miryoku layout.  The extra keys were decided with ideas from
-the [Engram layout](https://sunaku.github.io/engram-keyboard-layout.html) regarding
-the placement of symbols in the 2 outer columns, with x2 non-QWERTY shift-pairs
-(`'(` and `")`):
+a smaller split ergo keyboard which physically contains the exact same number of
+keys as the original *Miryoku* layout.  The extra keys were filled like this:
+
+- top row: `F1`-`F12` to facilitate app shortcuts
+  with one hand, eg. *vscode*, *midnight commander*.
+- outer columns: ideas from the [Engram layout](https://sunaku.github.io/engram-keyboard-layout.html)
+  for programmers.
 
 ```txt
-`~ 1! 2@ 3# 4$ 5%    6^ 7& 8* 9/ 0? =+
-[{ qQ wW fF pP bB    jJ lL uU yY ;: ]}
-'( aA rR sS tT gG    mM nN eE iI oO ")
-,< zZ xX cC dD vV    kK hH \| /? -_ .>
+F1  F2  F3  F4  F5  F6    F7  F8  F9  F10 F11 F12
+[{  qQ  wW  fF  pP  bB    jJ  lL  uU  yY  ;:  ]}
+'(  aA  rR  sS  tT  gG    mM  nN  eE  iI  oO  ")
+,<  zZ  xX  cC  dD  vV    kK  hH  \|  /?  -_  .>
 
-media/ESC                  num/Bksp
-    nav/SPACE          sym/Del
-        mouse/TAB        
+media/ESC                               num/Bksp
+    nav/SPACE                       sym/Del
+        mouse/TAB
 
-   RAlt/APP             fun/Enter  
+   RAlt/APP                          fun/Enter
        RCtrl/PrtSc
 ```
 
