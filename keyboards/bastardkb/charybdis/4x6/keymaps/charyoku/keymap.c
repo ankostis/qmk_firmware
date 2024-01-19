@@ -182,7 +182,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     XXXXXXX,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  ________________HOME_ROW_GACS_R________________, \
     XXXXXXX, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  _________________DEAD_HALF_ROW_________________, \
                              KC_DOT,   KC_0,KC_MINS,                                   KC_DEL,KC_BSPC, \
-                                    APP_RAL,PRN_CTL,                                   KC_ENT
+                                    KC_COMM,KC_QUOT,                                   KC_ENT
 
 
 /**
