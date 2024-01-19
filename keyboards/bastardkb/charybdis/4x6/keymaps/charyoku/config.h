@@ -28,6 +28,8 @@
 
 #define SPLIT_LAYER_STATE_ENABLE  // comm overhead
 
+#define CAPS_WORD_INVERT_ON_SHIFT
+
 /* Charybdis-specific features. */
 
 #ifdef POINTING_DEVICE_ENABLE

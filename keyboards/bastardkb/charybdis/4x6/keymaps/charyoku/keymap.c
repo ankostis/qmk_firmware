@@ -84,8 +84,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define _________________TRNS_HALF_ROW_________________  _______,_______,_______,_______,_______,_______
 #define ________________HOME_ROW_GACS_L________________  XXXXXXX,KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,XXXXXXX
 #define ________________HOME_ROW_GACS_R________________  XXXXXXX,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,XXXXXXX
-#define ________________KEYB_CTRL_ROW_L________________   EE_CLR,QK_BOOT, QK_RBT,DB_TOGG,XXXXXXX,XXXXXXX
-#define ________________KEYB_CTRL_ROW_R________________  XXXXXXX,XXXXXXX,DB_TOGG, QK_RBT,QK_BOOT, EE_CLR
+#define ________________KEYB_CTRL_ROW_L________________   EE_CLR,QK_BOOT, QK_RBT,DB_TOGG,CW_TOGG,XXXXXXX
+#define ________________KEYB_CTRL_ROW_R________________  XXXXXXX,CW_TOGG,DB_TOGG, QK_RBT,QK_BOOT, EE_CLR
 
 /*
  * Layers used on the Charybdis 4x6.
@@ -233,6 +233,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_SYMBOLS] = LAYOUT_wrapper(LAYOUT_LAYER_SYMBOLS),
 };
 // clang-format on
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_MINS:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+        // extra from defaults
+        case KC_SLSH:
+        case KC_LEFT:
+        case KC_RGHT:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
