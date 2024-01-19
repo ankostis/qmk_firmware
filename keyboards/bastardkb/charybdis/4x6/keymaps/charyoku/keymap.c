@@ -47,7 +47,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define ESC_MED LT(LAYER_MEDIA, KC_ESC)
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
-#define LA2_NAV LT(LAYER_NAVIGATION, KC_MINS)
+#define LA2_NAV LT(LAYER_NAVIGATION, KC_BSLS)
 #define TAB_PTR LT(LAYER_POINTER, KC_TAB)
 #define LA2_PTR LT(LAYER_POINTER, KC_SLSH)
 #define LA3_PTR LT(LAYER_POINTER, KC_END)
@@ -89,7 +89,7 @@ static uint16_t auto_pointer_layer_timer = 0;
       KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,    KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11, KC_F12, \
     KC_LBRC,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_SCLN,KC_RBRC, \
     KC_QUOT,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_QUOT, \
-    KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_BSLS,LA2_PTR,LA2_NAV, KC_DOT, \
+    KC_COMM,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_MINS,LA2_PTR,LA2_NAV, KC_DOT, \
                             ESC_MED,SPC_NAV,TAB_PTR,                                  DEL_SYM,BSP_NUM, \
                                     APP_RAL,PRN_CTL,                                  ENT_FUN
 
