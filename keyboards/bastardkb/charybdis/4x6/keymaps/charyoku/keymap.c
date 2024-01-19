@@ -81,8 +81,11 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 /** Convenience row shorthands. */
 #define _________________DEAD_HALF_ROW_________________  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX
+#define _________________TRNS_HALF_ROW_________________  _______,_______,_______,_______,_______,_______
 #define ________________HOME_ROW_GACS_L________________  XXXXXXX,KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,XXXXXXX
 #define ________________HOME_ROW_GACS_R________________  XXXXXXX,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,XXXXXXX
+#define ________________KEYB_CTRL_ROW_L________________   EE_CLR,QK_BOOT, QK_RBT,DB_TOGG,XXXXXXX,XXXXXXX
+#define ________________KEYB_CTRL_ROW_R________________  XXXXXXX,XXXXXXX,DB_TOGG, QK_RBT,QK_BOOT, EE_CLR
 
 /*
  * Layers used on the Charybdis 4x6.
@@ -102,11 +105,11 @@ static uint16_t auto_pointer_layer_timer = 0;
  * from the base layer to enable auto-repeat.
  */
 #define LAYOUT_LAYER_FUNCTION                                                                          \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
+    _________________DEAD_HALF_ROW_________________,  _________________TRNS_HALF_ROW_________________, \
     XXXXXXX, KC_F12,  KC_F7,  KC_F8,  KC_F9,KC_PSCR,  _________________DEAD_HALF_ROW_________________, \
     XXXXXXX, KC_F11,  KC_F4,  KC_F5,  KC_F6,KC_SCRL,  ________________HOME_ROW_GACS_R________________, \
     XXXXXXX, KC_F10,  KC_F1,  KC_F2,  KC_F3,KC_PAUS,  _________________DEAD_HALF_ROW_________________, \
-                            XXXXXXX,XXXXXXX,XXXXXXX,                                  XXXXXXX,XXXXXXX, \
+                             KC_ESC,XXXXXXX,XXXXXXX,                                   KC_DEL,KC_BSPC, \
                                     APP_RAL,PRN_CTL,                                  _______
 
 
@@ -118,41 +121,49 @@ static uint16_t auto_pointer_layer_timer = 0;
  */
 #define LAYOUT_LAYER_MEDIA                                                                             \
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    XXXXXXX,XXXXXXX,RGB_RMOD,RGB_TOG,RGB_MOD,XXXXXXX,XXXXXXX,RGB_RMOD,RGB_TOG,RGB_MOD,XXXXXXX,XXXXXXX, \
-    XXXXXXX,KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,XXXXXXX, \
-    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX, EE_CLR,QK_BOOT,  QK_BOOT, EE_CLR,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX, \
+    _________________DEAD_HALF_ROW_________________,  RGB_VAI,RGB_HUI,RGB_SAI,RGB_MOD,RGB_SPI,RGB_TOG, \
+    ________________HOME_ROW_GACS_L________________,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,RGB_M_P, \
+    _________________DEAD_HALF_ROW_________________,  QK_BOOT, EE_CLR,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX, \
                             _______,KC_MPLY,KC_MSTP,                                  KC_MSTP,KC_MPLY, \
                                     APP_RAL,PRN_CTL,                                  XXXXXXX
 
 
 
-/** \brief Mouse emulation and pointer functions.  The mouse buttons are located
- * above track ball close to the right side home-row, along with copy, paste, undo and
- * redo keys, allowing one-hand editing & browsing.
+/** \brief Mouse emulation and pointer functions.
+ *
+ * The mouse buttons are located above track ball close to the right side home-row,
+ * along with copy, paste, undo and redo keys, allowing one-hand editing & browsing.
+ *
+ * Both thumb-clusters act as mouse buttons, plus, Esc for canceling menus & popups.
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    _________________DEAD_HALF_ROW_________________,   KC_CUT,DPI_MOD,KC_BTN3,S_D_MOD,KC_UNDO,KC_AGIN, \
-    ________________HOME_ROW_GACS_L________________,  KC_COPY,KC_BTN2,KC_BTN1,XXXXXXX, KC_SPC, KC_TAB, \
-    _________________DEAD_HALF_ROW_________________,  KC_PSTE,XXXXXXX,DRGSCRL,_______,SNIPING,KC_CAPS, \
-                            XXXXXXX,XXXXXXX,_______,                                  KC_BTN2,KC_BTN1, \
-                                    APP_RAL,PRN_CTL,                                  KC_BTN3
+    _________________DEAD_HALF_ROW_________________,  KC_AGIN,DPI_MOD,KC_BTN3,S_D_MOD,XXXXXXX, KC_TAB, \
+    ________________HOME_ROW_GACS_L________________,  KC_UNDO,KC_BTN2,KC_BTN1,XXXXXXX,XXXXXXX, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,DRGSCRL,_______,SNP_TOG,XXXXXXX, \
+                             KC_ESC,KC_BTN1,_______,                                  KC_BTN2,KC_BTN1, \
+                                    KC_BTN2,KC_BTN3,                                  KC_BTN3
 
 /**
  * \brief Navigation layer.
  *
  * Primary right-hand layer (left home thumb) is navigation and editing. Cursor
- * keys are on the home position, line and page movement below, clipboard above,
- * caps lock and insert on the inner column. Thumb keys are duplicated from the
- * base layer to avoid having to layer change mid edit and to enable auto-repeat.
+ * keys and line and page movement are on a "cross" centered around the home position,.
+ * Clipboard, undos and other editing utils *mimic the pointer layer*.
+ *
+ * Thumb keys are duplicated from the base layer to avoid having to layer change mid edit and
+ * to enable auto-repeat.
+ *
+ * Notice the "Caps Word" (`CW_TOGG`) in the top-inner key (part of the `KEYB_CTRL_ROW`)
+ * that spells just the next word in capital, including underscores.
  */
 #define LAYOUT_LAYER_NAVIGATION                                                                        \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    ________________HOME_ROW_GACS_L________________,  KC_CAPS,KC_LEFT,KC_DOWN,  KC_UP,KC_RGHT,XXXXXXX, \
-    _________________DEAD_HALF_ROW_________________,   KC_INS,KC_HOME,KC_PGDN,KC_PGUP, KC_END,XXXXXXX, \
-                            XXXXXXX,_______,XXXXXXX,                                   KC_ENT,KC_BSPC, \
-                                    APP_RAL,PRN_CTL,                                   KC_DEL
+    ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
+    _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_HOME,  KC_UP, KC_END,KC_PGUP, KC_TAB, \
+    ________________HOME_ROW_GACS_L________________,  KC_UNDO,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,XXXXXXX, KC_INS, QK_REP,QK_AREP, \
+                             KC_ESC,_______,XXXXXXX,                                   KC_DEL,KC_BSPC, \
+                                    APP_RAL,PRN_CTL,                                   KC_ENT
 
 
 /**
@@ -163,12 +174,12 @@ static uint16_t auto_pointer_layer_timer = 0;
  * `KC_DOT` is duplicated from the base layer.
  */
 #define LAYOUT_LAYER_NUMERAL                                                                           \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
+    ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     XXXXXXX,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  _________________DEAD_HALF_ROW_________________, \
     XXXXXXX,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  ________________HOME_ROW_GACS_R________________, \
     XXXXXXX, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  _________________DEAD_HALF_ROW_________________, \
-                             KC_DOT,   KC_0,KC_MINS,                                  XXXXXXX,_______, \
-                                    APP_RAL,PRN_CTL,                                  XXXXXXX
+                             KC_DOT,   KC_0,KC_MINS,                                   KC_DEL,KC_BSPC, \
+                                    APP_RAL,PRN_CTL,                                   KC_ENT
 
 
 /**
@@ -179,12 +190,12 @@ static uint16_t auto_pointer_layer_timer = 0;
  * `KC_RPRN`.
  */
 #define LAYOUT_LAYER_SYMBOLS                                                                           \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
+    ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     XXXXXXX,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  _________________DEAD_HALF_ROW_________________, \
     XXXXXXX,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,  ________________HOME_ROW_GACS_R________________, \
     XXXXXXX,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,  _________________DEAD_HALF_ROW_________________, \
-                            KC_LPRN,KC_RPRN,KC_UNDS,                                  _______,XXXXXXX, \
-                                    APP_RAL,PRN_CTL,                                  XXXXXXX
+                            KC_LPRN,KC_RPRN,KC_UNDS,                                   KC_DEL,KC_BSPC, \
+                                    APP_RAL,PRN_CTL,                                   KC_ENT
 
 /**
  * \brief Add Home Row mod to a layout.
