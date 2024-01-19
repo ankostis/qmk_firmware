@@ -63,9 +63,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
-// Strange, but these do not work!?
+/* The `KC_COPY/KC_UNDO` etc are *Mac* only keys. */
 #define KC_UNDO LCTL(KC_Z)
 #define KC_AGIN LCTL(KC_Y)
+#define KC_CUT LCTL(KC_X)
+#define KC_COPY LCTL(KC_C)
+#define KC_PSTE LCTL(KC_V)
 
 // clang-format off
 /** \brief NUM+ColemakDH layout (4 rows, 2x6 columns, 5+3 thumbs), punctuations
