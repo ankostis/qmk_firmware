@@ -346,8 +346,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_set_color_all(RGB_CYAN);
             break;
         case LAYER_MEDIA:
-            // Leave colors of kbd funcs to shine.
-            // rgb_matrix_set_color_all(RGB_MAGENTA);
+            // Just mark volume up/dowe/mute keys, and
+            // let colors of kbd funcs to shine.
+            rgb_matrix_set_color(47, RGB_MAGENTA);
+            rgb_matrix_set_color(42, RGB_MAGENTA);
+            rgb_matrix_set_color(39, RGB_MAGENTA);
             break;
         case LAYER_NUMERAL:
             rgb_matrix_set_color_all(RGB_BLUE);
