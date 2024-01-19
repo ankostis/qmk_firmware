@@ -26,6 +26,8 @@
 #    define NO_ACTION_ONESHOT
 #endif // __arm__
 
+#define SPLIT_LAYER_STATE_ENABLE  // comm overhead
+
 /* Charybdis-specific features. */
 
 #ifdef POINTING_DEVICE_ENABLE
