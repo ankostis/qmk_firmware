@@ -11,6 +11,7 @@ keys as the original *Miryoku* layout.  The extra keys were filled like this:
 
 - top row: `F1`-`F12` to facilitate app shortcuts
   with one hand, eg. *vscode*, *midnight commander*.
+- bottom left thumbs: space/tab for both sym & num layers.
 - outer columns: ideas from the [Engram layout](https://sunaku.github.io/engram-keyboard-layout.html)
   for programmers.
 
@@ -27,6 +28,15 @@ media/ESC                               num/Bksp
    RAlt/APP                          fun/Enter
        RCtrl/PrtSc
 ```
+
+## Deviations from Miryoku
+ 
+- Swap `,` with `-`, the former being much usefull in programming, the latter's place
+  in the num+left thumb rhymes with `.` also there.
+- Function-keys in place of the numbers (top row) to facilitate programming shortcuts
+  with one hand, eg. *vscode*, *midnight commander*.
+- Navigation keys are layed-out in a "cross" pattern.  Many changes in nav & pointer
+  layers.
 
 ## Features
 
