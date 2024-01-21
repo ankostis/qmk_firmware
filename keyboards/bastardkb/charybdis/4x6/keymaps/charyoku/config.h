@@ -27,6 +27,8 @@
 #endif // __arm__
 
 #define SPLIT_LAYER_STATE_ENABLE  // comm overhead
+#define SPLIT_MODS_ENABLE
+#define SPLIT_LED_STATE_ENABLE
 
 #define CAPS_WORD_INVERT_ON_SHIFT
 

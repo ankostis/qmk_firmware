@@ -326,6 +326,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 
+#define MOD_CTRL_LED_INDEX 53  // 1st-thumb-right
+#define MOD_SHIFT_LED_INDEX 54  // 2nd-thumb-right
+#define MOD_ALT_LED_INDEX 55  // 3rd-thumb-right
 
 /**
  * Indicate *Caps_Word* with top-inner keys
@@ -361,11 +364,23 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         default:
             break;
     }
+    if (host_keyboard_led_state().caps_lock) {
+        rgb_matrix_set_color(50, RGB_WHITE);
+    }
     if (is_caps_word_on()) {
         rgb_matrix_set_color(CAPS_WORD_LED_INDEX0, RGB_WHITE);
         rgb_matrix_set_color(CAPS_WORD_LED_INDEX1, RGB_WHITE);
     }
-
+    uint8_t mods = get_mods();
+    if (mods & MOD_MASK_SHIFT) {
+        rgb_matrix_set_color(MOD_SHIFT_LED_INDEX, RGB_GREEN);
+    }
+    if (mods & MOD_MASK_CTRL) {
+        rgb_matrix_set_color(MOD_CTRL_LED_INDEX, RGB_RED);
+    }
+    if (mods & MOD_MASK_ALT) {
+        rgb_matrix_set_color(MOD_ALT_LED_INDEX, RGB_BLUE);
+    }
 
     return false;
 }
