@@ -25,14 +25,14 @@ media/ESC                               num/Bksp
     nav/SPACE                       sym/Del
         mouse/TAB
 
-   RAlt/APP                          fun/Enter
-       RCtrl/PrtSc
+   RAlt/;                            fun/Enter
+       RCtrl/,
 ```
 
 ## Deviations from Miryoku
  
 - Swap `,` with `-`, the former being much usefull in programming, the latter's place
-  in the num+left thumb rhymes with `.` also there.
+  in the num+left thumb rhymes with `.` also there when num-typing.
 - Function-keys in place of the numbers (top row) to facilitate programming shortcuts
   with one hand, eg. *vscode*, *midnight commander*.
 - Navigation keys are layed-out in a "cross" pattern.  Many changes in nav & pointer
