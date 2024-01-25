@@ -73,8 +73,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define KC_PSTE LCTL(KC_V)
 
 // clang-format off
-/** \brief NUM+ColemakDH layout (4 rows, 2x6 columns, 5+3 thumbs), punctuations
- * in the outer/surrounding keys, miryoku hold_n_tap in the thumbs.
+/**
+ * \brief NUM+ColemakDH+miryoku hold-n-tap thumbs (4 rows, 2x6 columns, 5+3 thumbs)
+ *
+ * - Put F-keys in place of number-keys (top non-miryoku row) to facilitate
+ *   app shortcuts with one hand, eg. *midnight commander*, *vscode*.
+ *   Besides, a non-char key is handy in Esc's position ;-)
  *
  * - Put F-keys in place of number-keys (top non-miryoku row) to facilitate
  *   app shortcuts with one hand, eg. *midnight commander*, *vscode*.
@@ -86,7 +90,7 @@ static uint16_t auto_pointer_layer_timer = 0;
  *   in the num+left thumb rhymes with `.`, both there when num-typing.
  */
 #define LAYOUT_LAYER_BASE                                                                              \
-      KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,    KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11, KC_F12, \
+     KC_F11,  KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,    KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F12, \
      KC_APP,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_QUOT,KC_RBRC, \
     CW_TOGG,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_CAPS, \
     KC_PSCR,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_MINS,LA2_PTR,LA2_NAV, KC_DOT, \

@@ -16,7 +16,7 @@ keys as the original *Miryoku* layout.  The extra keys were filled like this:
   for programmers.
 
 ```txt
-F1  F2  F3  F4  F5  F6    F7  F8  F9  F10 F11 F12
+F11 F1  F2  F3  F4  F5    F6  F7  F8  F9  F10 F12
 [{  qQ  wW  fF  pP  bB    jJ  lL  uU  yY  ;:  ]}
 ↥   aA  rR  sS  tT  gG    mM  nN  eE  iI  oO  ⇈
 ,<  zZ  xX  cC  dD  vV    kK  hH  -_  /?  \|  .>
