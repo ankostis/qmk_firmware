@@ -51,9 +51,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define TAB_PTR LT(LAYER_POINTER, KC_TAB)
 #define LA2_PTR LT(LAYER_POINTER, KC_DOT)
 #define LA3_PTR LT(LAYER_POINTER, KC_END)
-#define DEL_SYM LT(LAYER_SYMBOLS, KC_DEL)
+#define DEL_FUN LT(LAYER_FUNCTION, KC_DEL)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
-#define ENT_FUN LT(LAYER_FUNCTION, KC_ENT)
+#define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
 
 #define ALT_SCL MT(MOD_RALT, KC_SCLN)
 #define CTL_COM MT(MOD_RCTL, KC_COMM)
@@ -94,8 +94,8 @@ static uint16_t auto_pointer_layer_timer = 0;
      KC_APP,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_QUOT,KC_RBRC, \
     CW_TOGG,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_CAPS, \
     KC_PSCR,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_MINS,LA2_PTR,LA2_NAV, KC_DOT, \
-                            ESC_MED,SPC_NAV,TAB_PTR,                                  DEL_SYM,BSP_NUM, \
-                                    ALT_SCL,CTL_COM,                                  ENT_FUN
+                            ESC_MED,SPC_NAV,TAB_PTR,                                  ENT_SYM,BSP_NUM, \
+                                    ALT_SCL,CTL_COM,                                  DEL_FUN
 
 /** Convenience row shorthands. */
 #define _________________DEAD_HALF_ROW_________________  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX
@@ -127,7 +127,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     _______, KC_F12,  KC_F7,  KC_F8,  KC_F9,KC_PSCR,  _________________DEAD_HALF_ROW_________________, \
     _______, KC_F11,  KC_F4,  KC_F5,  KC_F6,KC_SCRL,  ________________HOME_ROW_GACS_R________________, \
     _______, KC_F10,  KC_F1,  KC_F2,  KC_F3,KC_PAUS,  _________________DEAD_HALF_ROW_________________, \
-                             KC_APP, KC_SPC, KC_TAB,                                   KC_DEL,KC_BSPC, \
+                             KC_APP,_______, KC_TAB,                                   KC_ENT,KC_BSPC, \
                                     ALT_SCL,CTL_COM,                                  _______
 
 
@@ -169,8 +169,8 @@ static uint16_t auto_pointer_layer_timer = 0;
     _________________DEAD_HALF_ROW_________________,  KC_UNDO,KC_AGIN,KC_BTN3,XXXXXXX,DPI_MOD, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_BTN2,KC_BTN1,XXXXXXX,S_D_MOD, KC_SPC, \
     _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,DRGSCRL,_______,SNP_TOG, QK_REP, \
-                             KC_ESC,KC_BTN1,_______,                                   KC_DEL,KC_BSPC, \
-                                    KC_BTN2,KC_BTN3,                                   KC_ENT
+                             KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
+                                    KC_BTN2,KC_BTN3,                                   KC_DEL
 
 /**
  * \brief Navigation layer featuring common editing keys with *all other right layers*.
@@ -190,8 +190,8 @@ static uint16_t auto_pointer_layer_timer = 0;
     _________________DEAD_HALF_ROW_________________,  KC_UNDO,KC_AGIN,  KC_UP, KC_INS,KC_PGUP, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
     _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,KC_HOME,LA3_PTR,_______, QK_REP, \
-                             KC_ESC,_______,XXXXXXX,                                   KC_DEL,KC_BSPC, \
-                                    ALT_SCL,CTL_COM,                                   KC_ENT
+                             KC_ESC,_______,XXXXXXX,                                   KC_ENT,KC_BSPC, \
+                                    ALT_SCL,CTL_COM,                                   KC_DEL
 
 
 /**
@@ -208,8 +208,8 @@ static uint16_t auto_pointer_layer_timer = 0;
     _______,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  KC_UNDO,KC_AGIN,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
     _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
-                             KC_DOT,   KC_0,KC_COMM,                                   KC_DEL,KC_BSPC, \
-                                     KC_SPC, KC_TAB,                                   KC_ENT
+                             KC_DOT,   KC_0,KC_COMM,                                   KC_ENT,_______, \
+                                     KC_SPC, KC_TAB,                                   KC_DEL
 
 
 /**
@@ -226,8 +226,8 @@ static uint16_t auto_pointer_layer_timer = 0;
     _______,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  KC_UNDO,KC_AGIN,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
     _______,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
-                            KC_LPRN,KC_RPRN,  KC_LT,                                   KC_DEL,KC_BSPC, \
-                                     KC_SPC, KC_TAB,                                   KC_ENT
+                            KC_LPRN,KC_RPRN,  KC_LT,                                  _______,KC_BSPC, \
+                                     KC_SPC, KC_TAB,                                   KC_DEL
 
 /**
  * \brief Add Home Row mod to a layout.
