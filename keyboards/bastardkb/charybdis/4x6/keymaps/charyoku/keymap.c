@@ -47,9 +47,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define ESC_MED LT(LAYER_MEDIA, KC_ESC)
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
-#define LA2_NAV LT(LAYER_NAVIGATION, KC_SLSH)
+#define LA2_NAV LT(LAYER_NAVIGATION, KC_DOT)
 #define TAB_PTR LT(LAYER_POINTER, KC_TAB)
-#define LA2_PTR LT(LAYER_POINTER, KC_DOT)
+#define LA2_PTR LT(LAYER_POINTER, KC_COMM)
 #define LA3_PTR LT(LAYER_POINTER, KC_END)
 #define DEL_FUN LT(LAYER_FUNCTION, KC_DEL)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
@@ -91,9 +91,9 @@ static uint16_t auto_pointer_layer_timer = 0;
  */
 #define LAYOUT_LAYER_BASE                                                                              \
      KC_F11,  KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,    KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F12, \
-     KC_APP,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_QUOT,KC_RBRC, \
-    CW_TOGG,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_CAPS, \
-    KC_PSCR,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_MINS,LA2_PTR,LA2_NAV, KC_DOT, \
+     KC_APP,   KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,     KC_J,   KC_L,   KC_U,   KC_Y,KC_QUOT,KC_SLSH, \
+    KC_PSCR,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_SCLN, \
+    CW_TOGG,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_MINS,LA2_PTR,LA2_NAV,KC_CAPS, \
                             ESC_MED,SPC_NAV,TAB_PTR,                                  ENT_SYM,BSP_NUM, \
                                     ALT_SCL,CTL_COM,                                  DEL_FUN
 
@@ -208,7 +208,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     _______,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  KC_UNDO,KC_AGIN,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
     _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
-                             KC_DOT,   KC_0,KC_COMM,                                   KC_ENT,_______, \
+                             KC_DOT,   KC_0,KC_SLSH,                                   KC_ENT,_______, \
                                      KC_SPC, KC_TAB,                                   KC_DEL
 
 
@@ -226,7 +226,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     _______,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  KC_UNDO,KC_AGIN,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
     _______,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
-                            KC_LPRN,KC_RPRN,  KC_LT,                                  _______,KC_BSPC, \
+                            KC_LPRN,KC_RPRN,KC_QUES,                                  _______,KC_BSPC, \
                                      KC_SPC, KC_TAB,                                   KC_DEL
 
 /**
