@@ -56,7 +56,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
 
 #define ALT_SCL MT(MOD_RALT, KC_SCLN)
-#define CTL_COM MT(MOD_RCTL, KC_COMM)
+#define CTL_EQL MT(MOD_RCTL, KC_EQL)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -95,7 +95,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     KC_PSCR,   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,     KC_M,   KC_N,   KC_E,   KC_I,   KC_O,KC_SCLN, \
     CW_TOGG,   KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,     KC_K,   KC_H,KC_MINS,LA2_PTR,LA2_NAV,KC_CAPS, \
                             ESC_MED,SPC_NAV,TAB_PTR,                                  ENT_SYM,BSP_NUM, \
-                                    ALT_SCL,CTL_COM,                                  DEL_FUN
+                                    ALT_SCL,CTL_EQL,                                  DEL_FUN
 
 /** Convenience row shorthands. */
 #define _________________DEAD_HALF_ROW_________________  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX
@@ -128,7 +128,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     _______, KC_F11,  KC_F4,  KC_F5,  KC_F6,KC_SCRL,  ________________HOME_ROW_GACS_R________________, \
     _______, KC_F10,  KC_F1,  KC_F2,  KC_F3,KC_PAUS,  _________________DEAD_HALF_ROW_________________, \
                              KC_APP,_______, KC_TAB,                                   KC_ENT,KC_BSPC, \
-                                    ALT_SCL,CTL_COM,                                  _______
+                                    ALT_SCL,CTL_EQL,                                  _______
 
 
 /**
@@ -143,7 +143,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     ________________HOME_ROW_GACS_L________________,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,RGB_M_P, \
     _________________DEAD_HALF_ROW_________________,  XXXXXXX,KC_BRID,XXXXXXX,KC_BRIU,XXXXXXX,XXXXXXX, \
                             _______,KC_MPLY,KC_MSTP,                                  KC_MSTP,KC_MPLY, \
-                                    ALT_SCL,CTL_COM,                                  XXXXXXX
+                                    ALT_SCL,CTL_EQL,                                  XXXXXXX
 
 
 
@@ -191,7 +191,7 @@ static uint16_t auto_pointer_layer_timer = 0;
     ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
     _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,KC_HOME,LA3_PTR,_______, QK_REP, \
                              KC_ESC,_______,XXXXXXX,                                   KC_ENT,KC_BSPC, \
-                                    ALT_SCL,CTL_COM,                                   KC_DEL
+                                    ALT_SCL,CTL_EQL,                                   KC_DEL
 
 
 /**

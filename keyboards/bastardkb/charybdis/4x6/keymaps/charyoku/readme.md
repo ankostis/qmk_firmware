@@ -26,7 +26,7 @@ media/ESC                               num/Bksp
         mouse/TAB
 
    RAlt/;                            fun/Enter
-       RCtrl/,
+       RCtrl/=
 ```
 
 ## Deviations from Miryoku
