@@ -2,41 +2,31 @@
 
 A *ColemakDH-esque* keymap for the "big" *Charybdis 4x6*, with *VIA* support,
 [home row mods](https://precondition.github.io/home-row-mods) and
-[Miryoku-inspired layers](https://github.com/manna-harbour/miryoku).
+[Miryoku-inspired layers](https://github.com/manna-harbour/miryoku):
+
+![alt text](charyoku-kle-reference.png)
+generated with [keyboard-layout-editor.com](http://www.keyboard-layout-editor.com/#/gists/57926252da9ebaea7a88cba9ed3bfa78)
 
 It was announced in [this *BastardKBD* discord thread](https://discordapp.com/channels/681309835135811648/1193692606568333342)
 on Jan 2024. It forked-off from *Charybdis 3x5* QWERTY based layout,
 a smaller split ergo keyboard which physically contains the exact same number of
-keys as the original *Miryoku* layout.  The extra keys were filled like this:
+keys as the original *Miryoku* layout.  The extra keys do not contain any 
+essential functionatlity, to have a gracefull degradation to 3x5 form,
+like this:
 
-- top row: `F1`-`F12` to facilitate app shortcuts
-  with one hand, eg. *vscode*, *midnight commander*.
-- bottom left thumbs: space/tab for both sym & num layers.
-- outer columns: ideas from the [Engram layout](https://sunaku.github.io/engram-keyboard-layout.html)
-  for programmers.
-
-```txt
-F11 F1  F2  F3  F4  F5    F6  F7  F8  F9  F10 F12
-Ap  qQ  wW  fF  pP  bB    jJ  lL  uU  yY  '"  /?
-Pr  aA  rR  sS  tT  gG    mM  nN  eE  iI  oO  ;:
-↥   zZ  xX  cC  dD  vV    kK  hH  -_  ,<  .>  ⇈
-
-media/ESC                               num/Bksp
-    nav/SPACE                       sym/Del
-        mouse/TAB
-
-   RAlt/;                            fun/Enter
-       RCtrl/=
-```
+- top row: Put F-keys in place of number-keys (top non-miryoku row) to facilitate
+  app shortcuts with one hand, eg. *midnight commander*, *vscode*.  Besides,
+  a non-char key is handy in Esc's position ;-)
+- x2 bottom left thumbs: `;,` in base layer and so as to have all QWERTY keys exposed
+  without layer;  space/tab for both sym & num layers.
+- outer columns: caps-lock keys and nice-to-have keys like `;` and `/`.
 
 ## Deviations from Miryoku
  
 - Swap `,` with `-`, the former being much usefull in programming, the latter's place
-  in the num+left thumb rhymes with `.` also there when num-typing.
-- Function-keys in place of the numbers (top row) to facilitate programming shortcuts
-  with one hand, eg. *vscode*, *midnight commander*.
-- Navigation keys are layed-out in a "cross" pattern.  Many changes in nav & pointer
-  layers.
+  in the num+left thumb rhymes with `.` also there when num-typing.  
+- Navigation keys are layed-out in a "cross" pattern;  many changes in nav & pointer
+  layers are due to this.
 
 ## Features
 
@@ -44,11 +34,12 @@ media/ESC                               num/Bksp
 - [x] RGB matrix
 - [x] ColemakDH
 - [x] all x6 Miryoku-inspired layers (media, nav, mouse, sym, num, fun)
-- [ ] single-handed pointer (trackball) with mouse-buttons ergonomically close to home-row
-- [ ] x2 non-QWERTY shift-pairs (`'(` and `")`)
+- [x] Only QWERTY shift-pairs
+- [x] single-handed pointer (trackball) with mouse-buttons ergonomically close to home-row
+- [x] layer-state & capslock RGB indicators
+- [ ] lock layers with thumb combos
 - [ ] Decide auto-mouse impl (core vs charybdis), scroll, (auto)snipping
 - [ ] Achordion (or bilateral-combinations) home-row-mods
-- [ ] layer-state RGB indicators
 - ...
 
 ---
