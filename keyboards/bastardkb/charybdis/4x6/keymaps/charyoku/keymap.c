@@ -167,8 +167,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_POINTER                                                                           \
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD, KC_TAB, \
-    ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
-    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,DRGSCRL,_______,SNP_TOG, QK_REP, \
+    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG, QK_REP, \
                              KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
                                     KC_BTN2,KC_BTN3,                                   KC_DEL
 
@@ -188,8 +188,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_NAVIGATION                                                                        \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,  KC_UP, KC_INS,KC_PGUP, KC_TAB, \
-    ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
-    _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,KC_HOME,LA3_PTR,_______, QK_REP, \
+    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,   KC_CUT,KC_COPY,KC_HOME,LA3_PTR,_______, QK_REP, \
                              KC_ESC,_______,XXXXXXX,                                   KC_ENT,KC_BSPC, \
                                     ALT_SCL,CTL_EQL,                                   KC_DEL
 
@@ -206,8 +206,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_NUMERAL                                                                           \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _______,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  KC_AGIN,KC_UNDO,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
-    _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
-    _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
+    _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
+    _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
                              KC_DOT,   KC_0,KC_SLSH,                                   KC_ENT,_______, \
                                      KC_SPC, KC_TAB,                                   KC_DEL
 
@@ -224,8 +224,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_SYMBOLS                                                                           \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _______,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  KC_AGIN,KC_UNDO,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
-    _______,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,   KC_CUT,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
-    _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,  KC_COPY,KC_PSTE,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
+    _______,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
+    _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
                             KC_LPRN,KC_RPRN,KC_QUES,                                  _______,KC_BSPC, \
                                      KC_SPC, KC_TAB,                                   KC_DEL
 
