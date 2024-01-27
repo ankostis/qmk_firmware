@@ -166,8 +166,8 @@ static uint16_t auto_pointer_layer_timer = 0;
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
     _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
-    _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,XXXXXXX,DPI_MOD, KC_TAB, \
-    ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_BTN2,KC_BTN1,XXXXXXX,S_D_MOD, KC_SPC, \
+    _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD, KC_TAB, \
+    ________________HOME_ROW_GACS_L________________,   KC_CUT,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
     _________________DEAD_HALF_ROW_________________,  KC_COPY,KC_PSTE,DRGSCRL,_______,SNP_TOG, QK_REP, \
                              KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
                                     KC_BTN2,KC_BTN3,                                   KC_DEL
