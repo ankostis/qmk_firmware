@@ -102,8 +102,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define _________________TRNS_HALF_ROW_________________  _______,_______,_______,_______,_______,_______
 #define ________________HOME_ROW_GACS_L________________  _______,KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,XXXXXXX
 #define ________________HOME_ROW_GACS_R________________  XXXXXXX,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,_______
-#define ________________KEYB_CTRL_ROW_L________________   EE_CLR,QK_BOOT, QK_RBT,DB_TOGG,CW_TOGG,XXXXXXX
-#define ________________KEYB_CTRL_ROW_R________________  XXXXXXX,CW_TOGG,DB_TOGG, QK_RBT,QK_BOOT, EE_CLR
+#define ________________KEYB_CTRL_ROW_L________________  QK_BOOT, QK_RBT,EE_CLR,DB_TOGG,XXXXXXX,KC_ESC
+#define ________________KEYB_CTRL_ROW_R________________   KC_ESC,XXXXXXX,DB_TOGG, EE_CLR,QK_RBT,QK_BOOT
 
 /*
  * Layers used on the Charybdis 4x6.
@@ -138,7 +138,7 @@ static uint16_t auto_pointer_layer_timer = 0;
  * symmetrical to accommodate the left- and right-hand trackball.
  */
 #define LAYOUT_LAYER_MEDIA                                                                             \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
+    ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  RGB_VAI,RGB_HUI,RGB_SAI,RGB_MOD,RGB_SPI,RGB_TOG, \
     ________________HOME_ROW_GACS_L________________,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,RGB_M_P, \
     _________________DEAD_HALF_ROW_________________,  XXXXXXX,KC_BRID,XXXXXXX,KC_BRIU,XXXXXXX,XXXXXXX, \
@@ -165,7 +165,7 @@ static uint16_t auto_pointer_layer_timer = 0;
  * anything on the 5th column unreachable (the original *charybdis 4x6 uses the pinky).
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
-    _________________DEAD_HALF_ROW_________________,  _________________DEAD_HALF_ROW_________________, \
+    ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
     _________________DEAD_HALF_ROW_________________,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG, QK_REP, \
@@ -181,9 +181,6 @@ static uint16_t auto_pointer_layer_timer = 0;
  * *mimic the pointer layer*.
  * Practically, with alternating right ring & pinky pinning, single-handed
  * editing & mouse is possible.
- *
- * Notice the "Caps Word" (`CW_TOGG`) in the top-2nd key (part of the `KEYB_CTRL_ROW`)
- * that types in capital just the next word (including underscores)
  */
 #define LAYOUT_LAYER_NAVIGATION                                                                        \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
