@@ -1,46 +1,46 @@
-[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.3.2</b>"],
+[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.3.3</b>"],
 [{f:1,y:-0.7, d:true},"https://github.com/ankostis/qmk_firmware/tree/charyoku/keyboards/bastardkb/charybdis/4x6/keymaps/charyoku"],
 [
   {f:3,f2:2},
-  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"F2\n2@\nrbt\nrbt","F3\n3#\ndbg\ndbg","F4\n4$","F5\n5%",
-  {x:2.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F6\n6^","F7\n7&","F8\n8*\ndbg\ndbg","F9\n9(\nrbt\nrbt"
+  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"F2\n2@\nEclr\nEclr","F3\n3#\ndbg\ndbg","F4\n4$","F5\n5%\nEsc\nEsc",
+  {x:2.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F6\n6^\nEsc\nEsc","F7\n7&","F8\n8*\ndbg\ndbg","F9\n9(\nEclr\nEclr"
 ],
 [
-  {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff"},"F11\n`~\nEE\nEE","F1\n1!\nbtld\nbtld",
-  {x:10.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F10\n0\nbtld\nbtld","F12\n=+\nEE\nEE"
+  {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff"},"F11\n`~\nbtld\nbtld","F1\n1!\nrbt\nrbt",
+  {x:10.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F10\n0\nrbt\nrbt","F12\n=+\nbtld\nbtld"
 ],
 [
-  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#999999"},"W\nF7\n&\n7","F\nF8\n*\n8","P\nF9\n(\n9","B\nPrtScn <i>SysRq</i>\n}\n]",
-  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"J\nRGB val\nRedo\nRedo","L\nRGB hui\nUndo\nUndo","U\nRGB satr\n❸M\n▲","Y\nRGB ptrn\n❺\nIns"
+  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"W\nF7\n&\n7","F\nF8\n*\n8","P\nF9\n(\n9","B\nPrtScn <i>SysRq</i>\n}\n]",
+  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"J\nRGB val\nredo\nredo","L\nRGB hui\nundo\nundo","U\nRGB satr\n❸M\n▲","Y\nRGB ptrn\n❺\nIns"
 ],
 [
-  {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"App",{c:"#999999"},"Q\nF12\n{\n[",
-  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"'<b>\"</b>\nRGB vel\ndpi\nPg▲",{c:"#888888"},"/?\nRGB tog\nTab\nTab"
+  {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"App",{c:"#888888"},"Q\nF12\n{\n[",
+  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"'<b>\"</b>\nRGB vel\ndpi\nPg▲",{c:"#777777"},"/?\nRGB tog\nTab\nTab"
 ],
 [
-  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff",c:"#999999"},"R\nF4\n$\n4\nAlt",{n:true},"S\nF5\n%\n5\nCtrl","T\nF6\n^\n6\nShift","G\nScroll Lock\n+\n=",
-  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffffff"},"M\n⏮\nPaste\nPaste","N\nVol-\n❷R\n◀\nShift",{n:true},"E\n🔇\n❶L\n▼\nCtrl","I\nVol+\n❹\n▶\nAlt"
+  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff",c:"#888888"},"R\nF4\n$\n4\nAlt",{n:true},"S\nF5\n%\n5\nCtrl","T\nF6\n^\n6\nShift","G\nScroll Lock\n+\n=",
+  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffffff"},"M\n⏮\npaste\npaste","N\nVol-\n❷R\n◀\nShift",{n:true},"E\n🔇\n❶L\n▼\nCtrl","I\nVol+\n❹\n▶\nAlt"
 ],
 [
-  {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#888888"},"PrtScn",{c:"#999999"},"A\nF11\n:\n;\nSuper",
-  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffffff"},"O\n⏭\ndpi-s\nPg▼\nRSuper",{c:"#888888"},"<b>;:</b>\nRGB<br>fix\nSpc\nSpc"
+  {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#777777"},"PrtScn",{c:"#888888"},"A\nF11\n:\n;\nSuper",
+  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffffff"},"O\n⏭\ndpi-s\nPg▼\nRSuper",{c:"#777777"},"<b>;:</b>\nRGB<br>fix\nSpc\nSpc"
 ],
 [
-  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#999999"},"X\nF1\n!\n1","C\nF2\n@\n2","D\nF3\n#\n3","V\nPause Break\n|\n\\",
-  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"K\n\nCut\nCut","H\n\nPaste\nPaste","<b>-_</b>\n🔅\nDrag Scroll\nHome",{t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffff00"},{n:true},"<b>,<</b>\n🔆\n\nEnd\n<b>Mouse</b>"
+  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"X\nF1\n!\n1","C\nF2\n@\n2","D\nF3\n#\n3","V\nPause Break\n|\n\\",
+  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"K\n\ncut\ncut","H\n\ncopy\ncopy","<b>-_</b>\n🔅\nDrag Scroll\nHome",{t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffff00"},{n:true},"<b>,<</b>\n🔆\n\nEnd\n<b>Mouse</b>"
 ],
 [
-  {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#888888"},"Caps Word",{c:"#999999"},"Z\nF10\n~\n`",
-  {x:10.5,t:"#000000\n\n#ffff00\n\n#00ffff"},"<b>.></b>\n\nSnipe\n\n<b>Nav</b>",{c:"#888888"},"Caps Lock"
+  {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#777777"},"Caps Word",{c:"#888888"},"Z\nF10\n~\n`",
+  {x:10.5,t:"#000000\n\n#ffff00\n\n#00ffff"},"<b>.></b>\n\nSnipe\n\n<b>Nav</b>",{c:"#777777"},"Caps Lock"
 ],
 [
-  {x:4,c:"#999999",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ff00ff"},"Esc\n≣\n(\n.>\n<b>Media</b>",
+  {x:4,c:"#888888",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ff00ff"},"Esc\n≣\n(\n.>\n<b>Media</b>",
   {t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#00ffff",n:true},"Spc\nSpc\n)\n0\n<b>Nav</b>",
   {t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffff00"},"Tab\nTab\n?\n/\n<b>Mouse</b>",
   {x:0.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#00ff00"},"↵\n◼\n❷R\n↵\n<b>Sym</b>",
   {t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#0000ff",n:true},"⌫\n⏯\n❶L\n⌫\n<b>Num</b>"
 ],
 [
-  {x:5,f:3,c:"#888888",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff"},"<b>;:</b>\n<b>;:</b>\nSpc\nSpc\nRAltGr","<b>=</b>\n<b>=</b>\nTab\nTab\nRCtrl",
+  {x:5,f:3,c:"#777777",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff"},"<b>;:</b>\n<b>;:</b>\nSpc\nSpc\nRAltGr","<b>=</b>\n<b>=</b>\nTab\nTab\nRCtrl",
   {x:0.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ff0000"},"⌦\n🔇\n❸M\n⌦\n<b>Fun</b>"
 ]
