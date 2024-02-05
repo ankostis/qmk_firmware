@@ -58,6 +58,13 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ALT_SCL MT(MOD_RALT, KC_SCLN)
 #define CTL_EQL MT(MOD_RCTL, KC_EQL)
 
+const uint16_t PROGMEM combo_layer_lock_med[] = {ESC_MED, CTL_EQL, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_nav[] = {SPC_NAV, CTL_EQL, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_ptr[] = {TAB_PTR, CTL_EQL, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_fun[] = {BSP_NUM, ENT_SYM, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_num[] = {BSP_NUM, DEL_FUN, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, DEL_FUN, COMBO_END};
+
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
 #    define DPI_MOD KC_NO
@@ -262,6 +269,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_SYMBOLS] = LAYOUT_wrapper(LAYOUT_LAYER_SYMBOLS),
 };
 // clang-format on
+
+
+combo_t key_combos[] = {
+    COMBO(combo_layer_lock_med, TG(LAYER_MEDIA)),
+    COMBO(combo_layer_lock_nav, TG(LAYER_NAVIGATION)),
+    COMBO(combo_layer_lock_ptr, TG(LAYER_POINTER)),
+    COMBO(combo_layer_lock_fun, TG(LAYER_FUNCTION)),
+    COMBO(combo_layer_lock_num, TG(LAYER_NUMERAL)),
+    COMBO(combo_layer_lock_sym, TG(LAYER_SYMBOLS)),
+};
+
 
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
