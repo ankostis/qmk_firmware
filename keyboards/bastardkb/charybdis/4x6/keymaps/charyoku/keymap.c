@@ -150,7 +150,7 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, DEL_FUN, COMBO_END};
     ________________HOME_ROW_GACS_L________________,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,RGB_M_P, \
     _________________DEAD_HALF_ROW_________________,  XXXXXXX,KC_BRID,XXXXXXX,KC_BRIU,XXXXXXX,XXXXXXX, \
                             _______,KC_MPLY,KC_MSTP,                                  KC_MSTP,KC_MPLY, \
-                                    ALT_SCL,CTL_EQL,                                  XXXXXXX
+                                    _______,_______,                                  XXXXXXX
 
 
 
@@ -195,7 +195,7 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, DEL_FUN, COMBO_END};
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
     _________________DEAD_HALF_ROW_________________,   KC_CUT,KC_COPY,KC_HOME,LA3_PTR,_______, QK_REP, \
                              KC_ESC,_______,XXXXXXX,                                   KC_ENT,KC_BSPC, \
-                                    ALT_SCL,CTL_EQL,                                   KC_DEL
+                                    _______,_______,                                   KC_DEL
 
 
 /**
@@ -213,7 +213,7 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, DEL_FUN, COMBO_END};
     _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
                              KC_DOT,   KC_0,KC_SLSH,                                   KC_ENT,_______, \
-                                     KC_SPC, KC_TAB,                                   KC_DEL
+                                    _______,_______,                                   KC_DEL
 
 
 /**
@@ -231,7 +231,7 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, DEL_FUN, COMBO_END};
     _______,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
                             KC_LPRN,KC_RPRN,KC_QUES,                                  _______,KC_BSPC, \
-                                     KC_SPC, KC_TAB,                                   KC_DEL
+                                    _______,_______,                                   KC_DEL
 
 /**
  * \brief Add Home Row mod to a layout.
