@@ -60,10 +60,14 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 const uint16_t PROGMEM combo_layer_lock_med[] = {ESC_MED, CTL_EQL, COMBO_END};
 const uint16_t PROGMEM combo_layer_lock_nav[] = {SPC_NAV, CTL_EQL, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_ptr[] = {TAB_PTR, CTL_EQL, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_fun[] = {BSP_NUM, ENT_SYM, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_num[] = {BSP_NUM, DEL_FUN, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, DEL_FUN, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_ptr0[] = {TAB_PTR, CTL_EQL, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_ptr1[] = {TAB_PTR, KC_BTN3, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_fun0[] = {BSP_NUM, ENT_SYM, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_fun1[] = {KC_ENT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_num0[] = {BSP_NUM, DEL_FUN, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_num1[] = {BSP_NUM, KC_DEL, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_sym0[] = {ENT_SYM, DEL_FUN, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -274,10 +278,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 combo_t key_combos[] = {
     COMBO(combo_layer_lock_med, TG(LAYER_MEDIA)),
     COMBO(combo_layer_lock_nav, TG(LAYER_NAVIGATION)),
-    COMBO(combo_layer_lock_ptr, TG(LAYER_POINTER)),
-    COMBO(combo_layer_lock_fun, TG(LAYER_FUNCTION)),
-    COMBO(combo_layer_lock_num, TG(LAYER_NUMERAL)),
-    COMBO(combo_layer_lock_sym, TG(LAYER_SYMBOLS)),
+    COMBO(combo_layer_lock_ptr0, TG(LAYER_POINTER)),
+    COMBO(combo_layer_lock_ptr1, TG(LAYER_POINTER)),
+    COMBO(combo_layer_lock_fun0, TG(LAYER_FUNCTION)),
+    COMBO(combo_layer_lock_fun1, TG(LAYER_FUNCTION)),
+    COMBO(combo_layer_lock_num0, TG(LAYER_NUMERAL)),
+    COMBO(combo_layer_lock_num1, TG(LAYER_NUMERAL)),
+    COMBO(combo_layer_lock_sym0, TG(LAYER_SYMBOLS)),
+    COMBO(combo_layer_lock_sym1, TG(LAYER_SYMBOLS)),
 };
 
 

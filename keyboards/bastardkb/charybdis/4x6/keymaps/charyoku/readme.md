@@ -37,7 +37,7 @@ like this:
 - [x] Only QWERTY shift-pairs
 - [x] single-handed pointer (trackball) with mouse-buttons ergonomically close to home-row
 - [x] layer-state & capslock RGB indicators
-- [ ] lock layers with thumb combos
+- [x] lock layers with thumb combos
 - [ ] Decide auto-mouse impl (core vs charybdis), scroll, (auto)snipping
 - [ ] Achordion (or bilateral-combinations) home-row-mods
 - ...
