@@ -1,4 +1,4 @@
-[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.3.3</b>"],
+[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.3.4</b>"],
 [{f:1,y:-0.7, d:true},"https://github.com/ankostis/qmk_firmware/tree/charyoku/keyboards/bastardkb/charybdis/4x6/keymaps/charyoku"],
 [
   {f:3,f2:2},
@@ -41,6 +41,6 @@
   {t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#0000ff",n:true},"⌫\n⏯\n❶L\n⌫\n<b>Num</b>"
 ],
 [
-  {x:5,f:3,c:"#777777",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff"},"<b>;:</b>\n<b>;:</b>\nSpc\nSpc\nRAltGr","<b>=</b>\n<b>=</b>\nTab\nTab\nRCtrl",
+  {x:5,f:3,c:"#777777",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff"},"<b>;:</b>\n<b>;:</b>\n<b>;:</b>\n<b>;:</b>\nRAltGr","<b>=</b>\n<b>=</b>\n<b>;:</b>\n<b>;:</b>\nRCtrl",
   {x:0.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ff0000"},"⌦\n🔇\n❸M\n⌦\n<b>Fun</b>"
 ]
