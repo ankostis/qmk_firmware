@@ -410,7 +410,20 @@ void rgb_matrix_colorify_led(uint8_t led, uint8_t mods, bool caps_lock, bool cap
         color_set = true;
     }
 
-    if (caps_lock && inarray(caps_lock_leds, led)) {
+    if (led == 7 || led == 36) {  // 2nd top-outers combine mod colors
+        if (mods & MOD_MASK_SHIFT) {
+            color.g = 0xff;
+            color_set = true;
+        }
+        if (mods & MOD_MASK_CTRL) {
+            color.r = 0xff;
+            color_set = true;
+        }
+        if (mods & MOD_MASK_ALT) {
+            color.b = 0xff;
+            color_set = true;
+        }
+    } else if (caps_lock && inarray(caps_lock_leds, led)) {
         set_color(RGB_WHITE);
     }
     else if (caps_word && inarray(caps_word_leds, led)) {
