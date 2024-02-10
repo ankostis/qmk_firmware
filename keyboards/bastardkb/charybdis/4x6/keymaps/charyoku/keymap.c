@@ -257,7 +257,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
           L12,         L13,         L14,         L15,         L16,         L17, \
           R18,         R19,         R20,         R21,         R22,         R23, \
           L24, LGUI_T(L25), LALT_T(L26), LCTL_T(L27), LSFT_T(L28),         L29, \
-          R30, RSFT_T(R31), RCTL_T(R32), LALT_T(R33), RGUI_T(R34),         R35, \
+          R30, RSFT_T(R31), RCTL_T(R32), LALT_T(R33), LGUI_T(R34),         R35, \
     __VA_ARGS__
 #define HOME_ROW_MOD_GACS(...) _HOME_ROW_MOD_GACS(__VA_ARGS__)
 
