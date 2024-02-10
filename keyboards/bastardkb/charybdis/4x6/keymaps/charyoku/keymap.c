@@ -353,16 +353,21 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 
-#define MOD_CTRL_LED_INDEX 53  // 1st-thumb-right
-#define MOD_SHIFT_LED_INDEX 54  // 2nd-thumb-right
-#define MOD_ALT_LED_INDEX 55  // 3rd-thumb-right
+#define MOD_SHIFT_LED_INDEX0 28  // left-3rd-thumb
+#define MOD_CTRL_LED_INDEX0 27  // left-2nd-thumb
+#define MOD_ALT_LED_INDEX0 26  // left-1st-thumb
+#define MOD_SHIFT_LED_INDEX1 54  // right-2nd-thumb
+#define MOD_CTRL_LED_INDEX1 53  // right-1st-thumb
+#define MOD_ALT_LED_INDEX1 55  // right-bottom-thumb
 
 /**
- * Indicate *Caps_Word* with top-inner keys
+ * Indicate *caps-states* with top-inner keys
  * (left-side works only if `SPLIT_LAYER_STATE_ENABLE`)
  */
-#define CAPS_WORD_LED_INDEX0 20  // inner-top-left
-#define CAPS_WORD_LED_INDEX1 49  // inner-top-right
+#define CAPS_LOCK_LED_INDEX0 21  // right,-inner-2nd
+#define CAPS_LOCK_LED_INDEX1 50  // left-inner-2nd
+#define CAPS_WORD_LED_INDEX0 20  // left-inner-top
+#define CAPS_WORD_LED_INDEX1 49  // right-inner-top
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch (get_highest_layer(layer_state | default_layer_state)) {
@@ -399,14 +404,17 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         rgb_matrix_set_color(CAPS_WORD_LED_INDEX1, RGB_WHITE);
     }
     uint8_t mods = get_mods();
-    if (mods & MOD_MASK_SHIFT) {
-        rgb_matrix_set_color(MOD_SHIFT_LED_INDEX, RGB_GREEN);
+    if (mods & (MOD_MASK_SHIFT | MOD_MASK_GUI)) {
+        rgb_matrix_set_color(MOD_SHIFT_LED_INDEX0, RGB_GREEN);
+        rgb_matrix_set_color(MOD_SHIFT_LED_INDEX1, RGB_GREEN);
     }
-    if (mods & MOD_MASK_CTRL) {
-        rgb_matrix_set_color(MOD_CTRL_LED_INDEX, RGB_RED);
+    if (mods & (MOD_MASK_CTRL | MOD_MASK_GUI)) {
+        rgb_matrix_set_color(MOD_CTRL_LED_INDEX0, RGB_RED);
+        rgb_matrix_set_color(MOD_CTRL_LED_INDEX1, RGB_RED);
     }
-    if (mods & MOD_MASK_ALT) {
-        rgb_matrix_set_color(MOD_ALT_LED_INDEX, RGB_BLUE);
+    if (mods & (MOD_MASK_ALT | MOD_MASK_GUI)) {
+        rgb_matrix_set_color(MOD_ALT_LED_INDEX0, RGB_BLUE);
+        rgb_matrix_set_color(MOD_ALT_LED_INDEX1, RGB_BLUE);
     }
 
     return false;
