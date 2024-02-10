@@ -353,71 +353,119 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 
-#define MOD_SHIFT_LED_INDEX0 28  // left-3rd-thumb
-#define MOD_CTRL_LED_INDEX0 27  // left-2nd-thumb
-#define MOD_ALT_LED_INDEX0 26  // left-1st-thumb
-#define MOD_SHIFT_LED_INDEX1 54  // right-2nd-thumb
-#define MOD_CTRL_LED_INDEX1 53  // right-1st-thumb
-#define MOD_ALT_LED_INDEX1 55  // right-bottom-thumb
-
 /**
+ *
+ * Led indices for RGBs.
+ * C-strings so 0 cannot set the color of the 1st led.
+ *
  * Indicate *caps-states* with top-inner keys
  * (left-side works only if `SPLIT_LAYER_STATE_ENABLE`)
  */
-#define CAPS_LOCK_LED_INDEX0 21  // right,-inner-2nd
-#define CAPS_LOCK_LED_INDEX1 50  // left-inner-2nd
-#define CAPS_WORD_LED_INDEX0 20  // left-inner-top
-#define CAPS_WORD_LED_INDEX1 49  // right-inner-top
+const int8_t caps_lock_leds[] = {
+    21, // right-inner-2nd
+    50, // left-inner-2nd
+    -1
+};
+const int8_t caps_word_leds[] = {
+    20, // left-inner-top
+    49, // right-inner-top
+    -1
+};
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    switch (get_highest_layer(layer_state | default_layer_state)) {
+const int8_t mod_shift_leds[] = {
+    28, // left-3rd-thumb
+    54, // right-2nd-thumb
+    -1
+};
+const int8_t mod_ctrl_leds[] = {
+    27, // left-2nd-thumb
+    53, // right-1st-thumb
+    -1
+};
+const int8_t mod_alt_leds[] = {
+    26, // left-1st-thumb
+    55, // right-bottom-thumb
+    -1
+};
+
+/**
+ * On *Media-layer* just mark volume up/down/mute keys,
+ * to let colors of other kbd funcs to shine.
+ */
+const int8_t media_layer_leds[] = { 47, 42, 39, -1 };
+
+bool inarray(const int8_t *arr, int8_t led) {
+    while (*arr != -1 && *arr != led) arr++;
+    return *arr == led;
+}
+
+void rgb_matrix_colorify_led(uint8_t led, uint8_t mods, bool caps_lock, bool caps_word) {
+    RGB color = { 0, 0, 0 };
+    bool color_set = false;
+
+    void set_color(int r, int g, int b) {
+        color.r = r;
+        color.g = g;
+        color.b = b;
+        color_set = true;
+    }
+
+    if (caps_lock && inarray(caps_lock_leds, led)) {
+        set_color(RGB_WHITE);
+    }
+    else if (caps_word && inarray(caps_word_leds, led)) {
+        set_color(RGB_WHITE);
+    }
+    else if ((mods & (MOD_MASK_SHIFT | MOD_MASK_GUI)) && inarray(mod_shift_leds, led)) {
+        set_color(RGB_GREEN);
+    }
+    else if ((mods & (MOD_MASK_CTRL | MOD_MASK_GUI)) && inarray(mod_ctrl_leds, led)) {
+        set_color(RGB_RED);
+    }
+    else if ((mods & (MOD_MASK_ALT | MOD_MASK_GUI)) && inarray(mod_alt_leds, led)) {
+        set_color(RGB_BLUE);
+    }
+    else {
+        switch (get_highest_layer(layer_state | default_layer_state)) {
         case LAYER_POINTER:
-            rgb_matrix_set_color_all(RGB_YELLOW);
+            set_color(RGB_YELLOW);
             break;
         case LAYER_FUNCTION:
-            rgb_matrix_set_color_all(RGB_MAGENTA);
+            set_color(RGB_MAGENTA);
             break;
         case LAYER_NAVIGATION:
-            rgb_matrix_set_color_all(RGB_CYAN);
-            break;
-        case LAYER_MEDIA:
-            // Just mark volume up/dowe/mute keys, and
-            // let colors of kbd funcs to shine.
-            rgb_matrix_set_color(47, RGB_MAGENTA);
-            rgb_matrix_set_color(42, RGB_MAGENTA);
-            rgb_matrix_set_color(39, RGB_MAGENTA);
+            set_color(RGB_CYAN);
             break;
         case LAYER_NUMERAL:
-            rgb_matrix_set_color_all(RGB_BLUE);
+            set_color(RGB_BLUE);
             break;
         case LAYER_SYMBOLS:
-            rgb_matrix_set_color_all(RGB_CORAL);
+            set_color(RGB_CORAL);
+            break;
+        case LAYER_MEDIA:
+            if (inarray(media_layer_leds, led)) {
+                set_color(RGB_MAGENTA);
+            }
             break;
         default:
             break;
+        }
     }
-    if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(50, RGB_WHITE);
+
+    if (color_set) {
+        rgb_matrix_set_color(led, color.r, color.g, color.b);
     }
-    if (is_caps_word_on()) {
-        rgb_matrix_set_color(CAPS_WORD_LED_INDEX0, RGB_WHITE);
-        rgb_matrix_set_color(CAPS_WORD_LED_INDEX1, RGB_WHITE);
-    }
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     uint8_t mods = get_mods();
-    if (mods & (MOD_MASK_SHIFT | MOD_MASK_GUI)) {
-        rgb_matrix_set_color(MOD_SHIFT_LED_INDEX0, RGB_GREEN);
-        rgb_matrix_set_color(MOD_SHIFT_LED_INDEX1, RGB_GREEN);
-    }
-    if (mods & (MOD_MASK_CTRL | MOD_MASK_GUI)) {
-        rgb_matrix_set_color(MOD_CTRL_LED_INDEX0, RGB_RED);
-        rgb_matrix_set_color(MOD_CTRL_LED_INDEX1, RGB_RED);
-    }
-    if (mods & (MOD_MASK_ALT | MOD_MASK_GUI)) {
-        rgb_matrix_set_color(MOD_ALT_LED_INDEX0, RGB_BLUE);
-        rgb_matrix_set_color(MOD_ALT_LED_INDEX1, RGB_BLUE);
+    bool caps_lock = host_keyboard_led_state().caps_lock;
+    bool caps_word = is_caps_word_on();
+
+    for (uint8_t led = led_min; led <= led_max; led++) {
+        rgb_matrix_colorify_led(led, mods, caps_lock, caps_word);
     }
 
     return false;
 }
-
-#endif      // RGB_MATRIX_ENABLE
+#endif // RGB_MATRIX_ENABLE
