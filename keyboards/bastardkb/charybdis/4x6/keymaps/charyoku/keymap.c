@@ -362,13 +362,14 @@ void rgb_matrix_update_pwm_buffers(void);
  * (left-side works only if `SPLIT_LAYER_STATE_ENABLE`)
  */
 const int8_t caps_lock_leds[] = {
-    21, // right-inner-2nd
-    50, // left-inner-2nd
+    20, // right-inner-top
+    49, // right-inner-top
     -1
 };
 const int8_t caps_word_leds[] = {
-    20, // left-inner-top
-    49, // right-inner-top
+    //21, // NOT WORKING, caps-word state not shared!
+    50, // left-inner-2nd
+    51, // left-inner-3rd
     -1
 };
 
