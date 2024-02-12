@@ -179,7 +179,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
-    _________________DEAD_HALF_ROW_________________,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG, QK_REP, \
+    XXXXXXX,XXXXXXX,XXXXXXX,SNP_TOG,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG, QK_REP, \
                              KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
                                     KC_BTN2,KC_BTN3,                                   KC_DEL
 
