@@ -58,16 +58,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ALT_SCL MT(MOD_RALT, KC_SCLN)
 #define CTL_EQL MT(MOD_RCTL, KC_EQL)
 
-const uint16_t PROGMEM combo_layer_lock_med[] = {ESC_MED, CTL_EQL, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_nav[] = {SPC_NAV, CTL_EQL, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_ptr0[] = {TAB_PTR, CTL_EQL, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_ptr1[] = {TAB_PTR, KC_BTN3, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_fun0[] = {BSP_NUM, ENT_SYM, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_fun1[] = {KC_ENT, KC_BSPC, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_num0[] = {BSP_NUM, DEL_FUN, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_num1[] = {BSP_NUM, KC_DEL, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_sym0[] = {ENT_SYM, DEL_FUN, COMBO_END};
-const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_med[] = {ESC_MED, CW_TOGG, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_nav[] = {SPC_NAV, CW_TOGG, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_ptr[] = {TAB_PTR, CW_TOGG, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_fun[] = {DEL_FUN, KC_CAPS, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_num[] = {BSP_NUM, KC_CAPS, COMBO_END};
+const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, KC_CAPS, COMBO_END};
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -137,7 +133,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
      KC_GRV,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,     KC_7,   KC_8,   KC_9,   KC_0, KC_EQL, \
     _______, KC_F12,  KC_F7,  KC_F8,  KC_F9,KC_PSCR,  _________________DEAD_HALF_ROW_________________, \
     _______, KC_F11,  KC_F4,  KC_F5,  KC_F6,KC_SCRL,  ________________HOME_ROW_GACS_R________________, \
-    _______, KC_F10,  KC_F1,  KC_F2,  KC_F3,KC_PAUS,  _________________DEAD_HALF_ROW_________________, \
+    _______, KC_F10,  KC_F1,  KC_F2,  KC_F3,KC_PAUS,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,_______, \
                              KC_APP,_______, KC_TAB,                                   KC_ENT,KC_BSPC, \
                                     ALT_SCL,CTL_EQL,                                  _______
 
@@ -152,7 +148,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  RGB_VAI,RGB_HUI,RGB_SAI,RGB_MOD,RGB_SPI,RGB_TOG, \
     ________________HOME_ROW_GACS_L________________,  KC_MPRV,KC_VOLD,KC_MUTE,KC_VOLU,KC_MNXT,RGB_M_P, \
-    _________________DEAD_HALF_ROW_________________,  XXXXXXX,KC_BRID,XXXXXXX,KC_BRIU,XXXXXXX,XXXXXXX, \
+    _______,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,  XXXXXXX,KC_BRID,XXXXXXX,KC_BRIU,XXXXXXX,XXXXXXX, \
                             _______,KC_MPLY,KC_MSTP,                                  KC_MSTP,KC_MPLY, \
                                     _______,_______,                                  XXXXXXX
 
@@ -179,7 +175,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
-    XXXXXXX,XXXXXXX,XXXXXXX,SNP_TOG,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG, QK_REP, \
+    _______,XXXXXXX,XXXXXXX,SNP_TOG,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG,_______, \
                              KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
                                     KC_BTN2,KC_BTN3,                                   KC_DEL
 
@@ -197,7 +193,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,  KC_UP, KC_INS,KC_PGUP, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
-    _________________DEAD_HALF_ROW_________________,   KC_CUT,KC_COPY,KC_HOME,LA3_PTR,_______, QK_REP, \
+    _______,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,   KC_CUT,KC_COPY,KC_HOME,LA3_PTR,_______,_______, \
                              KC_ESC,_______,_______,                                   KC_ENT,KC_BSPC, \
                                     _______,_______,                                   KC_DEL
 
@@ -215,7 +211,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _______,KC_LBRC,   KC_7,   KC_8,   KC_9,KC_RBRC,  KC_AGIN,KC_UNDO,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
     _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
-    _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
+    _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX,_______, \
                              KC_DOT,   KC_0,KC_SLSH,                                   KC_ENT,_______, \
                                     _______,_______,                                   KC_DEL
 
@@ -233,7 +229,7 @@ const uint16_t PROGMEM combo_layer_lock_sym1[] = {ENT_SYM, KC_DEL, COMBO_END};
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
     _______,KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,  KC_AGIN,KC_UNDO,XXXXXXX,XXXXXXX,XXXXXXX, KC_TAB, \
     _______,KC_COLN, KC_DLR,KC_PERC,KC_CIRC,KC_PLUS,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
-    _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX, QK_REP, \
+    _______,KC_TILD,KC_EXLM,  KC_AT,KC_HASH,KC_PIPE,   KC_CUT,KC_COPY,KC_HOME,XXXXXXX,XXXXXXX,_______, \
                             KC_LPRN,KC_RPRN,KC_QUES,                                  _______,KC_BSPC, \
                                     _______,_______,                                   KC_DEL
 
@@ -278,14 +274,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 combo_t key_combos[] = {
     COMBO(combo_layer_lock_med, TG(LAYER_MEDIA)),
     COMBO(combo_layer_lock_nav, TG(LAYER_NAVIGATION)),
-    COMBO(combo_layer_lock_ptr0, TG(LAYER_POINTER)),
-    COMBO(combo_layer_lock_ptr1, TG(LAYER_POINTER)),
-    COMBO(combo_layer_lock_fun0, TG(LAYER_FUNCTION)),
-    COMBO(combo_layer_lock_fun1, TG(LAYER_FUNCTION)),
-    COMBO(combo_layer_lock_num0, TG(LAYER_NUMERAL)),
-    COMBO(combo_layer_lock_num1, TG(LAYER_NUMERAL)),
-    COMBO(combo_layer_lock_sym0, TG(LAYER_SYMBOLS)),
-    COMBO(combo_layer_lock_sym1, TG(LAYER_SYMBOLS)),
+    COMBO(combo_layer_lock_ptr, TG(LAYER_POINTER)),
+    COMBO(combo_layer_lock_fun, TG(LAYER_FUNCTION)),
+    COMBO(combo_layer_lock_num, TG(LAYER_NUMERAL)),
+    COMBO(combo_layer_lock_sym, TG(LAYER_SYMBOLS)),
 };
 
 
