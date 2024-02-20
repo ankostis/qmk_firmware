@@ -186,32 +186,45 @@ static void pointing_device_task_charybdis(report_mouse_t* mouse_report) {
     static int16_t scroll_buffer_y = 0;
     if (g_charybdis_config.is_dragscroll_enabled) {
 #    ifdef CHARYBDIS_DRAGSCROLL_REVERSE_X
-        scroll_buffer_x -= mouse_report->x;
+        const int16_t m_x = -mouse_report->x;
 #    else
-        scroll_buffer_x += mouse_report->x;
+        const int16_t m_x = mouse_report->x;
 #    endif // CHARYBDIS_DRAGSCROLL_REVERSE_X
 #    ifdef CHARYBDIS_DRAGSCROLL_REVERSE_Y
-        scroll_buffer_y -= mouse_report->y;
+        const int16_t m_y = -mouse_report->y;
 #    else
-        scroll_buffer_y += mouse_report->y;
+        const int16_t m_y = mouse_report->y;
 #    endif // CHARYBDIS_DRAGSCROLL_REVERSE_Y
-        mouse_report->x = 0;
-        mouse_report->y = 0;
+        scroll_buffer_x += m_x;
+        scroll_buffer_y += m_y;
+
         if (abs(scroll_buffer_x) >= CHARYBDIS_DRAGSCROLL_BUFFER_SIZE) {
             const int16_t sign_x = scroll_buffer_x > 0 ? 1 : -1;
-            mouse_report->h = sign_x;
-            scroll_buffer_x -= sign_x * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE;
+            mouse_report->h      = sign_x;
+            if (m_x == 0 || ((m_x > 0) && (scroll_buffer_x > 0)) || ((m_x < 0) && (scroll_buffer_x < 0))) {
+                // Spill-over accumulated distance to the next cycle.
+                scroll_buffer_x -= sign_x * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE;
+            } else {
+                // Cancel accunulated distance if mouse-direction reversed.
+                scroll_buffer_x = 0;
+            }
         }
         if (abs(scroll_buffer_y) >= CHARYBDIS_DRAGSCROLL_BUFFER_SIZE) {
             const int16_t sign_y = scroll_buffer_y > 0 ? 1 : -1;
-            mouse_report->v = sign_y;
-            scroll_buffer_y -= sign_y * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE;
+            mouse_report->v      = sign_y;
+            if (m_y == 0 || ((m_y > 0) && (scroll_buffer_y > 0)) || ((m_y < 0) && (scroll_buffer_y < 0))) {
+                // Spill-over accumulated distance to the next cycle.
+                scroll_buffer_y -= sign_y * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE;
+            } else {
+                // Cancel accunulated distance if mouse-direction reversed.
+                scroll_buffer_y = 0;
+            }
         }
 
         mouse_report->x = mouse_report->y = 0;
-    } else {  // not a drag-scroll event
+    } else { // not a drag-scroll event
         // Clean up, or next draa-scroll actevation would start abruptly.
-        scroll_buffer_x =  scroll_buffer_y = 0;
+        scroll_buffer_x = scroll_buffer_y = 0;
     }
 }
 
