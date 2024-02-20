@@ -190,35 +190,33 @@ static void pointing_device_task_charybdis(report_mouse_t* mouse_report) {
 #    else
         const int16_t m_x = mouse_report->x;
 #    endif // CHARYBDIS_DRAGSCROLL_REVERSE_X
+        if (((m_x > 0) && (scroll_buffer_x < 0)) || ((m_x < 0) && (scroll_buffer_x > 0))) {
+            // Immediately cancel accunulated distance if mouse-direction reversed.
+            scroll_buffer_x = m_x;
+        } else {
+            scroll_buffer_x += m_x;
+        }
+        if (abs(scroll_buffer_x) >= CHARYBDIS_DRAGSCROLL_BUFFER_SIZE) {
+            const int16_t sign_x = scroll_buffer_x > 0 ? 1 : -1;
+            mouse_report->h      = sign_x;
+            scroll_buffer_x -= sign_x * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE; // Spill-over
+        }
+
 #    ifdef CHARYBDIS_DRAGSCROLL_REVERSE_Y
         const int16_t m_y = -mouse_report->y;
 #    else
         const int16_t m_y = mouse_report->y;
 #    endif // CHARYBDIS_DRAGSCROLL_REVERSE_Y
-        scroll_buffer_x += m_x;
-        scroll_buffer_y += m_y;
-
-        if (abs(scroll_buffer_x) >= CHARYBDIS_DRAGSCROLL_BUFFER_SIZE) {
-            const int16_t sign_x = scroll_buffer_x > 0 ? 1 : -1;
-            mouse_report->h      = sign_x;
-            if (m_x == 0 || ((m_x > 0) && (scroll_buffer_x > 0)) || ((m_x < 0) && (scroll_buffer_x < 0))) {
-                // Spill-over accumulated distance to the next cycle.
-                scroll_buffer_x -= sign_x * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE;
-            } else {
-                // Cancel accunulated distance if mouse-direction reversed.
-                scroll_buffer_x = 0;
-            }
+        if (((m_y > 0) && (scroll_buffer_y < 0)) || ((m_y < 0) && (scroll_buffer_y > 0))) {
+            // Immediately cancel accunulated distance if mouse-direction reversed.
+            scroll_buffer_y = m_y;
+        } else {
+            scroll_buffer_y += m_y;
         }
         if (abs(scroll_buffer_y) >= CHARYBDIS_DRAGSCROLL_BUFFER_SIZE) {
             const int16_t sign_y = scroll_buffer_y > 0 ? 1 : -1;
             mouse_report->v      = sign_y;
-            if (m_y == 0 || ((m_y > 0) && (scroll_buffer_y > 0)) || ((m_y < 0) && (scroll_buffer_y < 0))) {
-                // Spill-over accumulated distance to the next cycle.
-                scroll_buffer_y -= sign_y * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE;
-            } else {
-                // Cancel accunulated distance if mouse-direction reversed.
-                scroll_buffer_y = 0;
-            }
+            scroll_buffer_y -= sign_y * CHARYBDIS_DRAGSCROLL_BUFFER_SIZE; // Spill-over
         }
 
         mouse_report->x = mouse_report->y = 0;
