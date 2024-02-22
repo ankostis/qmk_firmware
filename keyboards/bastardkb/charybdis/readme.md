@@ -97,6 +97,8 @@ define `CHARYBDIS_DRAGSCROLL_SEND_COALESCED`:
 #define CHARYBDIS_DRAGSCROLL_SEND_COALESCED
 ```
 
+Define it on slower systems or when your qmk firmware is not able to keep up with the trackball movement.
+
 ### Sniping mode
 
 Sniping mode slows down the pointer for more precise gestures. It is useful when combined with a higher default DPI.
