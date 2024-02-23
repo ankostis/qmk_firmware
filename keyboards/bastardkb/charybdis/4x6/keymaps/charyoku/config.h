@@ -35,8 +35,31 @@
 /* Charybdis-specific features. */
 
 #ifdef POINTING_DEVICE_ENABLE
+
 #define CHARYBDIS_DRAGSCROLL_REVERSE_Y      // mimic up/down movement: scroll towards drag
-#define CHARYBDIS_MINIMUM_DEFAULT_DPI 600   // default(400)
-#define CHARYBDIS_MINIMUM_SNIPING_DPI 200   // default(200)
+
+// Drag-scroll changes DPI on activation, but this causes issues,
+// better keep both identical (400).  So have to compensate drag-scroll divider
+//  (`CHARYBDIS_DRAGSCROLL_BUFFER_SIZE`)
+//
+// #define CHARYBDIS_MINIMUM_DEFAULT_DPI 400        // default(400)
+// #define CHARYBDIS_MINIMUM_SNIPING_DPI 200        // default(200)
+// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 200    // default(200)
+// #define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 100    // default(100)
+#define CHARYBDIS_DRAGSCROLL_DPI 400                // default(100)
+#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE 20         // default(6)
+
+// Send coalesced events with scroll values above ±1 (vs queueing ±1 events)?
+#define CHARYBDIS_DRAGSCROLL_SEND_COALESCE
+
+// If need, reduce mouse events frequency to cope with MCU load;
+// note that it delays (but smoothens) drag-scrolling, particularly when
+// queued (ie. `CHARYBDIS_DRAGSCROLL_SEND_COALESCE` undefined).
+// #undef  POINTING_DEVICE_TASK_THROTTLE_MS
+// #define POINTING_DEVICE_TASK_THROTTLE_MS 5
+
+// For "maccel" configs, see `keymap.c` file.
+
+#define EECONFIG_USER_DATA_SIZE 20
 
 #endif // POINTING_DEVICE_ENABLE

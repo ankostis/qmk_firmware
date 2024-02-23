@@ -289,6 +289,75 @@ bool caps_word_press_user(uint16_t keycode) {
 }
 
 
+#ifdef MACCEL_ENABLE
+//// MACCEL configs
+//
+// Design: https://www.desmos.com/calculator/p0etbmee57
+// Design: https://www.desmos.com/calculator/fjjli56gow
+// Mine butters with slow gnome-moute+accel
+// #define MACCEL_TAKEOFF     0.7   // --/++ curve starts rising smoothlier/abruptlier
+// #define MACCEL_GROWTH      0.25  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET      4.7   // --/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT       9.0   // maximum acceleration factor
+
+// #define MACCEL_TAKEOFF     1.0   // --/++ curve starts rising smoothlier/abruptlier
+// #define MACCEL_GROWTH      0.56  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET      4.8   // --/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT       8.0   // maximum acceleration factor
+
+// #define MACCEL_TAKEOFF     1.07  // --/++ curve starts rising smoothlier/abruptlier
+// #define MACCEL_GROWTH      0.56  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET      4.5   // --/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT       8.0   // maximum acceleration factor
+
+// Mine with Gnome-mouse: mid-speed + no-accel, 400DPI both mouse/scroll
+#define MACCEL_TAKEOFF     1.18  // --/++ curve starts rising smoothlier/abruptlier
+#define MACCEL_GROWTH      0.56  // --/++ curve reaches max limit slower/faster
+#define MACCEL_OFFSET      3.6   //--/++ growth kicks in earlier/later
+#define MACCEL_LIMIT       9.0   //maximum acceleration factor
+
+// Wimads, old https://www.desmos.com/calculator/p0etbmee57
+// New-letters: https://www.desmos.com/calculator/4ajz8f7bqb
+// #define MACCEL_TAKEOFF  2.0   // --/++ curve starts rising smoothlier/abruptlier
+// #define MACCEL_GROWTH   0.25  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET   2.2   // --/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT    6.0   // maximum acceleration factor
+
+// To view mouse's distance/velocity while configuring maccel,
+// set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,
+// and run `qmk console` in the shell:
+// #define MACCEL_DEBUG
+// #undef PRINTF_SUPPORT_DECIMAL_SPECIFIERS
+// #define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
+
+
+#   include "maccel/maccel.h"
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    return pointing_device_task_maccel(mouse_report);
+}
+
+void keyboard_post_init_user(void) {
+    keyboard_post_init_maccel();
+}
+
+enum my_keycodes {
+    MA_TAKEOFF = QK_USER,   // mouse acceleration curve takeoff (initial acceleration) step key
+    MA_GROWTH_RATE,              // mouse acceleration curve growth rate step key
+    MA_OFFSET,              // mouse acceleration curve offset step key
+    MA_LIMIT,               // mouse acceleration curve limit step key
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_maccel(keycode, record, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
+        return false;
+    }
+    /* insert your own macros here */
+    return true;
+}
+#endif  // MACCEL_ENABLE
+
+
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in
 // rgb_matrix.c.

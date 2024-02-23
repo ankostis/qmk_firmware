@@ -38,9 +38,23 @@ like this:
 - [x] single-handed pointer (trackball) with mouse-buttons ergonomically close to home-row
 - [x] layer-state & capslock RGB indicators
 - [x] lock layers with thumb combos
-- [ ] Decide auto-mouse impl (core vs charybdis), scroll, (auto)snipping
+- [x] Charybdis auto-mouse impl, scroll, (auto)snipping
+- [x] Generalised sigmoid mouse & drag-scroll acceleration
+  NOTE: maccel is not integrated yet as officially suggested,
+  but facilitates experimentation with fast builds.
+  - [ ] maccel configed through *via*
+- [ ] Opinionated on same-side keys (unassigned in miryoku)
 - [ ] Achordion (or bilateral-combinations) home-row-mods
 - ...
+
+
+## Tips
+
+- Store puncts in toggling-side for SYM/NUM so as to type easier `!=` and regexes like
+  `/.*\\n|#.*//` or paths like `~/.*` without changing from *Sym* layer.
+- [![accelaration-profiles](https://github.com/finrod09/qmk_userspace_features/raw/maccel-dev/maccel/assets/accel_curve.png)](https://www.desmos.com/calculator/4ajz8f7bqb)
+
+enjoy!
 
 ---
 
