@@ -50,19 +50,30 @@ like this:
 
 ![charyoku layers](assets/charyoku-layers.svg)
 
-Original generated with the 1st command below and heavily hand-tweaked yaml 
-in [*keymap-drawer*](https://keymap-drawer.streamlit.app/) before issuing the 2nd command:
+Original generated with the first two commands below and heavily hand-tweaked yaml 
+in [*keymap-drawer*](https://keymap-drawer.streamlit.app/) before issuing
+the 3rd command.
+Since then, issue the 1st & 2nd commands on every release:
 
 ```shell
-qmk c2json | tee keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.json
-keymap parse -q | keymap draw - > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.svg
+qmk c2json > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/keylist.json
+keymap parse -q keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/keylist.json > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.yaml
+keymap draw keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.yaml > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.svg
 ```
 
- 
+:::{note}
+Install *keymap-drawer* with the following command until @finrod09(burkfers) 
+submits a PR to main repo:
+
+```shell
+pip install https://github.com/finrod09/keymap-drawer.git@bkb
+```
+:::
+
 ## Tips
 
-- Store puncts in toggling-side for SYM/NUM so as to type easier `!=` and regexes like
-  `/.*\\n|#.*//` or paths like `~/.*` without changing from *Sym* layer.
+- Some symbols in the toggling-side for SYM/NUM help type faster `!=`, regexes like
+  `/.*\\n|#.*//` and paths like `~/.*` without lifting the R-thumb.
 - [![accelaration-profiles](assets/maccel-curve.png)](https://www.desmos.com/calculator/xkhejelty8)
 
 enjoy!

@@ -40,6 +40,8 @@ enum charybdis_keymap_layers {
 #define ALT_SCL MT(MOD_RALT, KC_SCLN)
 #define CTL_EQL MT(MOD_RCTL, KC_EQL)
 
+// const uint16_t PROGMEM combo_del0[] = {KC_BSPC, KC_M, COMBO_END};
+// const uint16_t PROGMEM combo_del1[] = {BSP_NUM, KC_M, COMBO_END};
 const uint16_t PROGMEM combo_layer_lock_med[] = {ESC_MED, CW_TOGG, COMBO_END};
 const uint16_t PROGMEM combo_layer_lock_nav[] = {SPC_NAV, CW_TOGG, COMBO_END};
 const uint16_t PROGMEM combo_layer_lock_ptr[] = {TAB_PTR, CW_TOGG, COMBO_END};
@@ -60,6 +62,21 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, KC_CAPS, COMBO_END};
 #define KC_CUT LCTL(KC_X)
 #define KC_COPY LCTL(KC_C)
 #define KC_PSTE LCTL(KC_V)
+
+
+#ifdef MACCEL_ENABLE
+enum my_keycodes {
+    MA_TAKEOFF = QK_USER,   // mouse acceleration curve takeoff (initial acceleration) step key
+    MA_GROWTH_RATE,         // mouse acceleration curve growth rate step key
+    MA_OFFSET,              // mouse acceleration curve offset step key
+    MA_LIMIT,               // mouse acceleration curve limit step key
+};
+#define MA_TKFF MA_TAKEOFF
+#define MA_GRWT MA_GROWTH_RATE
+#define MA_OFST MA_OFFSET
+#define MA_LIMT MA_LIMIT
+#endif  // MACCEL_ENABLE
+
 
 // clang-format off
 /**
@@ -154,10 +171,10 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, KC_CAPS, COMBO_END};
  * anything on the 5th column unreachable (the original *charybdis 4x6 uses the pinky).
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
-    ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
-    _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD, KC_TAB, \
-    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD, KC_SPC, \
-    _______,XXXXXXX,XXXXXXX,SNP_TOG,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG,_______, \
+    ________________KEYB_CTRL_ROW_L________________,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MA_TKFF, \
+    _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
+    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD,MA_OFST, \
+    _______,XXXXXXX,XXXXXXX,SNP_TOG,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG,MA_LIMT, \
                              KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
                                     KC_BTN2,KC_BTN3,                                   KC_DEL
 
@@ -255,6 +272,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 combo_t key_combos[] = {
+    // COMBO(combo_del0, KC_DEL),
+    // COMBO(combo_del1, KC_DEL),
     COMBO(combo_layer_lock_med, TG(LAYER_MEDIA)),
     COMBO(combo_layer_lock_nav, TG(LAYER_NAVIGATION)),
     COMBO(combo_layer_lock_ptr, TG(LAYER_POINTER)),
@@ -323,14 +342,6 @@ bool caps_word_press_user(uint16_t keycode) {
 // #define MACCEL_OFFSET      2.2   // --/++ growth kicks in earlier/later
 // #define MACCEL_LIMIT       6.0   // maximum acceleration factor
 
-// To view mouse's distance/velocity while configuring maccel,
-// set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,
-// and run `qmk console` in the shell:
-// #define MACCEL_DEBUG
-// #undef PRINTF_SUPPORT_DECIMAL_SPECIFIERS
-// #define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
-
-
 #   include "maccel/maccel.h"
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
@@ -340,13 +351,6 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 void keyboard_post_init_user(void) {
     keyboard_post_init_maccel();
 }
-
-enum my_keycodes {
-    MA_TAKEOFF = QK_USER,   // mouse acceleration curve takeoff (initial acceleration) step key
-    MA_GROWTH_RATE,              // mouse acceleration curve growth rate step key
-    MA_OFFSET,              // mouse acceleration curve offset step key
-    MA_LIMIT,               // mouse acceleration curve limit step key
-};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_maccel(keycode, record, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {

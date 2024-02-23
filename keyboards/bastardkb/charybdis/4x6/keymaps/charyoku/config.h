@@ -42,12 +42,13 @@
 // better keep both identical (400).  So have to compensate drag-scroll divider
 //  (`CHARYBDIS_DRAGSCROLL_BUFFER_SIZE`)
 //
-// #define CHARYBDIS_MINIMUM_DEFAULT_DPI 400        // default(400)
-// #define CHARYBDIS_MINIMUM_SNIPING_DPI 200        // default(200)
-// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 200    // default(200)
-// #define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 100    // default(100)
-#define CHARYBDIS_DRAGSCROLL_DPI 400                // default(100)
-#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE 20         // default(6)
+#define COMMON_DPI 400
+#define CHARYBDIS_MINIMUM_DEFAULT_DPI           COMMON_DPI  // default(400)
+#define CHARYBDIS_MINIMUM_SNIPING_DPI           100         // default(200)
+// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP    200         // default( COMMON_DPI)
+// #define CHARYBDIS_SNIPING_DPI_CONFIG_STEP    100         // default(100)
+#define CHARYBDIS_DRAGSCROLL_DPI                COMMON_DPI  // default(100)
+#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        20          // default(6)
 
 // Send coalesced events with scroll values above ±1 (vs queueing ±1 events)?
 #define CHARYBDIS_DRAGSCROLL_SEND_COALESCE
@@ -55,11 +56,20 @@
 // If need, reduce mouse events frequency to cope with MCU load;
 // note that it delays (but smoothens) drag-scrolling, particularly when
 // queued (ie. `CHARYBDIS_DRAGSCROLL_SEND_COALESCE` undefined).
-// #undef  POINTING_DEVICE_TASK_THROTTLE_MS
-// #define POINTING_DEVICE_TASK_THROTTLE_MS 5
+#undef  POINTING_DEVICE_TASK_THROTTLE_MS
+#define POINTING_DEVICE_TASK_THROTTLE_MS 5
+
+#define MACCEL_USE_KEYCODES
 
 // For "maccel" configs, see `keymap.c` file.
-
+#define MOUSE_EXTENDED_REPORT
 #define EECONFIG_USER_DATA_SIZE 20
+
+// To view mouse's distance/velocity while configuring maccel,
+// set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,
+// and run `qmk console` in the shell:
+#define MACCEL_DEBUG
+#undef PRINTF_SUPPORT_DECIMAL_SPECIFIERS
+#define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
 
 #endif // POINTING_DEVICE_ENABLE
