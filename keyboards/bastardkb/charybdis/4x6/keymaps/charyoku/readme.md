@@ -4,7 +4,7 @@ A *ColemakDH-esque* keymap for the "big" *Charybdis 4x6*, with *VIA* support,
 [home row mods](https://precondition.github.io/home-row-mods) and
 [Miryoku-inspired layers](https://github.com/manna-harbour/miryoku):
 
-![alt text](charyoku-kle-reference.png)
+![alt text](assets/charyoku-kle-reference.png)
 generated with [keyboard-layout-editor.com](http://www.keyboard-layout-editor.com/#/gists/57926252da9ebaea7a88cba9ed3bfa78)
 
 It was announced in [this *BastardKBD* discord thread](https://discordapp.com/channels/681309835135811648/1193692606568333342)
