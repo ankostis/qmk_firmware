@@ -1,0 +1,237 @@
+layout:
+  { qmk_keyboard: bastardkb/charybdis/4x6/v2/splinky_3, qmk_layout: LAYOUT }
+layers:
+  base:
+    - [F11, F1, F2, F3, F4, F5]
+    - [F6, F7, F8, F9, F10, F12]
+    - [App, Q, W, F, P, B]
+    - [J, L, U, Y, { t: "'", s: '"' }, { t: "/", s: "?", type: ghost }]
+    - [
+        PrtSc,
+        { t: A, h: LGUI },
+        { t: R, h: LAlt },
+        { t: S, h: LCtrl },
+        { t: T, h: LShift },
+        G,
+      ]
+    - [
+        M,
+        { t: N, h: RShift },
+        { t: E, h: RCtrl },
+        { t: I, h: LAlt },
+        { t: O, h: LGUI },
+        { t: ";", s: ":", type: ghost },
+      ]
+    - [Caps word, Z, X, C, D, V]
+    - [
+        K,
+        H,
+        { t: "-", s: "_" },
+        { t: ",", s: "<", h: mouse },
+        { t: ".", s: ">", h: nav },
+        Caps lock,
+      ]
+    - [
+        { t: "Esc ⎋", h: media },
+        { t: "$$mdi:keyboard-space$$", h: nav },
+        { t: Tab, h: mouse },
+        { t: "$$mdi:keyboard-return$$", h: sym },
+        { t: $$mdi:backspace$$, h: num },
+      ]
+    - [
+        { t: ";", s: ":", h: RAlt, type: ghost },
+        { t: "=", s: "+", h: RCtrl, type: ghost },
+        { t: "Del", h: fun },
+      ]
+  fun:
+    - [
+        { t: "`", s: "~" },
+        { t: "1", s: "!" },
+        { t: "2", s: "@" },
+        { t: "3", s: "#" },
+        { t: "4", s: "$" },
+        { t: "5", s: "%" },
+      ]
+    - [
+        { t: "6", s: "^" },
+        { t: "7", s: "&" },
+        { t: "8", s: "*" },
+        { t: "9", s: "(" },
+        { t: "0", s: ")" },
+        { t: "=", s: "+" },
+      ]
+    - [{ t: App, type: trans }, F12, F7, F8, F9, PrtSc]
+    - ["", "", "", "", "", ""]
+    - [{ t: PrtSc, type: trans }, F11, F4, F5, F6, Scroll lock]
+    - ["", LShift, LCtrl, LAlt, LGUI, { t: ";", s: ":", type: trans }]
+    - [{ t: Caps word, type: trans }, F10, F1, F2, F3, Pause]
+    - ["", "", "", "", "", { t: Caps lock, type: trans }]
+    - [
+        App,
+        { t: "$$mdi:keyboard-space$$", type: trans },
+        Tab,
+        "$$mdi:keyboard-return$$",
+        $$mdi:backspace$$,
+      ]
+    - [
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        { type: held },
+      ]
+
+  nav:
+    - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["", "", "", "", "", ""]
+    - [Redo, Undo, ▲, Insert, PgUp ▲, Tab]
+    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
+    - [Paste, ◀, ▼, ▶, PgDown ▼, "$$mdi:keyboard-space$$"]
+    - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "", Paste]
+    - [
+        Cut,
+        Copy,
+        Home,
+        { t: "End", h: mouse },
+        { type: held },
+        { t: Caps lock, type: trans },
+      ]
+    - [
+        "Esc ⎋",
+        { type: held },
+        { t: Tab, h: mouse, type: trans },
+        "$$mdi:keyboard-return$$",
+        "$$mdi:backspace$$",
+      ]
+    - [
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
+      ]
+
+  media:
+    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["", "", "", "", "", ""]
+    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
+    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
+    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
+    - [{ "Caps word", type: trans }, "", "", "", "", ""]
+    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
+    - [{ type: held }, Play, Stop, Stop, Play]
+    - [
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        "",
+      ]
+
+  num:
+    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - [
+        { t: App, type: trans },
+        { t: "[", s: "{" },
+        { t: "7", s: "&" },
+        { t: "8", s: "*" },
+        { t: "9", s: "(" },
+        { t: "]", s: "}" },
+      ]
+    - [
+        Redo,
+        Undo,
+        { t: "=", s: "+" },
+        { t: "/", s: "?" },
+        { t: '\', s: "|" },
+        Tab,
+      ]
+    - [
+        { t: PrtSc, type: trans },
+        { t: ";", s: ":" },
+        { t: "4", s: "$" },
+        { t: "5", s: "%" },
+        { t: "6", s: "^" },
+        { t: "=", s: "+" },
+      ]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
+    - [
+        { t: "Caps word", type: trans },
+        { t: "`", s: "~" },
+        { t: "1", s: "!" },
+        { t: "2", s: "@" },
+        { t: "3", s: "#" },
+        { t: '\', s: "|" },
+      ]
+    - [
+        Cut,
+        Copy,
+        { t: "-", s: "_" },
+        { t: ",", s: "<" },
+        { t: ".", s: ">" },
+        { t: "Caps lock", type: trans },
+      ]
+    - [{ t: ".", s: ">" }, "0", /, "$$mdi:keyboard-return$$", { type: held }]
+    - [
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
+      ]
+
+  mouse:
+    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["", "", "", "", "", ""]
+    - [Redo, Undo, ❸M, ❺, "", Tab]
+    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
+    - [Paste, ❷R, ❶L, ❹, "", "$$mdi:keyboard-space$$"]
+    - [{ t: Caps word, type: trans }, "", "", "snipe toggle", "drag toggle", ""]
+    - [
+        Cut,
+        Copy,
+        "drag scroll",
+        { type: held },
+        "snipe toggle",
+        { t: Caps lock, type: trans },
+      ]
+    - [
+        "Esc ⎋",
+        ❶L,
+        { type: held },
+        "$$mdi:keyboard-return$$",
+        "$$mdi:backspace$$",
+      ]
+    - [❷R, ❸M, Del]
+  sym:
+    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
+    - [
+        Redo,
+        Undo,
+        { t: "=", s: "+" },
+        { t: "/", s: "?" },
+        { t: '\', s: "|" },
+        Tab,
+      ]
+    - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
+    - [{ t: "Caps word", type: trans }, "~", "!", "@", "#", "|"]
+    - [
+        Cut,
+        Copy,
+        { t: "-", s: "_" },
+        { t: ",", s: "<" },
+        { t: ".", s: ">" },
+        { t: "Caps lock", type: trans },
+      ]
+    - ["(", ")", "?", { type: held }, $$mdi:backspace$$]
+    - [
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
+      ]
+combos:
+  - { p: [36, 48], k: "media lock", l: [base], a: left }
+  - { p: [36, 49], k: "nav lock", l: [base], a: bottom }
+  - { p: [36, 50], k: "mouse lock", l: [base], a: right }
+  - { p: [47, 51], k: "sym lock", l: [base], a: left }
+  - { p: [47, 52], k: "num lock", l: [base], a: bottom }
+  - { p: [47, 55], k: "fun lock", l: [base], a: right }

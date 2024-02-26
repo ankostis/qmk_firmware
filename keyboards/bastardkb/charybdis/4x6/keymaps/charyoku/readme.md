@@ -47,7 +47,20 @@ like this:
 - [ ] Achordion (or bilateral-combinations) home-row-mods
 - ...
 
+## Layout
 
+![charyoku layers](assets/charyoku-layers.svg)
+
+Original generated with this commands and heavily hand-tweaked yaml:
+
+```shell
+qmk c2json | \
+    tee keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.json | \
+    keymap parse -q | keymap draw - > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/charyoku-layers.svg
+```
+
+
+ 
 ## Tips
 
 - Store puncts in toggling-side for SYM/NUM so as to type easier `!=` and regexes like
