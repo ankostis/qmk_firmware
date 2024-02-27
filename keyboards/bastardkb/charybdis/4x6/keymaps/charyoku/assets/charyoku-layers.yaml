@@ -2,7 +2,7 @@ layout:
   { qmk_keyboard: bastardkb/charybdis/4x6/v2/splinky_3, qmk_layout: LAYOUT }
 layers:
   base:
-    - [F11, F1, F2, F3, F4, F5]
+    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.4.1" }, F4, F5]
     - [F6, F7, F8, F9, F10, F12]
     - [App, Q, W, F, P, B]
     - [J, L, U, Y, { t: "'", s: '"' }, { t: "/", s: "?", type: ghost }]
@@ -39,44 +39,9 @@ layers:
         { t: $$mdi:backspace$$, h: num },
       ]
     - [
-        { t: ";", s: ":", h: RAlt, type: ghost },
+        { t: ";", s: ":", h: RAltGr, type: ghost },
         { t: "=", s: "+", h: RCtrl, type: ghost },
         { t: "Del", h: fun },
-      ]
-  fun:
-    - [
-        { t: "`", s: "~" },
-        { t: "1", s: "!" },
-        { t: "2", s: "@" },
-        { t: "3", s: "#" },
-        { t: "4", s: "$" },
-        { t: "5", s: "%" },
-      ]
-    - [
-        { t: "6", s: "^" },
-        { t: "7", s: "&" },
-        { t: "8", s: "*" },
-        { t: "9", s: "(" },
-        { t: "0", s: ")" },
-        { t: "=", s: "+" },
-      ]
-    - [{ t: App, type: trans }, F12, F7, F8, F9, PrtSc]
-    - ["", "", "", "", "", ""]
-    - [{ t: PrtSc, type: trans }, F11, F4, F5, F6, Scroll lock]
-    - ["", LShift, LCtrl, LAlt, LGUI, { t: ";", s: ":", type: trans }]
-    - [{ t: Caps word, type: trans }, F10, F1, F2, F3, Pause]
-    - ["", "", "", "", "", { t: Caps lock, type: trans }]
-    - [
-        App,
-        { t: "$$mdi:keyboard-space$$", type: trans },
-        Tab,
-        "$$mdi:keyboard-return$$",
-        $$mdi:backspace$$,
-      ]
-    - [
-        { t: ";", s: ":", h: RAlt, type: trans },
-        { t: "=", s: "+", h: RCtrl, type: trans },
-        { type: held },
       ]
 
   nav:
@@ -90,8 +55,8 @@ layers:
     - [
         Cut,
         Copy,
-        Home,
-        { t: "End", h: mouse },
+        "Home ⇱",
+        { t: "End ⇲", h: mouse },
         { type: held },
         { t: Caps lock, type: trans },
       ]
@@ -108,21 +73,24 @@ layers:
         Del,
       ]
 
-  media:
+  mouse:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
     - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
-    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
+    - [Redo, Undo, ❸M, ❺, "", Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
-    - [{ "Caps word", type: trans }, "", "", "", "", ""]
-    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
-    - [{ type: held }, Play, Stop, Stop, Play]
+    - [Paste, ❷R, ❶L, ❹, "", "$$mdi:keyboard-space$$"]
+    - [{ t: Caps word, type: trans }, "", "", "snipe toggle", "drag toggle", ""]
     - [
-        { t: ";", s: ":", h: RAlt, type: trans },
-        { t: "=", s: "+", h: RCtrl, type: trans },
-        "",
+        Cut,
+        Copy,
+        "drag scroll",
+        { type: held },
+        "snipe toggle",
+        { t: Caps lock, type: trans },
       ]
+    - [Esc, ❶L, { type: held }, "$$mdi:keyboard-return$$", "$$mdi:backspace$$"]
+    - [❷R, ❸M, Del]
 
   num:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
@@ -168,37 +136,19 @@ layers:
         { t: ".", s: ">" },
         { t: "Caps lock", type: trans },
       ]
-    - [{ t: ".", s: ">" }, "0", /, "$$mdi:keyboard-return$$", { type: held }]
+    - [
+        { t: ".", s: ">" },
+        { t: "0", s: ")" },
+        { t: "/", s: "?" },
+        "$$mdi:keyboard-return$$",
+        { type: held },
+      ]
     - [
         { t: ";", s: ":", h: RAlt, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
         Del,
       ]
 
-  mouse:
-    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
-    - ["", "", "", "", "", ""]
-    - [Redo, Undo, ❸M, ❺, "", Tab]
-    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - [Paste, ❷R, ❶L, ❹, "", "$$mdi:keyboard-space$$"]
-    - [{ t: Caps word, type: trans }, "", "", "snipe toggle", "drag toggle", ""]
-    - [
-        Cut,
-        Copy,
-        "drag scroll",
-        { type: held },
-        "snipe toggle",
-        { t: Caps lock, type: trans },
-      ]
-    - [
-        "Esc ⎋",
-        ❶L,
-        { type: held },
-        "$$mdi:keyboard-return$$",
-        "$$mdi:backspace$$",
-      ]
-    - [❷R, ❸M, Del]
   sym:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
     - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
@@ -228,6 +178,59 @@ layers:
         { t: "=", s: "+", h: RCtrl, type: trans },
         Del,
       ]
+
+  fun:
+    - [
+        { t: "`", s: "~" },
+        { t: "1", s: "!" },
+        { t: "2", s: "@" },
+        { t: "3", s: "#" },
+        { t: "4", s: "$" },
+        { t: "5", s: "%" },
+      ]
+    - [
+        { t: "6", s: "^" },
+        { t: "7", s: "&" },
+        { t: "8", s: "*" },
+        { t: "9", s: "(" },
+        { t: "0", s: ")" },
+        { t: "=", s: "+" },
+      ]
+    - [{ t: App, type: trans }, F12, F7, F8, F9, PrtSc]
+    - ["", "", "", "", "", ""]
+    - [{ t: PrtSc, type: trans }, F11, F4, F5, F6, Scroll lock]
+    - ["", LShift, LCtrl, LAlt, LGUI, { t: ";", s: ":", type: trans }]
+    - [{ t: Caps word, type: trans }, F10, F1, F2, F3, Pause]
+    - ["", "", "", "", "", { t: Caps lock, type: trans }]
+    - [
+        App,
+        { t: "$$mdi:keyboard-space$$", type: trans },
+        Tab,
+        "$$mdi:keyboard-return$$",
+        $$mdi:backspace$$,
+      ]
+    - [
+        { t: ";", s: ":", h: RAlt },
+        { t: "=", s: "+", h: RCtrl },
+        { type: held },
+      ]
+
+  media:
+    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["", "", "", "", "", ""]
+    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
+    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
+    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
+    - [{ "Caps word", type: trans }, "", "", "", "", ""]
+    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
+    - [{ type: held }, Play, Stop, Stop, Play]
+    - [
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        "",
+      ]
+
 combos:
   - { p: [36, 48], k: "media lock", l: [base], a: left }
   - { p: [36, 49], k: "nav lock", l: [base], a: bottom }
