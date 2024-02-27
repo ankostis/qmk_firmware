@@ -210,8 +210,8 @@ layers:
         $$mdi:backspace$$,
       ]
     - [
-        { t: ";", s: ":", h: RAlt },
-        { t: "=", s: "+", h: RCtrl },
+        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
         { type: held },
       ]
 
