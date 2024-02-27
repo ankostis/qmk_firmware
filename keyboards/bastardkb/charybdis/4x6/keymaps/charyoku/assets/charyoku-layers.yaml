@@ -143,11 +143,7 @@ layers:
         "$$mdi:keyboard-return$$",
         { type: held },
       ]
-    - [
-        { t: ";", s: ":", h: RAlt, type: trans },
-        { t: "=", s: "+", h: RCtrl, type: trans },
-        Del,
-      ]
+    - [(, ), Del]
 
   sym:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]

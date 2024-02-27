@@ -195,7 +195,7 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, KC_CAPS, COMBO_END};
     _______,KC_SCLN,   KC_4,   KC_5,   KC_6, KC_EQL,  KC_PSTE,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI, KC_SPC, \
     _______, KC_GRV,   KC_1,   KC_2,   KC_3,KC_BSLS,   KC_CUT,KC_COPY,KC_MINS,KC_COMM, KC_DOT,_______, \
                              KC_DOT,   KC_0,KC_SLSH,                                   KC_ENT,_______, \
-                                    _______,_______,                                   KC_DEL
+                                    KC_LPRN,KC_RPRN,                                   KC_DEL
 
 
 /**
