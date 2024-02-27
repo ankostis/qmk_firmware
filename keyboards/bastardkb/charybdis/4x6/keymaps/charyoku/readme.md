@@ -65,7 +65,7 @@ qmk c2json | \
 
 - Store puncts in toggling-side for SYM/NUM so as to type easier `!=` and regexes like
   `/.*\\n|#.*//` or paths like `~/.*` without changing from *Sym* layer.
-- [![accelaration-profiles](https://github.com/finrod09/qmk_userspace_features/raw/maccel-dev/maccel/assets/accel_curve.png)](https://www.desmos.com/calculator/4ajz8f7bqb)
+- [![accelaration-profiles](assets/maccel-curve.png)](https://www.desmos.com/calculator/xkhejelty8)
 
 enjoy!
 
