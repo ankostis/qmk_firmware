@@ -234,3 +234,59 @@ combos:
   - { p: [47, 51], k: "sym lock", l: [base], a: left }
   - { p: [47, 52], k: "num lock", l: [base], a: bottom }
   - { p: [47, 55], k: "fun lock", l: [base], a: right }
+
+draw_config:
+  n_columns: 2
+  svg_extra_style: >
+    rect.key
+    {
+      fill: #c6c8ca;
+    }
+
+    /* version string */
+    .key.keypos-2 > text.key.hold, .key.keypos-3 > text.key.hold
+    {
+      fill: #ffffff;
+    }
+
+    /* .layer-nav, */
+    .key.keypos-46 > text.key.hold,
+    .key.keypos-49 > text.key.hold,
+    .key.held.keypos-46 > rect,
+    .key.held.keypos-49 > rect
+    {
+      fill: cyan;
+    }
+
+    /* .layer-mouse, */
+    .key.keypos-45 > text.key.hold,
+    .key.keypos-50 > text.key.hold,
+    .key.held.keypos-45 > rect,
+    .key.held.keypos-50 > rect
+    {
+      fill: yellow;
+    }
+
+    /* .layer-num, */
+    .key.keypos-52 > text.key.hold,
+    .key.held.keypos-52 > rect {
+      fill: blue;
+    }
+
+    /* .layer-sym, */
+    .key.keypos-51 > text.key.hold,
+    .key.held.keypos-51 > rect {
+      fill: green;
+    }
+
+    /* .layer-fun, */
+    .key.keypos-55 > text.key.hold,
+    .key.held.keypos-55 > rect {
+      fill: red;
+    }
+
+    /* .layer-media, */
+    .key.keypos-48 > text.key.hold,
+    .key.held.keypos-48 > rect {
+      fill: purple;
+    }
