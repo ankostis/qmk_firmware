@@ -1,5 +1,13 @@
 # Charyoku Changes
 
+## v0.4.2, 27 Feb 2024 - layer reorder, layer-diagrams, doc improvements
+
+- feat: parenthensis in NUM bottom-L-thumbs, to allow typing expressions
+  without lifting the R-thumb. 
+- doc: added `keymap-drawer` layer diagrams to the readme.
+
+## v0.4.1, 25 Feb 2024 - layer reorder
+
 ## v0.4.0, 23 Feb 2024 - maccel for mouse & drag-scroll, DPI stability
 
 - feat: more punctuatios & symbols in toggling-side for *sym*/*num* layers,

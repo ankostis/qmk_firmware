@@ -1,8 +1,11 @@
 layout:
-  { qmk_keyboard: bastardkb/charybdis/4x6/v2/splinky_3, qmk_layout: LAYOUT }
+  # Requirements:
+  #   pip install https://github.com/finrod09/keymap-drawer.git@bkb
+  qmk_keyboard: bastardkb/charybdis/4x6
+  qmk_layout: LAYOUT
 layers:
   base:
-    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.4.1" }, F4, F5]
+    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.4.2" }, F4, F5]
     - [F6, F7, F8, F9, F10, F12]
     - [App, Q, W, F, P, B]
     - [J, L, U, Y, { t: "'", s: '"' }, { t: "/", s: "?", type: ghost }]
@@ -68,7 +71,37 @@ layers:
         "$$mdi:backspace$$",
       ]
     - [
-        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: ";", s: ":", h: RAltGr, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
+      ]
+
+  sym:
+    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
+    - [
+        Redo,
+        Undo,
+        { t: "=", s: "+" },
+        { t: "/", s: "?" },
+        { t: '\', s: "|" },
+        Tab,
+      ]
+    - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
+    - [{ t: "Caps word", type: trans }, "~", "!", "@", "#", "|"]
+    - [
+        Cut,
+        Copy,
+        { t: "-", s: "_" },
+        { t: ",", s: "<" },
+        { t: ".", s: ">" },
+        { t: "Caps lock", type: trans },
+      ]
+    - ["(", ")", "?", { type: held }, $$mdi:backspace$$]
+    - [
+        { t: ";", s: ":", h: RAltGr, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
         Del,
       ]
@@ -86,7 +119,7 @@ layers:
         Copy,
         "drag scroll",
         { type: held },
-        "snipe toggle",
+        "snipe",
         { t: Caps lock, type: trans },
       ]
     - [Esc, ❶L, { type: held }, "$$mdi:keyboard-return$$", "$$mdi:backspace$$"]
@@ -145,34 +178,20 @@ layers:
       ]
     - [(, ), Del]
 
-  sym:
-    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
-    - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
+  media:
+    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["", "", "", "", "", ""]
+    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
+    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
+    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
+    - [{ "Caps word", type: trans }, "", "", "", "", ""]
+    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
+    - [{ type: held }, Play, Stop, Stop, Play]
     - [
-        Redo,
-        Undo,
-        { t: "=", s: "+" },
-        { t: "/", s: "?" },
-        { t: '\', s: "|" },
-        Tab,
-      ]
-    - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
-    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
-    - [{ t: "Caps word", type: trans }, "~", "!", "@", "#", "|"]
-    - [
-        Cut,
-        Copy,
-        { t: "-", s: "_" },
-        { t: ",", s: "<" },
-        { t: ".", s: ">" },
-        { t: "Caps lock", type: trans },
-      ]
-    - ["(", ")", "?", { type: held }, $$mdi:backspace$$]
-    - [
-        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: ";", s: ":", h: RAltGr, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
-        Del,
+        "",
       ]
 
   fun:
@@ -206,25 +225,9 @@ layers:
         $$mdi:backspace$$,
       ]
     - [
-        { t: ";", s: ":", h: RAlt, type: trans },
+        { t: ";", s: ":", h: RAltGr, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
         { type: held },
-      ]
-
-  media:
-    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
-    - ["", "", "", "", "", ""]
-    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
-    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
-    - [{ "Caps word", type: trans }, "", "", "", "", ""]
-    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
-    - [{ type: held }, Play, Stop, Stop, Play]
-    - [
-        { t: ";", s: ":", h: RAlt, type: trans },
-        { t: "=", s: "+", h: RCtrl, type: trans },
-        "",
       ]
 
 combos:

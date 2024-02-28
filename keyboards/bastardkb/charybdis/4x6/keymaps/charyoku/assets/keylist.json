@@ -115,8 +115,8 @@
       "KC_TAB",
       "KC_ENT",
       "KC_BSPC",
-      "MT(MOD_RALT, KC_SCLN)",
-      "MT(MOD_RCTL, KC_EQL)",
+      "KC_TRNS",
+      "KC_TRNS",
       "KC_TRNS"
     ],
     [
@@ -289,8 +289,8 @@
       "KC_SLSH",
       "KC_ENT",
       "KC_TRNS",
-      "KC_TRNS",
-      "KC_TRNS",
+      "KC_LPRN",
+      "KC_RPRN",
       "KC_DEL"
     ],
     [
