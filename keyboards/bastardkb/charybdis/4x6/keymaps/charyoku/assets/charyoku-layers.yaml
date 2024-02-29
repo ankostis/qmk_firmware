@@ -60,12 +60,12 @@ layers:
         Copy,
         "Home ⇱",
         { t: "End ⇲", h: mouse },
-        { type: held },
+        { t: ".", s: ">", type: held },
         { t: Caps lock, type: trans },
       ]
     - [
         "Esc ⎋",
-        { type: held },
+        { t: "$$mdi:keyboard-space$$", type: held },
         { t: Tab, h: mouse, type: trans },
         "$$mdi:keyboard-return$$",
         "$$mdi:backspace$$",
@@ -118,11 +118,17 @@ layers:
         Cut,
         Copy,
         "drag scroll",
-        { type: held },
+        { t: ",", s: "<", type: held },
         "snipe",
         { t: Caps lock, type: trans },
       ]
-    - [Esc, ❶L, { type: held }, "$$mdi:keyboard-return$$", "$$mdi:backspace$$"]
+    - [
+        Esc,
+        ❶L,
+        { t: Tab, type: held },
+        "$$mdi:keyboard-return$$",
+        "$$mdi:backspace$$",
+      ]
     - [❷R, ❸M, Del]
 
   num:
