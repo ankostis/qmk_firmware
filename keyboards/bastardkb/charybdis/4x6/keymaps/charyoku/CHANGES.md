@@ -1,10 +1,20 @@
 # Charyoku Changes
 
-## v0.4.2, 27 Feb 2024 - layer reorder, layer-diagrams, doc improvements
+<!---
+On each release update both layer diagrams in readme and
+maintain the `keylist.json` with the following command:
+    qmk c2json | jq > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/keylist.json 
+-->
+
+## v0.4.3, 29 Feb 2024 - swap Home/Insert keys
+
+- feat/break: swap  `Home` <--> `Insert`, to align in parallel with PgUp/PgDn keys.
+
+## v0.4.2, 27 Feb 2024 - x2-column colorful layer-diagrams, doc improvements
 
 - feat: parenthensis in NUM bottom-L-thumbs, to allow typing expressions
   without lifting the R-thumb. 
-- doc: added `keymap-drawer` layer diagrams to the readme.
+- doc: use @burkfers `keymap-drawer` branch that depicts charybdis key-layout better.
 
 ## v0.4.1, 25 Feb 2024 - layer reorder
 
@@ -19,6 +29,7 @@
   your OS's mouse settings to base and then ++/-- to your liking.
 - feat: by default, coalesce scroll-wheel events to values above ±1
   (changed from queuing ±1 events).
-- Doc: generate all layers with `keymap-drawer`.
+- Doc: generate all layers with `keymap-drawer` to the readme.
+- Doc: generate keylist with 
 - doc: explain config options & alternatives in the sources where they are defined.
 - chore: polished git history, reasoning added in the commit messages.

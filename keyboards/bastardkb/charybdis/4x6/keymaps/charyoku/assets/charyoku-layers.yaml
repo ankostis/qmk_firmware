@@ -51,14 +51,14 @@ layers:
     - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
     - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
-    - [Redo, Undo, ▲, Insert, PgUp ▲, Tab]
+    - [Redo, Undo, ▲, "Home ⇱", PgUp ▲, Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
     - [Paste, ◀, ▼, ▶, PgDown ▼, "$$mdi:keyboard-space$$"]
     - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "", Paste]
     - [
         Cut,
         Copy,
-        "Home ⇱",
+        Insert,
         { t: "End ⇲", h: mouse },
         { t: ".", s: ">", type: held },
         { t: Caps lock, type: trans },

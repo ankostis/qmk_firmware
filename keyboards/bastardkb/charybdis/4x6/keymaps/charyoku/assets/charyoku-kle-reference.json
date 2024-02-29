@@ -1,4 +1,4 @@
-[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.4.2</b>"],
+[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.4.3</b>"],
 [{f:1,y:-0.7, d:true},"https://github.com/ankostis/qmk_firmware/tree/charyoku/keyboards/bastardkb/charybdis/4x6/keymaps/charyoku"],
 [
   {f:3,f2:2},
@@ -11,7 +11,7 @@
 ],
 [
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"W\nF7\n&\n7","F\nF8\n*\n8","P\nF9\n(\n9","B\nPrtScn <i>SysRq</i>\n}\n]",
-  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"J\nRGB pwr\nredo\nredo","L\nRGB hui\nundo\nundo","U\nRGB satr\n❸M\n▲","Y\nRGB mod\n❺\nIns"
+  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"J\nRGB pwr\nredo\nredo","L\nRGB hui\nundo\nundo","U\nRGB satr\n❸M\n▲","Y\nRGB mod\n❺\nHome"
 ],
 [
   {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"App",{c:"#888888"},"Q\nF12\n{\n[",
@@ -27,7 +27,7 @@
 ],
 [
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"X\nF1\n!\n1","C\nF2\n@\n2","D\nF3\n#\n3","V\nPause Break\n|\n\\",
-  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"K\n\ncut\ncut","H\n🔅\ncopy\ncopy","<b>-_</b>\n\nDrag Scroll\nHome",{t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffff00"},{n:true},"<b>,<</b>\n🔆\n\nEnd\n<b>Mouse</b>"
+  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"K\n\ncut\ncut","H\n🔅\ncopy\ncopy","<b>-_</b>\n\nDrag Scroll\nIns",{t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffff00"},{n:true},"<b>,<</b>\n🔆\n\nEnd\n<b>Mouse</b>"
 ],
 [
   {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#777777"},"Caps Word",{c:"#888888"},"Z\nF10\n~\n`",
