@@ -35,21 +35,21 @@ maccel_config_t g_maccel_config = {
 };
 
 /* DEVICE_CPI_SCALING
-A device specific parameter required to ensure consistent acceleration behaviour across different devices and user dpi settings.
- * PMW3360: 0.087
+A device specific parameter required to ensure consistent acceleration behaviour across different devices.
+ * PMW3360: 1.5
  * PMW3389: tbd
- * Cirque: 0.087
+ * Cirque: 1.15
  * Azoteq: tbd
 *///disclaimer: values guesstimated by scientifically questionable emperical testing
 // Slightly hacky method of detecting which driver is loaded
 #if !defined(DEVICE_CPI_SCALING)
 #    if defined(POINTING_DEVICE_DRIVER_pmw3360)
-#        define DEVICE_CPI_SCALING 0.087
+#        define DEVICE_CPI_SCALING 1.15
 #    elif defined(POINTING_DEVICE_DRIVER_cirque_pinnacle_spi)
-#        define DEVICE_CPI_SCALING 0.087
+#        define DEVICE_CPI_SCALING 1.15
 #    else
 #        warning "Unsupported pointing device driver! Please manually set the scaling parameter DEVICE_CPI_SCALING to achieve a consistent acceleration curve!"
-#        define DEVICE_CPI_SCALING 0.087
+#        define DEVICE_CPI_SCALING 1.15
 #    endif
 #endif
 
@@ -120,24 +120,25 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
         return mouse_report;
     }
 
-    // time since last mouse report:
-    const uint16_t delta_time = timer_elapsed32(maccel_timer);
-    maccel_timer              = timer_read32();
-    // get device cpi setting, only call when mouse hasn't moved since more than 200ms
+    const uint16_t report_elapsed_time = timer_elapsed32(maccel_timer);
+    maccel_timer                       = timer_read32();
+    // Limit expensive calls to get device cpi settings only when mouse stationay for > 200ms.
     static uint16_t device_cpi = 300;
-    if (delta_time > MACCEL_CPI_THROTTLE_MS) {
+    if (report_elapsed_time > MACCEL_CPI_THROTTLE_MS) {
         device_cpi = pointing_device_get_cpi();
     }
-    // calculate dpi correction factor (for normalizing velocity range across different user dpi settings)
-    const float dpi_correction = (float)100.0f / (DEVICE_CPI_SCALING * device_cpi);
-    // calculate euclidean distance moved (sqrt(x^2 + y^2))
-    const float distance = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
-    // calculate delta velocity: dv = distance/dt
-    const float velocity_raw = distance / delta_time;
-    // correct raw velocity for dpi
-    const float velocity = dpi_correction * velocity_raw;
-    // calculate mouse acceleration factor: f(dv) = c - ((c-1) / ((1 + e^(x(x - b)) * a/z)))
-    const float maccel_factor = g_maccel_config.limit - (g_maccel_config.limit - 1) / powf(1 + expf(g_maccel_config.takeoff * (velocity - g_maccel_config.limit)), g_maccel_config.growth_rate / g_maccel_config.takeoff);
+    // euclidean distance moved: sqrt(x^2 + y^2)
+    const float distance     = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
+    const float velocity_raw = distance / report_elapsed_time;
+    // Normalize velocity vs user-DPI settings and scale its value rougly to 0...100.
+    const float velocity = velocity_raw * (DEVICE_CPI_SCALING)*1000.0 / device_cpi;
+    const float k = g_maccel_config.takeoff;
+    const float g = g_maccel_config.growth_rate;
+    const float s = g_maccel_config.offset;
+    const float m = g_maccel_config.limit;
+    // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
+    // Generalised Sigmoid Function, see https://www.desmos.com/calculator/xkhejelty8
+    const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity - s)), g / k);
     // calculate accelerated delta X and Y values and clamp:
     const mouse_xy_report_t x = CONSTRAIN_REPORT(mouse_report.x * maccel_factor);
     const mouse_xy_report_t y = CONSTRAIN_REPORT(mouse_report.y * maccel_factor);
