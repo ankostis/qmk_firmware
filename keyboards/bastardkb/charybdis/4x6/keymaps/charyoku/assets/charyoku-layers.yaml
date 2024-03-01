@@ -110,9 +110,9 @@ layers:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
     - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
-    - [Redo, Undo, ❸M, ❺, "", Tab]
+    - [Redo, Undo, ❸M, ❺, "DPI±", Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - [Paste, ❷R, ❶L, ❹, "", "$$mdi:keyboard-space$$"]
+    - [Paste, ❷R, ❶L, ❹, "DPI± snipe", "$$mdi:keyboard-space$$"]
     - [{ t: Caps word, type: trans }, "", "", "snipe toggle", "drag toggle", ""]
     - [
         Cut,
