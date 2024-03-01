@@ -1,19 +1,6 @@
-/* Copyright 2024 burkfers (@burkfers)
- * Copyright 2024 Wimads (@wimads)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright 2024 burkfers (@burkfers)
+// Copyright 2024 Wimads (@wimads)
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "quantum.h" // IWYU pragma: keep
 #include "maccel.h"
@@ -33,6 +20,7 @@ static uint32_t maccel_timer;
 #ifndef MACCEL_LIMIT
 #    define MACCEL_LIMIT 6.0 // upper limit of accel curve (maximum acceleration factor)
 #endif
+#define MACCEL_CPI_THROTTLE_MS 200 // milliseconds to wait between requesting the device's current DPI
 
 maccel_config_t g_maccel_config = {
     // clang-format off
@@ -48,18 +36,15 @@ maccel_config_t g_maccel_config = {
 A device specific parameter required to ensure consistent acceleration behaviour across different devices and user dpi settings.
  * PMW3360: 0.087
  * PMW3389: tbd
- * Cirque: tbd
+ * Cirque: 0.087
  * Azoteq: tbd
 *///disclaimer: values guesstimated by scientifically questionable emperical testing
 // Slightly hacky method of detecting which driver is loaded
 #if !defined(DEVICE_CPI_PARAM)
-// #    if defined(PMW33XX_FIRMWARE_LENGTH)
 #    if defined(POINTING_DEVICE_DRIVER_pmw3360)
 #        define DEVICE_CPI_PARAM 0.087
 #    elif defined(POINTING_DEVICE_DRIVER_cirque_pinnacle_spi)
 #        define DEVICE_CPI_PARAM 0.087
-#    elif defined(POINTING_DEVICE_DRIVER_azoteq_iqs5xx)
-#        define DEVICE_CPI_PARAM 1
 #    else
 #        warning "Unsupported pointing device driver! Please manually set the scaling parameter DEVICE_CPI_PARAM to achieve a consistent acceleration curve!"
 #        define DEVICE_CPI_PARAM 0.087
@@ -134,19 +119,12 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
             return mouse_report;
         }
         // time since last mouse report:
-        uint16_t delta_time = timer_elapsed32(maccel_timer);
-        maccel_timer        = timer_read32();
+        const uint16_t delta_time = timer_elapsed32(maccel_timer);
+        maccel_timer              = timer_read32();
         // get device cpi setting, only call when mouse hasn't moved since more than 200ms
         static uint16_t device_cpi = 300;
-        if (delta_time > 200) {
-#ifdef POINTING_DEVICE_DRIVER_azoteq_iqs5xx
-            wait_ms(2);
-#endif // POINTING_DEVICE_DRIVER_azoteq_iqs5xx
+        if (delta_time > MACCEL_CPI_THROTTLE_MS) {
             device_cpi = pointing_device_get_cpi();
-#ifdef POINTING_DEVICE_DRIVER_pmw3360
-            // janky bug-fix for PMW3360
-            pointing_device_set_cpi(device_cpi);
-#endif // POINTING_DEVICE_DRIVER_pmw3360
         }
         // calculate dpi correction factor (for normalizing velocity range across different user dpi settings)
         const float dpi_correction = (float)100.0f / (DEVICE_CPI_PARAM * device_cpi);
