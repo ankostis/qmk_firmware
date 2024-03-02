@@ -296,32 +296,32 @@ bool caps_word_press_user(uint16_t keycode) {
 // Design: https://www.desmos.com/calculator/fjjli56gow
 // Mine butters with slow gnome-moute+accel
 // #define MACCEL_TAKEOFF     0.7   // --/++ curve starts rising smoothlier/abruptlier
-// #define MACCEL_GROWTH      0.25  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_GROWTH_RATE 0.25  // --/++ curve reaches max limit slower/faster
 // #define MACCEL_OFFSET      4.7   // --/++ growth kicks in earlier/later
 // #define MACCEL_LIMIT       9.0   // maximum acceleration factor
 
 // #define MACCEL_TAKEOFF     1.0   // --/++ curve starts rising smoothlier/abruptlier
-// #define MACCEL_GROWTH      0.56  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_GROWTH_RATE 0.56  // --/++ curve reaches max limit slower/faster
 // #define MACCEL_OFFSET      4.8   // --/++ growth kicks in earlier/later
 // #define MACCEL_LIMIT       8.0   // maximum acceleration factor
 
 // #define MACCEL_TAKEOFF     1.07  // --/++ curve starts rising smoothlier/abruptlier
-// #define MACCEL_GROWTH      0.56  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_GROWTH_RATE 0.56  // --/++ curve reaches max limit slower/faster
 // #define MACCEL_OFFSET      4.5   // --/++ growth kicks in earlier/later
 // #define MACCEL_LIMIT       8.0   // maximum acceleration factor
 
 // Mine with Gnome-mouse: mid-speed + no-accel, 400DPI both mouse/scroll
 #define MACCEL_TAKEOFF     1.18  // --/++ curve starts rising smoothlier/abruptlier
-#define MACCEL_GROWTH      0.56  // --/++ curve reaches max limit slower/faster
+#define MACCEL_GROWTH_RATE 0.56  // --/++ curve reaches max limit slower/faster
 #define MACCEL_OFFSET      3.6   //--/++ growth kicks in earlier/later
 #define MACCEL_LIMIT       9.0   //maximum acceleration factor
 
 // Wimads, old https://www.desmos.com/calculator/p0etbmee57
 // New-letters: https://www.desmos.com/calculator/4ajz8f7bqb
-// #define MACCEL_TAKEOFF  2.0   // --/++ curve starts rising smoothlier/abruptlier
-// #define MACCEL_GROWTH   0.25  // --/++ curve reaches max limit slower/faster
-// #define MACCEL_OFFSET   2.2   // --/++ growth kicks in earlier/later
-// #define MACCEL_LIMIT    6.0   // maximum acceleration factor
+// #define MACCEL_TAKEOFF     2.0   // --/++ curve starts rising smoothlier/abruptlier
+// #define MACCEL_GROWTH_RATE 0.25  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET      2.2   // --/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT       6.0   // maximum acceleration factor
 
 // To view mouse's distance/velocity while configuring maccel,
 // set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,
