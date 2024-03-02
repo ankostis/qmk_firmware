@@ -76,12 +76,14 @@ This accel curve works in opposite direction from what you may be used to from o
 
 Several characteristics of the acceleration curve can be tweaked by adding relevant defines to `config.h`:
 ```c
-#define MACCEL_TAKEOFF 2.0      // lower/higher value = curve takes off more smoothly/abrubtly
-#define MACCEL_GROWTH_RATE 0.25 // lower/higher value = curve reaches its upper limit slower/faster 
-#define MACCEL_OFFSET 2.2       // lower/higher value = acceleration kicks in earlier/later
-#define MACCEL_LIMIT 6.0        // upper limit of accel curve (maximum acceleration factor)
+// Mouse Acceleration Curve parameters to map input-velocity [0, 100+] to a velocity-factor [1, 10+],
+// as seen in https://www.desmos.com/calculator/xkhejelty8
+#define MACCEL_TAKEOFF 2.0      // (K) --/++ curve starts rising smoothlier/abruptlier
+#define MACCEL_GROWTH_RATE 0.25 // (G) --/++ curve reaches max limit slower/faster
+#define MACCEL_OFFSET 2.2       // (S) --/++ growth kicks in earlier/later
+#define MACCEL_LIMIT 6.0        // (M) maximum acceleration factor
 ```
-[![](assets/accel_curve.png)](https://www.desmos.com/calculator/g6zxh5rt44)
+[![](assets/accel_curve.png)](https://www.desmos.com/calculator/xkhejelty8)
 
 The graph above shows the acceleration curve. You can interpret this graph as follows: the horizontal axis is input velocity (ie. how fast you are physically moving your mouse/trackball/trackpad); the vertical axis is the acceleration factor, which is the factor with which the input speed will be multiplied, resulting in your new output speed on screen. You can also understand this as a DPI scaling factor: at the start of the curve the factor is 1, and your mouse sensitivity will be equal to your default DPI setting. At the end of the curve, the factor approaches a limit which can be set by the LIMIT variable. The limit is 6 in this example and will result in a maximum mouse sensitivity of 6 times your default DPI.
 
