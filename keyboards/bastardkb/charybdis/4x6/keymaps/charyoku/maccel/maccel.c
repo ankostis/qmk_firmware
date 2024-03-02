@@ -35,13 +35,18 @@ maccel_config_t g_maccel_config = {
 };
 
 /* DEVICE_CPI_SCALING
-A device specific parameter required to ensure consistent acceleration behaviour across different devices.
- * PMW3360: 1.5
+ * A device specific parameter required to ensure consistent acceleration behaviour across different devices.
+ * PMW3360: 1.15
  * PMW3389: tbd
  * Cirque: 1.15
  * Azoteq: tbd
-*///disclaimer: values guesstimated by scientifically questionable emperical testing
-// Slightly hacky method of detecting which driver is loaded
+ * 
+ * Linearity across diferrent user-CPI settings in the reported distnance moved
+ * works better when pointer task throttling is enforced,
+ * that is, `POINTING_DEVICE_TASK_THROTTLE_MS` is defined (at least in PMW3360).
+ * 
+ * Disclaimer: values guesstimated by scientifically questionable emperical testing.
+ */
 #if !defined(DEVICE_CPI_SCALING)
 #    if defined(POINTING_DEVICE_DRIVER_pmw3360)
 #        define DEVICE_CPI_SCALING 1.15
