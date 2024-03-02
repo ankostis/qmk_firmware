@@ -41,7 +41,7 @@ maccel_config_t g_maccel_config = {
  * Cirque: 1.15
  * Azoteq: tbd
  * 
- * Linearity across diferrent user-CPI settings in the reported distnance moved
+ * Linearity across different user CPI settings in the reported distance moved
  * works better when pointer task throttling is enforced,
  * that is, `POINTING_DEVICE_TASK_THROTTLE_MS` is defined (at least in PMW3360).
  * 
