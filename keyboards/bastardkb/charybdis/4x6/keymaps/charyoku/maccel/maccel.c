@@ -60,7 +60,7 @@ maccel_config_t g_maccel_config = {
 
 #ifdef MACCEL_USE_KEYCODES
 #    ifndef MACCEL_TAKEOFF_STEP
-#        define MACCEL_TAKEOFF_STEP 0.01f
+#        define MACCEL_TAKEOFF_STEP 0.2f
 #    endif
 #    ifndef MACCEL_GROWTH_RATE_STEP
 #        define MACCEL_GROWTH_RATE_STEP 0.01f
@@ -69,7 +69,7 @@ maccel_config_t g_maccel_config = {
 #        define MACCEL_OFFSET_STEP 0.1f
 #    endif
 #    ifndef MACCEL_LIMIT_STEP
-#        define MACCEL_LIMIT_STEP 0.1f
+#        define MACCEL_LIMIT_STEP 0.2f
 #    endif
 #endif
 

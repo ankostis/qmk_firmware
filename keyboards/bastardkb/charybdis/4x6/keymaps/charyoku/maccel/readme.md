@@ -163,10 +163,10 @@ The step keys will adjust the parameters by the following amounts, which can opt
 
 | Parameter    | Default step value | Define name               |
 | ---          | ---                | ---                       |
-| Takeoff      | `+0.01`            | `MACCEL_TAKEOFF_STEP`     |
+| Takeoff      | `+0.2`            | `MACCEL_TAKEOFF_STEP`     |
 | Growth rate  | `+0.01`            | `MACCEL_GROWTH_RATE_STEP` |
 | Offset       | `+0.1`             | `MACCEL_OFFSET_STEP`      |
-| Limit        | `+0.1`             | `MACCEL_LIMIT_STEP`       |
+| Limit        | `+0.2`             | `MACCEL_LIMIT_STEP`       |
 
 The modifier keys can be used to alter the step effect:
 
