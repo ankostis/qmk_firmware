@@ -330,10 +330,16 @@ bool caps_word_press_user(uint16_t keycode) {
 // #define MACCEL_LIMIT       8.0   // maximum acceleration factor
 
 // Mine with Gnome-mouse: mid-speed + no-accel, 400DPI both mouse/scroll
-#define MACCEL_TAKEOFF     1.18  // --/++ curve starts rising smoothlier/abruptlier
-#define MACCEL_GROWTH_RATE 0.56  // --/++ curve reaches max limit slower/faster
-#define MACCEL_OFFSET      3.6   //--/++ growth kicks in earlier/later
-#define MACCEL_LIMIT       9.0   //maximum acceleration factor
+// #define MACCEL_TAKEOFF     1.18  // --/++ curve starts rising smoothlier/abruptlier
+// #define MACCEL_GROWTH_RATE 0.56  // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET      3.6   //--/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT       9.0   //maximum acceleration factor
+
+// // Scale curve with 500
+// #define MACCEL_TAKEOFF     3.2   // --/++ curve starts smoothlier/abruptlier
+// #define MACCEL_GROWTH_RATE 0.6   // --/++ curve reaches max limit slower/faster
+// #define MACCEL_OFFSET      1.6   //--/++ growth kicks in earlier/later
+// #define MACCEL_LIMIT       9.0   //maximum acceleration factor
 
 // Wimads, old https://www.desmos.com/calculator/p0etbmee57
 // New-letters: https://www.desmos.com/calculator/4ajz8f7bqb
