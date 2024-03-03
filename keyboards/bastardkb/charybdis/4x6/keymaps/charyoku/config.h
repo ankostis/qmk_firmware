@@ -42,11 +42,9 @@
 // better keep both identical (400).  So have to compensate drag-scroll divider
 //  (`CHARYBDIS_DRAGSCROLL_BUFFER_SIZE`)
 //
-#define COMMON_DPI 1600
+#define COMMON_DPI 1200
 #define CHARYBDIS_MINIMUM_DEFAULT_DPI           COMMON_DPI  // default(400)
-#define CHARYBDIS_MINIMUM_SNIPING_DPI           100         // default(200)
-// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP    200         // default( COMMON_DPI)
-// #define CHARYBDIS_SNIPING_DPI_CONFIG_STEP    100         // default(100)
+// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP    400         // default(200)
 #define CHARYBDIS_DRAGSCROLL_DPI                COMMON_DPI  // default(100)
 #define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        (CHARYBDIS_DRAGSCROLL_DPI / 100)  // default(6)
 
@@ -54,10 +52,11 @@
 #define CHARYBDIS_DRAGSCROLL_SEND_COALESCE
 
 // Scale curve with 500
-#define MACCEL_TAKEOFF     4.4   // --/++ curve starts smoothlier/abruptlier
-#define MACCEL_GROWTH_RATE 0.5   // --/++ curve reaches max limit slower/faster
-#define MACCEL_OFFSET      1.3  //--/++ growth kicks in earlier/later
-#define MACCEL_LIMIT       7.0   //maximum acceleration factor
+#define MACCEL_SCALE       220   // --/++ faster/slower (ensure it drives curve where it grows)
+#define MACCEL_TAKEOFF     5.1   // --/++ curve starts smoothlier/abruptlier
+#define MACCEL_GROWTH_RATE 0.6   // --/++ curve reaches max limit slower/faster
+#define MACCEL_OFFSET      1.0   //--/++ growth kicks in earlier/later
+#define MACCEL_LIMIT       8.0   //maximum acceleration factor
 
 // If need, reduce mouse events frequency to cope with MCU load;
 // note that it delays (but smoothens) drag-scrolling, particularly when
@@ -69,7 +68,7 @@
 
 // For "maccel" configs, see `keymap.c` file.
 #define MOUSE_EXTENDED_REPORT
-#define EECONFIG_USER_DATA_SIZE 20
+#define EECONFIG_USER_DATA_SIZE 24
 
 // To view mouse's distance/velocity while configuring maccel,
 // set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,

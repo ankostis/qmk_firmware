@@ -66,11 +66,13 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, KC_CAPS, COMBO_END};
 
 #ifdef MACCEL_ENABLE
 enum my_keycodes {
-    MA_TAKEOFF = QK_USER,   // mouse acceleration curve takeoff (initial acceleration) step key
+    MA_SCALE = QK_USER,     // mouse acceleration curve scale step key
+    MA_TAKEOFF,             // mouse acceleration curve takeoff (initial acceleration) step key
     MA_GROWTH_RATE,         // mouse acceleration curve growth rate step key
     MA_OFFSET,              // mouse acceleration curve offset step key
     MA_LIMIT,               // mouse acceleration curve limit step key
 };
+#define MA_SCAL MA_SCALE
 #define MA_TKFF MA_TAKEOFF
 #define MA_GRWT MA_GROWTH_RATE
 #define MA_OFST MA_OFFSET
@@ -173,7 +175,7 @@ enum my_keycodes {
 #define LAYOUT_LAYER_POINTER                                                                           \
     ________________KEYB_CTRL_ROW_L________________,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MA_TKFF, \
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
-    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,S_D_MOD,MA_OFST, \
+    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,MA_SCAL,MA_OFST, \
     _______,XXXXXXX,XXXXXXX,SNP_TOG,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,SNP_TOG,MA_LIMT, \
                              KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
                                     KC_BTN2,KC_BTN3,                                   KC_DEL
@@ -359,7 +361,7 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_maccel(keycode, record, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
+    if (!process_record_maccel(keycode, record, MA_SCALE, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
         return false;
     }
     /* insert your own macros here */
