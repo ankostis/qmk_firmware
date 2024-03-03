@@ -46,7 +46,9 @@
 #define CHARYBDIS_MINIMUM_DEFAULT_DPI           COMMON_DPI  // default(400)
 // #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP    400         // default(200)
 #define CHARYBDIS_DRAGSCROLL_DPI                COMMON_DPI  // default(100)
-#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        (CHARYBDIS_DRAGSCROLL_DPI / 100)  // default(6)
+// Mouse reports DPI-independent, configure scroll speed with a fixed factor.
+// #define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        ((int)(CHARYBDIS_DRAGSCROLL_DPI / 150))
+#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        10          // default(6)
 
 // Send coalesced events with scroll values above ±1 (vs queueing ±1 events)?
 #define CHARYBDIS_DRAGSCROLL_SEND_COALESCE
