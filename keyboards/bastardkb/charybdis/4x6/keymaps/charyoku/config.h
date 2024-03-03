@@ -75,8 +75,10 @@
 // To view mouse's distance/velocity while configuring maccel,
 // set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,
 // and run `qmk console` in the shell:
-#define MACCEL_DEBUG
-#undef PRINTF_SUPPORT_DECIMAL_SPECIFIERS
-#define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
+// #define MACCEL_DEBUG
+#ifdef MACCEL_DEBUG
+#   undef PRINTF_SUPPORT_DECIMAL_SPECIFIERS
+#   define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
+#endif  // MACCEL_DEBUG
 
 #endif // POINTING_DEVICE_ENABLE
