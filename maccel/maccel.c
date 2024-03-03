@@ -101,13 +101,14 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     static float rounding_carry_x = 0;
     static float rounding_carry_y = 0;
 
-    // time since last mouse report:
+    // time since last non-zero mouse report
     const uint16_t delta_time = timer_elapsed32(maccel_timer);
-    maccel_timer              = timer_read32();
 
     if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
         return mouse_report;
     }
+
+    maccel_timer = timer_read32();
 
     // get device cpi setting, only call when mouse hasn't moved since more than 200ms
     static uint16_t device_cpi = 300;
