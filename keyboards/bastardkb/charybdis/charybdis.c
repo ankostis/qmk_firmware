@@ -190,7 +190,7 @@ static void pointing_device_task_charybdis(report_mouse_t* mouse_report) {
 #    else
         const int16_t m_x = mouse_report->x;
 #    endif // CHARYBDIS_DRAGSCROLL_REVERSE_X
-        if (((m_x > 0) && (scroll_buffer_x < 0)) || ((m_x < 0) && (scroll_buffer_x > 0))) {
+        if (m_x * scroll_buffer_x < 0) {
             // Immediately cancel accunulated distance if mouse-direction reversed.
             scroll_buffer_x = m_x;
         } else {
