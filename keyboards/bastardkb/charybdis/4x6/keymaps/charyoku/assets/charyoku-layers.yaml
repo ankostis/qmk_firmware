@@ -108,28 +108,32 @@ layers:
 
   mouse:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "maccel takeoff ±"]
     - ["", "", "", "", "", ""]
-    - [Redo, Undo, ❸M, ❺, "DPI±", Tab]
+    - [Redo, Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - [Paste, ❷R, ❶L, ❹, "DPI± snipe", "$$mdi:keyboard-space$$"]
-    - [{ t: Caps word, type: trans }, "", "", "snipe toggle", "drag toggle", ""]
+    - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]
+    - [{ t: Caps word, type: trans }, "", "", "", "drag toggle", ""]
     - [
         Cut,
         Copy,
         "drag scroll",
         { t: ",", s: "<", type: held },
-        "snipe",
-        { t: Caps lock, type: trans },
+        "",
+        "maccel limit ±",
       ]
     - [
         Esc,
-        ❶L,
+        "$$mdi:keyboard-space$$",
         { t: Tab, type: held },
         "$$mdi:keyboard-return$$",
         "$$mdi:backspace$$",
       ]
-    - [❷R, ❸M, Del]
+    - [
+        { t: ";", s: ":", h: RAltGr, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
+      ]
 
   num:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
@@ -246,6 +250,7 @@ combos:
 
 draw_config:
   n_columns: 2
+  shrink_wide_legends: 5
   svg_extra_style: >
     rect.key
     {
