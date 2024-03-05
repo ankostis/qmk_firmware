@@ -173,7 +173,8 @@ bool charybdis_get_pointer_dragscroll_enabled(void) {
 
 void charybdis_set_pointer_dragscroll_enabled(bool enable) {
     g_charybdis_config.is_dragscroll_enabled = enable;
-    maybe_update_pointing_device_cpi(&g_charybdis_config);
+    //// DPI-switch unnecessary with DPI-independent MAccel.
+    // maybe_update_pointing_device_cpi(&g_charybdis_config);
 }
 
 /**
