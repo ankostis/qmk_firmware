@@ -8,17 +8,18 @@
 
 static uint32_t maccel_timer;
 
-/* MACCEL_SCALE
- * A device specific parameter (C) required to ensure consistent acceleration behaviour across different devices.
- * lower/higher value = pointer speedier/slower
- * - PMW3360: 200
- * - PMW3389: 200
+/**
+ * MACCEL_SCALE (C)
  *
- * Linearity across different user CPI settings in the reported distance moved
- * works better when pointer task throttling is enforced,
- * that is, `POINTING_DEVICE_TASK_THROTTLE_MS` is defined (at least in PMW3360).
- *,
- * Disclaimer: values guesstimated by scientifically questionable emperical testing.
+ * It corresponds to the DPI desired to drive the accel curve, that is
+ * how many dots (±1) to push into the curve for an inch of mouse-drift.
+ * This is independent of device's CPI setting (which now can be set freely,
+ * to control the hardware accuracy of the mouse alone).
+ *
+ * It can be considered a device specific parameter
+ * (apart from a user-comfort control).
+ *
+ * lower/higher value --> pointer speedier/slower
  */
 #ifndef MACCEL_SCALE
 #    ifdef POINTING_DEVICE_DRIVER_pmw3360
@@ -46,7 +47,7 @@ static uint32_t maccel_timer;
 #    define MACCEL_CPI_THROTTLE_MS 200 // milliseconds to wait between requesting the device's current DPI
 #endif
 #ifndef MACCEL_ROUNDING_CURRY_TIMEOUT_MS
-#    define MACCEL_ROUNDING_CURRY_TIMEOUT_MS 300 // mouse report ellapsed time after which quantization error gets reset
+#    define MACCEL_ROUNDING_CURRY_TIMEOUT_MS 12000 // mouse report delta time after which quantization carry gets reset
 #endif
 
 maccel_config_t g_maccel_config = {
@@ -135,14 +136,14 @@ void maccel_toggle_enabled(void) {
 #define CONSTRAIN_REPORT(val) (mouse_xy_report_t) _CONSTRAIN(val, XY_REPORT_MIN, XY_REPORT_MAX)
 
 report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
-    static float rounding_curry_x = 0;
-    static float rounding_curry_y = 0;
+    static float rounding_carry_x = 0;
+    static float rounding_carry_y = 0;
 
-    const uint16_t report_elapsed_time = timer_elapsed32(maccel_timer);
+    const uint16_t time_delta = timer_elapsed32(maccel_timer);
 
     if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
-        if (report_elapsed_time > MACCEL_ROUNDING_CURRY_TIMEOUT_MS) {
-            rounding_curry_x = rounding_curry_y = 0;
+        if (time_delta > MACCEL_ROUNDING_CURRY_TIMEOUT_MS) {
+            rounding_carry_x = rounding_carry_y = 0;
         }
         return mouse_report;
     }
@@ -150,52 +151,52 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     maccel_timer = timer_read32();
 
     // Reset carry when pointer swaps direction, to follow user's hand.
-    if (mouse_report.x * mouse_report.x < 0) rounding_curry_x = 0;
-    if (mouse_report.y * mouse_report.y < 0) rounding_curry_y = 0;
+    if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
+    if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
 
-    // Limit expensive calls to get device cpi settings only when mouse stationay for > 200ms.
-    static uint16_t device_cpi = 300;
-    if (report_elapsed_time > MACCEL_CPI_THROTTLE_MS) {
-    printf("%8lu, %8u\n", maccel_timer, report_elapsed_time);
-        device_cpi = pointing_device_get_cpi();
-        // do the junk-fix untill merge with qbk-upstream
-        pointing_device_set_cpi(device_cpi);
+    // Avoid expensive call to get-device-cpi unless mouse stationary for > 200ms.
+    static uint16_t device_dpi = 300;
+    if (time_delta > MACCEL_CPI_THROTTLE_MS) {
+        device_dpi = pointing_device_get_cpi();
+        // do the junk-fix until merge with qbk-upstream
+        pointing_device_set_cpi(device_dpi);
     }
-    // euclidean distance moved: sqrt(x^2 + y^2)
-    const float distance     = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
-    const float velocity_raw = distance / report_elapsed_time;
-    // Normalize input velocity across DPIs rougly in the range 0..10, where the curve grows.
-    const float cpi_scale = g_maccel_config.scaling / (device_cpi + 1); // Div by 0
-    const float velocity  = velocity_raw * cpi_scale;
-    // Generalised Sigmoid acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
-    // see https://www.desmos.com/calculator/m7mzjocsb4
+
+    const mouse_xy_report_t x_dots = mouse_report.x;
+    const mouse_xy_report_t y_dots = mouse_report.y;
+    // euclidean distance: sqrt(x^2 + y^2)
+    const float distance_dots = sqrtf(x_dots * x_dots + y_dots * y_dots);
+    const float distance_inch = distance_dots / device_dpi;
+    const float velocity_inch = distance_inch / time_delta;
+    // Scale velocity in the range where the acceleration curve grows.
+    const float velocity = velocity_inch * g_maccel_config.scaling;
+    // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
+    // Design generalised sigmoid: https://www.desmos.com/calculator/sodvw10g89
     const float k             = g_maccel_config.takeoff;
     const float g             = g_maccel_config.growth_rate;
     const float s             = g_maccel_config.offset;
     const float m             = g_maccel_config.limit;
     const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity - s)), g / k);
-    // DPI-scale also mouse-report x, y and account old quantization errors.
-    const float new_x = rounding_curry_x + maccel_factor * mouse_report.x * cpi_scale;
-    const float new_y = rounding_curry_y + maccel_factor * mouse_report.y * cpi_scale;
-    // Accumulate any difference from next integer (quantization).
-    rounding_curry_x = new_x - (int)new_x;
-    rounding_curry_y = new_y - (int)new_y;
-    // clamp values
-    const mouse_xy_report_t x = CONSTRAIN_REPORT(new_x);
-    const mouse_xy_report_t y = CONSTRAIN_REPORT(new_y);
+    // Convert mouse-report.x/y also to inches and account quantization carry.
+    const float de_cpi_n_scale = g_maccel_config.scaling / device_dpi;
+    const float x_new          = rounding_carry_x + maccel_factor * x_dots * de_cpi_n_scale;
+    const float y_new          = rounding_carry_y + maccel_factor * y_dots * de_cpi_n_scale;
+    // Add any remainder from the reported x/y integers as quantization-carry.
+    rounding_carry_x = x_new - (int)x_new;
+    rounding_carry_y = y_new - (int)y_new;
+    // Clamp values and report back accelerated values.
+    const mouse_xy_report_t x = mouse_report.x = CONSTRAIN_REPORT(x_new);
+    const mouse_xy_report_t y = mouse_report.y = CONSTRAIN_REPORT(y_new);
 
 // console output for debugging (enable/disable in config.h)
 #ifdef MACCEL_DEBUG
+    // const float distance_accel = sqrtf(x_new * x_new + y_new * x_new);
     const float distance_out = sqrtf(x * x + y * y);
     const float velocity_out = velocity * maccel_factor;
-    printf("MACCEL: DPI:%5i Scl:%7.1f Tko: %6.3f Grw: %.3f Ofs: %.3f Lmt: %6.3f | Fct: %7.3f v.in: %7.3f v.out: %+7.3f d.in: %7.3f d.out: %7.3f\n", device_cpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity, velocity_out - velocity, distance, distance_out);
+    printf("MACCEL: DPI:%5i Scl:%7.1f Tko: %6.3f Grw: %.3f Ofs: %.3f Lmt: %6.3f | Fct: %7.3f v.in: %7.3f v.out: %+7.3f d.in: %7.3f d.out: %7.3f\n", device_dpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity, velocity_out - velocity, distance_inch, distance_out);
 /*
  */
 #endif // MACCEL_DEBUG
-
-    // report back accelerated values
-    mouse_report.x = x;
-    mouse_report.y = y;
 
     return mouse_report;
 }
