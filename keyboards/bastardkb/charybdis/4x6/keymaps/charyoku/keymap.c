@@ -177,8 +177,8 @@ enum my_keycodes {
     _________________DEAD_HALF_ROW_________________,  KC_AGIN,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,MA_SCAL,MA_OFST, \
     _______,XXXXXXX,XXXXXXX,XXXXXXX,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,LA2_NAV,MA_LIMT, \
-                             KC_ESC,KC_BTN1,_______,                                   KC_ENT,KC_BSPC, \
-                                    KC_BTN2,KC_BTN3,                                   KC_DEL
+                             KC_ESC,_______,TAB_PTR,                                   KC_ENT,KC_BSPC, \
+                                    _______,_______,                                   KC_DEL
 
 /**
  * \brief Navigation layer featuring common editing keys with *all other right layers*.
