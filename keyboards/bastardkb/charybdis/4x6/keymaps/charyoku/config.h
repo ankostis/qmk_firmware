@@ -48,17 +48,17 @@
 #define CHARYBDIS_DRAGSCROLL_DPI                COMMON_DPI  // default(100)
 // Mouse reports DPI-independent, configure scroll speed with a fixed factor.
 // #define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        ((int)(CHARYBDIS_DRAGSCROLL_DPI / 150))
-#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        10          // default(6)
+#define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        12          // default(6)
 
 // Send coalesced events with scroll values above ±1 (vs queueing ±1 events)?
 #define CHARYBDIS_DRAGSCROLL_SEND_COALESCE
 
-// Scale curve with 500
-#define MACCEL_SCALE       220   // --/++ faster/slower (ensure it drives curve where it grows)
-#define MACCEL_TAKEOFF     5.1   // --/++ curve starts smoothlier/abruptlier
-#define MACCEL_GROWTH_RATE 0.6   // --/++ curve reaches max limit slower/faster
-#define MACCEL_OFFSET      1.0   //--/++ growth kicks in earlier/later
-#define MACCEL_LIMIT       8.0   //maximum acceleration factor
+// https://www.desmos.com/calculator/te5hi9za4c
+#define MACCEL_CPI         210   // --/++ faster/slower (ensure it drives curve where it grows)
+#define MACCEL_TAKEOFF     7.7   // --/++ curve starts smoothlier/abruptlier
+#define MACCEL_GROWTH_RATE 0.72  // --/++ curve reaches max limit slower/faster
+#define MACCEL_OFFSET      0.6   //--/++ growth kicks in earlier/later
+#define MACCEL_LIMIT       9.6   //maximum acceleration factor
 
 // If need, reduce mouse events frequency to cope with MCU load;
 // note that it delays (but smoothens) drag-scrolling, particularly when
@@ -75,7 +75,7 @@
 // To view mouse's distance/velocity while configuring maccel,
 // set `CONSOLE_ENABLE = yes` in `rules.mk` and uncomment the lines below,
 // and run `qmk console` in the shell:
-// #define MACCEL_DEBUG
+#define MACCEL_DEBUG
 #ifdef MACCEL_DEBUG
 #   undef PRINTF_SUPPORT_DECIMAL_SPECIFIERS
 #   define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
