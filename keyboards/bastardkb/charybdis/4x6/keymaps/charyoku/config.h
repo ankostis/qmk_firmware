@@ -38,27 +38,25 @@
 
 #define CHARYBDIS_DRAGSCROLL_REVERSE_Y      // mimic up/down movement: scroll towards drag
 
+#define CHARYBDIS_MINIMUM_DEFAULT_DPI           100  // default(400)
+#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP       100  // default(200)
+
 // Drag-scroll changes DPI on activation, but this causes issues,
 // better keep both identical (400).  So have to compensate drag-scroll divider
 //  (`CHARYBDIS_DRAGSCROLL_BUFFER_SIZE`)
 //
-#define COMMON_DPI 1200
-#define CHARYBDIS_MINIMUM_DEFAULT_DPI           COMMON_DPI  // default(400)
-// #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP    400         // default(200)
-#define CHARYBDIS_DRAGSCROLL_DPI                COMMON_DPI  // default(100)
-// Mouse reports DPI-independent, configure scroll speed with a fixed factor.
-// #define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        ((int)(CHARYBDIS_DRAGSCROLL_DPI / 150))
+// Maccel mouse reports are DPI-independent, configure scroll speed with a fixed factor.
 #define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE        12          // default(6)
 
-// Send coalesced events with scroll values above ±1 (vs queueing ±1 events)?
+// Send coalesced events with scroll values ≥ ±1 (vs queueing ±1 events)?
 #define CHARYBDIS_DRAGSCROLL_SEND_COALESCE
 
 // https://www.desmos.com/calculator/te5hi9za4c
-#define MACCEL_CPI         210   // --/++ faster/slower (ensure it drives curve where it grows)
-#define MACCEL_TAKEOFF     7.7   // --/++ curve starts smoothlier/abruptlier
-#define MACCEL_GROWTH_RATE 0.72  // --/++ curve reaches max limit slower/faster
-#define MACCEL_OFFSET      0.6   //--/++ growth kicks in earlier/later
-#define MACCEL_LIMIT       9.6   //maximum acceleration factor
+#define MACCEL_CPI         180     // --/++ faster/slower
+#define MACCEL_TAKEOFF     1300    // --/++ curve starts smoothlier/abruptlier
+#define MACCEL_GROWTH_RATE 600     // --/++ curve reaches max limit slower/faster
+#define MACCEL_OFFSET      0.0048  //--/++ growth kicks in earlier/later
+#define MACCEL_LIMIT       9.6     //maximum acceleration factor
 
 // If need, reduce mouse events frequency to cope with MCU load;
 // note that it delays (but smoothens) drag-scrolling, particularly when

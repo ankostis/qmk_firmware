@@ -11,40 +11,40 @@ static uint32_t maccel_timer;
 /**
  * MACCEL_CPI (C)
  *
- * It corresponds to the DPI desired to drive the accel curve, that is
- * how many dots (±1) to push into the curve for an inch of mouse-drift.
- * This is independent of device's CPI setting (which now can be set freely,
- * to control the hardware accuracy of the mouse alone).
+ * The DPI desired from the maccel algo, independent of device's CPI setting
+ * (the latter is free to control mouse's hardware accuracy).
+ *
+ * --/++ value --> pointer speedier/slower
  *
  * It can be considered a device specific parameter
  * (apart from a user-comfort control).
- *
- * lower/higher value --> pointer speedier/slower
+ * It is NOT used by the curve, not to burden tuning it's parameters.
  */
 #ifndef MACCEL_CPI
 #    ifdef POINTING_DEVICE_DRIVER_pmw3360
-#        define MACCEL_CPI 220.0
+#        define MACCEL_CPI 180.0
 #    elif POINTING_DEVICE_DRIVER_cirque_pinnacle_spi
-#        define MACCEL_CPI 220.0
+#        define MACCEL_CPI 180.0
 #    else
 #        warning "Unsupported pointing device driver! Please manually set the scaling parameter MACCEL_CPI to achieve a consistent acceleration curve!"
-#        define MACCEL_CPI 220.0
+#        define MACCEL_CPI 180.0
 #    endif
 #endif
 #ifdef MACCEL_SCALE
 #  error "You must rename MACCEL_SCALE as MACCEL_CPI in your `config.h`!"
 #endif // MACCEL_SCALE
 #ifndef MACCEL_TAKEOFF
-#    define MACCEL_TAKEOFF 4.44 // (K) lower/higher value = curve starts more smoothly/abrubtly
+// https://www.desmos.com/calculator/te5hi9za4c
+#    define MACCEL_TAKEOFF     1300    // (K) --/++ value --> curve starts smoothlier/abruptlier
 #endif
 #ifndef MACCEL_GROWTH_RATE
-#    define MACCEL_GROWTH_RATE 0.5 // (G) lower/higher value = curve reaches its upper limit slower/faster
+#    define MACCEL_GROWTH_RATE 600     // (M) --/++ value --> max limit reached slower/faster
 #endif
 #ifndef MACCEL_OFFSET
-#    define MACCEL_OFFSET 1.1 // (S) lower/higher value = acceleration kicks in earlier/later
+#    define MACCEL_OFFSET      0.0048  // (S) --/++ value --> growth kicks in earlier/later
 #endif
 #ifndef MACCEL_LIMIT
-#    define MACCEL_LIMIT 6.0 // (M) upper limit of accel curve (maximum acceleration factor)
+#    define MACCEL_LIMIT       9.6     // (M) maximum acceleration factor
 #endif
 #ifndef MACCEL_CPI_THROTTLE_MS
 #    define MACCEL_CPI_THROTTLE_MS 200 // milliseconds to wait between requesting the device's current DPI
@@ -170,11 +170,9 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     // euclidean distance: sqrt(x^2 + y^2)
     const float distance_dots = sqrtf(x_dots * x_dots + y_dots * y_dots);
     const float distance_inch = distance_dots / device_dpi;
-    const float velocity_inch = distance_inch / time_delta;
-    // Scale velocity in the range where the acceleration curve grows.
-    const float velocity = velocity_inch * g_maccel_config.scaling;
+    const float velocity = distance_inch / time_delta;
     // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
-    // Design generalised sigmoid: https://www.desmos.com/calculator/sodvw10g89
+    // Design generalised sigmoid: https://www.desmos.com/calculator/grd1ox94hm
     const float k             = g_maccel_config.takeoff;
     const float g             = g_maccel_config.growth_rate;
     const float s             = g_maccel_config.offset;
@@ -196,7 +194,9 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     // const float distance_accel = sqrtf(x_new * x_new + y_new * x_new);
     const float distance_out = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
     const float velocity_out = velocity * maccel_factor;
-    printf("MACCEL: DPI:%5i Scl:%7.1f Tko: %6.3f Grw: %.3f Ofs: %.3f Lmt: %6.3f | Fct: %7.3f v.in: %7.3f v.out: %+7.3f d.in: %7.3f d.out: %7.3f\n", device_dpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity, velocity_out - velocity, distance_inch, distance_out);
+    printf("MACCEL: DPI:%5i Scl:%7.1f Tko: %6.3f Grw: %.3f Ofs: %.3f Lmt: %6.3f | Fct: %7.3f v.in: %7.3f v.out: %+7.3f d.in: %7.3f d.out: %7.3f\n",
+    device_dpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit,
+    maccel_factor, velocity * 1000, (velocity_out - velocity)  * 1000, distance_dots, distance_out);
 #endif // MACCEL_DEBUG
 
     return mouse_report;
