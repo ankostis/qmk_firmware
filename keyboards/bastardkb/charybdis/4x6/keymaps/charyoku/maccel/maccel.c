@@ -6,8 +6,6 @@
 #include "maccel.h"
 #include "math.h"
 
-static uint32_t maccel_timer;
-
 /**
  * MACCEL_CPI (C)
  *
@@ -146,34 +144,51 @@ void maccel_toggle_enabled(void) {
 #define CONSTRAIN_REPORT(val) (mouse_xy_report_t) _CONSTRAIN(val, XY_REPORT_MIN, XY_REPORT_MAX)
 
 report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
+    static uint32_t last_report_time = 0;
+    static uint32_t last_move_time = 0;
     static float rounding_carry_x = 0;
     static float rounding_carry_y = 0;
 
-    const uint16_t time_delta = timer_elapsed32(maccel_timer);
+    const uint16_t report_t_delta = timer_elapsed32(last_report_time);
+    last_report_time = timer_read32();
+    const uint16_t move_t_delta = timer_elapsed32(last_move_time);
 
     if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
-        if (time_delta > MACCEL_ROUNDING_CURRY_TIMEOUT_MS) {
-            rounding_carry_x = rounding_carry_y = 0;
-        }
         return mouse_report;
     }
 
-    maccel_timer = timer_read32();
+    last_move_time = timer_read32();
 
     // Avoid expensive call to get-device-cpi unless mouse stationary for > 200ms.
     static uint16_t device_dpi = 300;
-    if (time_delta > MACCEL_CPI_THROTTLE_MS) {
+    // if (report_t_delta > MACCEL_CPI_THROTTLE_MS) {
+    if (move_t_delta > MACCEL_CPI_THROTTLE_MS) {
         device_dpi = pointing_device_get_cpi();
         // do the junk-fix until merge with qbk-upstream
         pointing_device_set_cpi(device_dpi);
     }
+    if (move_t_delta > MACCEL_ROUNDING_CURRY_TIMEOUT_MS) {
+        rounding_carry_x = rounding_carry_y = 0;
+    }
+
+    // Dump x & y movements in 10,000th of an inch.
+    // Ie. for a typical ball speed x1 inch/sec and pointer-task duty-cycle 1ms,
+    // it should print 10.
+    const float d_inch_x = (float) mouse_report.x / device_dpi;
+    const float d_inch_y = (float) mouse_report.y / device_dpi;
+    const float v_inch_x =  d_inch_x / report_t_delta;
+    const float v_inch_y =  d_inch_y / report_t_delta;
+    printf("MACCEL: DPI:%5i Dinch: %7.3f Vinch: %7.3f\n",
+    device_dpi, d_inch_x * 1000, v_inch_x * 1000);
+    printf("MACCEL: DPI:%5i Dinch: %7.3f Vinch: %7.3f\n",
+    device_dpi, d_inch_y * 1000, v_inch_y * 1000);
 
     const mouse_xy_report_t x_dots = mouse_report.x;
     const mouse_xy_report_t y_dots = mouse_report.y;
     // euclidean distance: sqrt(x^2 + y^2)
     const float distance_dots = sqrtf(x_dots * x_dots + y_dots * y_dots);
     const float distance_inch = MACCEL_MAGNIFICATION_DPI * distance_dots / device_dpi;
-    const float velocity = distance_inch / time_delta;
+    const float velocity = distance_inch / report_t_delta;
     // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
     // Design generalised sigmoid: https://www.desmos.com/calculator/grd1ox94hm
     const float k             = g_maccel_config.takeoff;
@@ -202,7 +217,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     const float velocity_out = velocity * maccel_factor;
     printf("MACCEL: DPI:%5i Scl:%7.1f Tko:%6.3f Grw:%.3f Ofs:%.3f Lmt:%6.3f | Acc:%7.3f v.in:%7.3f v.out:%+8.3f t:%5i d.in:%7.3f d.out:%7.3f\n",
     device_dpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit,
-    maccel_factor, velocity, (velocity_out - velocity), time_delta, distance_dots, distance_out);
+    maccel_factor, velocity, (velocity_out - velocity), report_t_delta, distance_dots, distance_out);
 #endif // MACCEL_DEBUG
 
     return mouse_report;
