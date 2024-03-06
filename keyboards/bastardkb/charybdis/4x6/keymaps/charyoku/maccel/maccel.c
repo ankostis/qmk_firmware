@@ -153,10 +153,6 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
 
     maccel_timer = timer_read32();
 
-    // Reset carry when pointer swaps direction, to follow user's hand.
-    if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
-    if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
-
     // Avoid expensive call to get-device-cpi unless mouse stationary for > 200ms.
     static uint16_t device_dpi = 300;
     if (time_delta > MACCEL_CPI_THROTTLE_MS) {
@@ -178,6 +174,9 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     const float s             = g_maccel_config.offset;
     const float m             = g_maccel_config.limit;
     const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity - s)), g / k);
+    // Reset carry when pointer swaps direction, to quickly follow user's hand.
+    if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
+    if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
     // Convert mouse-report.x/y also to inches and account quantization carry.
     const float de_cpi_n_scale = g_maccel_config.scaling / device_dpi;
     const float x_new          = rounding_carry_x + maccel_factor * x_dots * de_cpi_n_scale;
