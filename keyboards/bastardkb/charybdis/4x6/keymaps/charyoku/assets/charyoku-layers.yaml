@@ -49,7 +49,7 @@ layers:
 
   media:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
     - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
@@ -65,7 +65,7 @@ layers:
 
   num:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
     - [
         { t: App, type: trans },
         { t: "[", s: "{" },
@@ -75,11 +75,11 @@ layers:
         { t: "]", s: "}" },
       ]
     - [
-        Redo,
         Undo,
         "$$mdi:backspace$$",
         "$$mdi:keyboard-space$$",
-        Del,
+        { t: "/", s: "?" },
+        { t: "'", s: '"' },
         { t: "=", s: "+", type: trans },
       ]
     - [
@@ -118,9 +118,9 @@ layers:
 
   nav:
     - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
-    - [Redo, Undo, ▲, "Home ⇱", PgUp ▲, Tab]
+    - [Undo, "$$mdi:backspace$$", ▲, "Home ⇱", PgUp ▲, Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
     - [Paste, ◀, ▼, ▶, PgDown ▼, "$$mdi:keyboard-space$$"]
     - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "", Paste]
@@ -146,29 +146,15 @@ layers:
       ]
 
   fun:
-    - [
-        { t: "`", s: "~" },
-        { t: "1", s: "!" },
-        { t: "2", s: "@" },
-        { t: "3", s: "#" },
-        { t: "4", s: "$" },
-        { t: "5", s: "%" },
-      ]
-    - [
-        { t: "6", s: "^" },
-        { t: "7", s: "&" },
-        { t: "8", s: "*" },
-        { t: "9", s: "(" },
-        { t: "0", s: ")" },
-        { t: "=", s: "+" },
-      ]
+    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", Redo, "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
     - [{ t: App, type: trans }, F12, F7, F8, F9, PrtSc]
     - [
-        Redo,
         Undo,
         "$$mdi:backspace$$",
         "$$mdi:keyboard-space$$",
-        Del,
+        { t: "/", s: "?" },
+        { t: "'", s: '"' },
         { t: "=", s: "+", type: trans },
       ]
     - [{ t: PrtSc, type: trans }, F11, F4, F5, F6, Scroll lock]
@@ -197,9 +183,16 @@ layers:
 
   mouse:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "maccel takeoff ±"]
+    - [
+        "Esc ⎋",
+        Redo,
+        "Debug toggle",
+        "eeprom clear",
+        Reboot,
+        "maccel takeoff ±",
+      ]
     - ["", "", "", "", "", ""]
-    - [Redo, Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
+    - [Undo, "$$mdi:backspace$$", ❸M, ❺, "DPI ±", "maccel growth ±"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
     - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]
     - [{ t: Caps word, type: trans }, "", "", "", "drag toggle", ""]
@@ -226,14 +219,14 @@ layers:
 
   sym:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
     - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
     - [
-        Redo,
         Undo,
         "$$mdi:backspace$$",
         "$$mdi:keyboard-space$$",
-        Del,
+        { t: "/", s: "?" },
+        { t: "'", s: '"' },
         { t: "=", s: "+", type: trans },
       ]
     - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
