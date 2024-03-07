@@ -47,92 +47,20 @@ layers:
         { t: "Del", h: fun },
       ]
 
-  nav:
-    - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
-    - ["", "", "", "", "", ""]
-    - [Redo, Undo, ▲, "Home ⇱", PgUp ▲, Tab]
-    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - [Paste, ◀, ▼, ▶, PgDown ▼, "$$mdi:keyboard-space$$"]
-    - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "", Paste]
-    - [
-        Cut,
-        Copy,
-        Insert,
-        { t: "End ⇲", h: mouse },
-        { t: ".", s: ">", type: held },
-        { t: Caps lock, type: trans },
-      ]
-    - [
-        "Esc ⎋",
-        { t: "$$mdi:keyboard-space$$", type: held },
-        { t: Tab, h: mouse, type: trans },
-        "$$mdi:keyboard-return$$",
-        "$$mdi:backspace$$",
-      ]
-    - [
-        { t: ";", s: ":", h: RAltGr, type: trans },
-        { t: "=", s: "+", h: RCtrl, type: trans },
-        Del,
-      ]
-
-  sym:
-    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
-    - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
-    - [
-        Redo,
-        Undo,
-        { t: "=", s: "+" },
-        { t: "/", s: "?" },
-        { t: '\', s: "|" },
-        Tab,
-      ]
-    - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
-    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
-    - [{ t: "Caps word", type: trans }, "~", "!", "@", "#", "|"]
-    - [
-        Cut,
-        Copy,
-        { t: "-", s: "_" },
-        { t: ",", s: "<" },
-        { t: ".", s: ">" },
-        { t: "Caps lock", type: trans },
-      ]
-    - ["(", ")", "?", { type: held }, $$mdi:backspace$$]
-    - [
-        { t: ";", s: ":", h: RAltGr, type: trans },
-        { t: "=", s: "+", h: RCtrl, type: trans },
-        Del,
-      ]
-
-  mouse:
+  media:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "maccel takeoff ±"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
-    - [Redo, Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
+    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]
-    - [{ t: Caps word, type: trans }, "", "", "", "drag toggle", ""]
-    - [
-        Cut,
-        Copy,
-        "drag scroll",
-        { t: ",", s: "<", type: held },
-        "",
-        "maccel limit ±",
-      ]
-    - [
-        Esc,
-        "$$mdi:keyboard-space$$",
-        { t: Tab, type: held },
-        "$$mdi:keyboard-return$$",
-        "$$mdi:backspace$$",
-      ]
+    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
+    - [{ "Caps word", type: trans }, "", "", "", "", ""]
+    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
+    - [{ type: held }, Play, Stop, Stop, Play]
     - [
         { t: ";", s: ":", h: RAltGr, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
-        Del,
+        "",
       ]
 
   num:
@@ -188,20 +116,33 @@ layers:
       ]
     - [(, ), Del]
 
-  media:
-    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+  nav:
+    - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
-    - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
+    - [Redo, Undo, ▲, "Home ⇱", PgUp ▲, Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - ["Prev ⏮", Vol-, Mute, Vol+, "Next ⏭", rgb fix]
-    - [{ "Caps word", type: trans }, "", "", "", "", ""]
-    - ["", "Brigt+ 🔆", "", "Brigt- 🔅", "", ""]
-    - [{ type: held }, Play, Stop, Stop, Play]
+    - [Paste, ◀, ▼, ▶, PgDown ▼, "$$mdi:keyboard-space$$"]
+    - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "", Paste]
+    - [
+        Cut,
+        Copy,
+        Insert,
+        { t: "End ⇲", h: mouse },
+        { t: ".", s: ">", type: held },
+        { t: Caps lock, type: trans },
+      ]
+    - [
+        "Esc ⎋",
+        { t: "$$mdi:keyboard-space$$", type: held },
+        { t: Tab, h: mouse, type: trans },
+        "$$mdi:keyboard-return$$",
+        "$$mdi:backspace$$",
+      ]
     - [
         { t: ";", s: ":", h: RAltGr, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
-        "",
+        Del,
       ]
 
   fun:
@@ -238,6 +179,65 @@ layers:
         { t: ";", s: ":", h: RAltGr, type: trans },
         { t: "=", s: "+", h: RCtrl, type: trans },
         { type: held },
+      ]
+
+  mouse:
+    - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom clear", Reboot, "maccel takeoff ±"]
+    - ["", "", "", "", "", ""]
+    - [Redo, Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
+    - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
+    - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]
+    - [{ t: Caps word, type: trans }, "", "", "", "drag toggle", ""]
+    - [
+        Cut,
+        Copy,
+        "drag scroll",
+        { t: ",", s: "<", type: held },
+        "",
+        "maccel limit ±",
+      ]
+    - [
+        Esc,
+        "$$mdi:keyboard-space$$",
+        { t: Tab, type: held },
+        "$$mdi:keyboard-return$$",
+        "$$mdi:backspace$$",
+      ]
+    - [
+        { t: ";", s: ":", h: RAltGr, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
+      ]
+
+  sym:
+    - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
+    - ["Esc ⎋", "", "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
+    - [
+        Redo,
+        Undo,
+        { t: "=", s: "+" },
+        { t: "/", s: "?" },
+        { t: '\', s: "|" },
+        Tab,
+      ]
+    - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
+    - [{ t: "Caps word", type: trans }, "~", "!", "@", "#", "|"]
+    - [
+        Cut,
+        Copy,
+        { t: "-", s: "_" },
+        { t: ",", s: "<" },
+        { t: ".", s: ">" },
+        { t: "Caps lock", type: trans },
+      ]
+    - ["(", ")", "?", { type: held }, $$mdi:backspace$$]
+    - [
+        { t: ";", s: ":", h: RAltGr, type: trans },
+        { t: "=", s: "+", h: RCtrl, type: trans },
+        Del,
       ]
 
 combos:
