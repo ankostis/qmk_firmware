@@ -1,17 +1,17 @@
-[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.4.3</b>"],
+[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.5.0</b>"],
 [{f:1,y:-0.7, d:true},"https://github.com/ankostis/qmk_firmware/tree/charyoku/keyboards/bastardkb/charybdis/4x6/keymaps/charyoku"],
 [
   {f:3,f2:2},
-  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"F2\n2@\nEclr\nEclr","F3\n3#\ndbg\ndbg","F4\n4$","F5\n5%\nEsc\nEsc",
-  {x:2.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F6\n6^\nEsc\nEsc","F7\n7&","F8\n8*\ndbg\ndbg","F9\n9(\nEclr\nEclr"
+  {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"F2\nEclr\nEclr\nEclr","F3\ndbg\ndbg\ndbg","F4\n","F5\nEsc\nEsc\nEsc",
+  {x:2.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F6\nEsc\nEsc\nEsc","F7\nredo\nredo\nredo","F8\ndbg\ndbg\ndbg","F9\nEclr\nEclr\nEclr"
 ],
 [
-  {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff"},"F11\n`~\nbtld\nbtld","F1\n1!\nrbt\nrbt",
-  {x:10.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F10\n0\nrbt\nrbt","F12\n=+\nbtld\nbtld"
+  {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff"},"F11\nbtld\nbtld\nbtld","F1\nrbt\nrbt\nrbt",
+  {x:10.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F10\nrbt\nrbt\nrbt","F12\nrbt\nbtld\nbtld"
 ],
 [
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"W\nF7\n&\n7","F\nF8\n*\n8","P\nF9\n(\n9","B\nPrtScn <i>SysRq</i>\n}\n]",
-  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"J\nRGB pwr\nredo\nredo","L\nRGB hui\nundo\nundo","U\nRGB satr\n❸M\n▲","Y\nRGB mod\n❺\nHome"
+  {x:2.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"J\nRGB pwr\nundo\nundo","L\nRGB hui\n⌫\n⌫","U\nRGB satr\n❸M\n▲","Y\nRGB mod\n❺\nHome"
 ],
 [
   {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"App",{c:"#888888"},"Q\nF12\n{\n[",

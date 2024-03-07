@@ -5,7 +5,7 @@ layout:
   qmk_layout: LAYOUT
 layers:
   base:
-    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.4.2" }, F4, F5]
+    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.5.0" }, F4, F5]
     - [F6, F7, F8, F9, F10, F12]
     - [App, Q, W, F, P, B]
     - [J, L, U, Y, { t: "'", s: '"' }, { t: "/", s: "?", type: ghost }]

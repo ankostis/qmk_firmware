@@ -155,7 +155,7 @@ rect.key {
 <g transform="translate(196, 28)" class="key keypos-3">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
 <text x="0" y="0" class="key tap">F3</text>
-<text x="0" y="24" class="key hold"><tspan style="font-size: 83%">v0.4.2</tspan></text>
+<text x="0" y="24" class="key hold"><tspan style="font-size: 83%">v0.5.0</tspan></text>
 </g>
 <g transform="translate(252, 39)" class="key keypos-4">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key"/>
