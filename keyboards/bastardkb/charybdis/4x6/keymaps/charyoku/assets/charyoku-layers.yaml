@@ -77,10 +77,10 @@ layers:
     - [
         Redo,
         Undo,
-        { t: "=", s: "+" },
-        { t: "/", s: "?" },
-        { t: '\', s: "|" },
-        Tab,
+        "$$mdi:backspace$$",
+        "$$mdi:keyboard-space$$",
+        Del,
+        { t: "=", s: "+", type: trans },
       ]
     - [
         { t: PrtSc, type: trans },
@@ -90,7 +90,7 @@ layers:
         { t: "6", s: "^" },
         { t: "=", s: "+" },
       ]
-    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, { t: "/", s: "?", type: trans }]
     - [
         { t: "Caps word", type: trans },
         { t: "`", s: "~" },
@@ -163,11 +163,25 @@ layers:
         { t: "=", s: "+" },
       ]
     - [{ t: App, type: trans }, F12, F7, F8, F9, PrtSc]
-    - ["", "", "", "", "", ""]
+    - [
+        Redo,
+        Undo,
+        "$$mdi:backspace$$",
+        "$$mdi:keyboard-space$$",
+        Del,
+        { t: "=", s: "+", type: trans },
+      ]
     - [{ t: PrtSc, type: trans }, F11, F4, F5, F6, Scroll lock]
-    - ["", LShift, LCtrl, LAlt, LGUI, { t: ";", s: ":", type: trans }]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, { t: "/", s: "?", type: trans }]
     - [{ t: Caps word, type: trans }, F10, F1, F2, F3, Pause]
-    - ["", "", "", "", "", { t: Caps lock, type: trans }]
+    - [
+        Cut,
+        Copy,
+        { t: "-", s: "_" },
+        { t: ",", s: "<" },
+        { t: ".", s: ">" },
+        { t: "Caps lock", type: trans },
+      ]
     - [
         App,
         { t: "$$mdi:keyboard-space$$", type: trans },
@@ -217,13 +231,13 @@ layers:
     - [
         Redo,
         Undo,
-        { t: "=", s: "+" },
-        { t: "/", s: "?" },
-        { t: '\', s: "|" },
-        Tab,
+        "$$mdi:backspace$$",
+        "$$mdi:keyboard-space$$",
+        Del,
+        { t: "=", s: "+", type: trans },
       ]
     - [{ t: PrtSc, type: trans }, ":", $, "%", ^, +]
-    - [Paste, LShift, LCtrl, LAlt, LGUI, "$$mdi:keyboard-space$$"]
+    - [Paste, LShift, LCtrl, LAlt, LGUI, { t: "/", s: "?", type: trans }]
     - [{ t: "Caps word", type: trans }, "~", "!", "@", "#", "|"]
     - [
         Cut,
