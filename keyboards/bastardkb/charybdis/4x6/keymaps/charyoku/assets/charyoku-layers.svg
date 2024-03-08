@@ -117,23 +117,73 @@ rect.key {
 /* version string */ .key.keypos-2 > text.key.hold, .key.keypos-3 > text.key.hold {
   fill: #ffffff;
 }
-/* .layer-nav, */ .key.keypos-46 > text.key.hold, .key.keypos-49 > text.key.hold, .key.held.keypos-46 > rect, .key.held.keypos-49 > rect {
+/**
+ * .LAYER-NAV
+ */
+.key.keypos-46 > text.key.hold, .key.keypos-49 > text.key.hold, .key.held.keypos-46 > rect, .key.held.keypos-49 > rect {
   fill: cyan;
+} /* Home-rows */ .layer-nav .key.keypos-25 > rect, .layer-nav .key.keypos-26 > rect, .layer-nav .key.keypos-27 > rect, .layer-nav .key.keypos-28 > rect {
+  fill: #c6b8cb;
+} /* Common undo-pasting keys */ .layer-nav .key.keypos-6 > rect, .layer-nav .key.keypos-7 > rect, .layer-nav .key.keypos-8 > rect, .layer-nav .key.keypos-18 > rect, .layer-nav .key.keypos-19 > rect, .layer-nav .key.keypos-30 > rect, .layer-nav .key.keypos-42 > rect, .layer-nav .key.keypos-43 > rect {
+  fill: #a6c8cb;
+} /* L-thumbs/copy-paste clone */ .layer-nav .key.keypos-14 > rect, .layer-nav .key.keypos-15 > rect, .layer-nav .key.keypos-16 > rect, .layer-nav .key.keypos-37 > rect, .layer-nav .key.keypos-38 > rect, .layer-nav .key.keypos-39 > rect, .layer-nav .key.keypos-41 > rect {
+  fill: #a6a8cb;
 }
-/* .layer-mouse, */ .key.keypos-45 > text.key.hold, .key.keypos-50 > text.key.hold, .key.held.keypos-45 > rect, .key.held.keypos-50 > rect {
+/**
+ * .LAYER-MOUSE
+ */
+.key.keypos-45 > text.key.hold, .key.keypos-50 > text.key.hold, .key.held.keypos-45 > rect, .key.held.keypos-50 > rect {
   fill: yellow;
+} /* Home-rows */ .layer-mouse .key.keypos-25 > rect, .layer-mouse .key.keypos-26 > rect, .layer-mouse .key.keypos-27 > rect, .layer-mouse .key.keypos-28 > rect {
+  fill: #c6b8cb;
+} /* Common undo-pasting keys */ .layer-mouse .key.keypos-6 > rect, .layer-mouse .key.keypos-7 > rect, .layer-mouse .key.keypos-8 > rect, .layer-mouse .key.keypos-18 > rect, .layer-mouse .key.keypos-19 > rect, .layer-mouse .key.keypos-30 > rect, .layer-mouse .key.keypos-42 > rect, .layer-mouse .key.keypos-43 > rect {
+  fill: #a6c8cb;
+} /* L-thumbs/copy-paste clone */ .layer-mouse .key.keypos-14 > rect, .layer-mouse .key.keypos-15 > rect, .layer-mouse .key.keypos-16 > rect, .layer-mouse .key.keypos-37 > rect, .layer-mouse .key.keypos-38 > rect, .layer-mouse .key.keypos-39 > rect, .layer-mouse .key.keypos-41 > rect {
+  fill: #a6a8cb;
 }
-/* .layer-num, */ .key.keypos-52 > text.key.hold, .key.held.keypos-52 > rect {
+/**
+ * .LAYER-NUM
+ */
+.key.keypos-52 > text.key.hold, .key.held.keypos-52 > rect {
   fill: blue;
+} /* Home-rows */ .layer-num .key.keypos-31 > rect, .layer-num .key.keypos-32 > rect, .layer-num .key.keypos-33 > rect, .layer-num .key.keypos-34 > rect {
+  fill: #c6b8cb;
+} /* Common undo-pasting keys */ .layer-num .key.keypos-6 > rect, .layer-num .key.keypos-7 > rect, .layer-num .key.keypos-8 > rect, .layer-num .key.keypos-18 > rect, .layer-num .key.keypos-19 > rect, .layer-num .key.keypos-30 > rect, .layer-num .key.keypos-42 > rect, .layer-num .key.keypos-43 > rect {
+  fill: #a6c8cb;
+} /* Common puncts keys */ .layer-num .key.keypos-20 > rect, .layer-num .key.keypos-21 > rect, .layer-num .key.keypos-22 > rect, .layer-num .key.keypos-44 > rect, .layer-num .key.keypos-45 > rect, .layer-num .key.keypos-46 > rect {
+  fill: #a6b8aa;
 }
-/* .layer-sym, */ .key.keypos-51 > text.key.hold, .key.held.keypos-51 > rect {
+/**
+ * .LAYER-SYM
+ */
+.key.keypos-51 > text.key.hold, .key.held.keypos-51 > rect {
   fill: green;
+} /* Home-rows */ .layer-sym .key.keypos-31 > rect, .layer-sym .key.keypos-32 > rect, .layer-sym .key.keypos-33 > rect, .layer-sym .key.keypos-34 > rect {
+  fill: #c6b8cb;
+} /* Common undo-pasting keys */ .layer-sym .key.keypos-6 > rect, .layer-sym .key.keypos-7 > rect, .layer-sym .key.keypos-8 > rect, .layer-sym .key.keypos-18 > rect, .layer-sym .key.keypos-19 > rect, .layer-sym .key.keypos-30 > rect, .layer-sym .key.keypos-42 > rect, .layer-sym .key.keypos-43 > rect {
+  fill: #a6c8cb;
+} /* Common puncts keys */ .layer-sym .key.keypos-20 > rect, .layer-sym .key.keypos-21 > rect, .layer-sym .key.keypos-22 > rect, .layer-sym .key.keypos-44 > rect, .layer-sym .key.keypos-45 > rect, .layer-sym .key.keypos-46 > rect {
+  fill: #a6b8aa;
 }
-/* .layer-fun, */ .key.keypos-55 > text.key.hold, .key.held.keypos-55 > rect {
+/**
+ * .LAYER-FUN
+ */
+.key.keypos-55 > text.key.hold, .key.held.keypos-55 > rect {
   fill: red;
+} /* Home-rows */ .layer-fun .key.keypos-31 > rect, .layer-fun .key.keypos-32 > rect, .layer-fun .key.keypos-33 > rect, .layer-fun .key.keypos-34 > rect {
+  fill: #c6b8cb;
+} /* Common undo-pasting keys */ .layer-fun .key.keypos-6 > rect, .layer-fun .key.keypos-7 > rect, .layer-fun .key.keypos-8 > rect, .layer-fun .key.keypos-18 > rect, .layer-fun .key.keypos-19 > rect, .layer-fun .key.keypos-30 > rect, .layer-fun .key.keypos-42 > rect, .layer-fun .key.keypos-43 > rect {
+  fill: #a6c8cb;
+} /* Common puncts keys */ .layer-fun .key.keypos-20 > rect, .layer-fun .key.keypos-21 > rect, .layer-fun .key.keypos-22 > rect, .layer-fun .key.keypos-44 > rect, .layer-fun .key.keypos-45 > rect, .layer-fun .key.keypos-46 > rect {
+  fill: #a6b8aa;
 }
-/* .layer-media, */ .key.keypos-48 > text.key.hold, .key.held.keypos-48 > rect {
+/**
+ * .LAYER-MEDIA
+ */
+.key.keypos-48 > text.key.hold, .key.held.keypos-48 > rect {
   fill: purple;
+} /* Home-rows */ .layer-media .key.keypos-25 > rect, .layer-media .key.keypos-26 > rect, .layer-media .key.keypos-27 > rect, .layer-media .key.keypos-28 > rect {
+  fill: #c6b8cb;
 }
 </style>
 <g transform="translate(30, 0)" class="layer-base">
