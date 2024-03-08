@@ -49,7 +49,7 @@ layers:
 
   media:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", Redo, "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Tab", "eeprom clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
     - [rgb power, rgb hue, rgb satr, rgb mod, rgb speed, "rgb toggle"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
@@ -65,7 +65,7 @@ layers:
 
   num:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", Redo, "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Tab", "eeprom Clear", Reboot, "Boot loader"]
     - [
         { t: App, type: trans },
         { t: "[", s: "{" },
@@ -118,7 +118,7 @@ layers:
 
   nav:
     - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", Redo, "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Tab", "eeprom Clear", Reboot, "Boot loader"]
     - ["", "", "", "", "", ""]
     - ["$$mdi:backspace$$", Undo, ▲, "Home ⇱", PgUp ▲, Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
@@ -147,7 +147,7 @@ layers:
 
   fun:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", Redo, "Debug toggle", "eeprom clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Tab", "eeprom clear", Reboot, "Boot loader"]
     - [{ t: App, type: trans }, F12, F7, F8, F9, PrtSc]
     - [
         "$$mdi:backspace$$",
@@ -183,14 +183,7 @@ layers:
 
   mouse:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - [
-        "Esc ⎋",
-        Redo,
-        "Debug toggle",
-        "eeprom clear",
-        Reboot,
-        "maccel takeoff ±",
-      ]
+    - ["Esc ⎋", Redo, "Tab", "eeprom clear", Reboot, "maccel takeoff ±"]
     - ["", "", "", "", "", ""]
     - ["$$mdi:backspace$$", Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
@@ -219,7 +212,7 @@ layers:
 
   sym:
     - ["Boot loader", Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", Redo, "Debug toggle", "eeprom Clear", Reboot, "Boot loader"]
+    - ["Esc ⎋", Redo, "Tab", "eeprom Clear", Reboot, "Boot loader"]
     - [{ t: App, type: trans }, "{", "&", "*", (, "}"]
     - [
         "$$mdi:backspace$$",

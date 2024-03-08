@@ -3,7 +3,7 @@
 [
   {f:3,f2:2},
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"F2\nEclr\nEclr\nEclr","F3\ndbg\ndbg\ndbg","F4\n","F5\nEsc\nEsc\nEsc",
-  {x:2.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F6\nEsc\nEsc\nEsc","F7\nredo\nredo\nredo","F8\ndbg\ndbg\ndbg","F9\nEclr\nEclr\nEclr"
+  {x:2.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F6\nEsc\nEsc\nEsc","F7\nredo\nredo\nredo","F8\nTab\nTab\nTab","F9\nEclr\nEclr\nEclr"
 ],
 [
   {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff"},"F11\nbtld\nbtld\nbtld","F1\nrbt\nrbt\nrbt",
