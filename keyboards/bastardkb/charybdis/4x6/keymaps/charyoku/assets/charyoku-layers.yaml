@@ -1,6 +1,7 @@
 layout:
   # Requirements:
   #   pip install https://github.com/finrod09/keymap-drawer.git@bkb
+  # or replace with `bastardkb/charybdis/4x6/v2/splinky_3` in https://keymap-drawer.streamlit.app/
   qmk_keyboard: bastardkb/charybdis/4x6
   qmk_layout: LAYOUT
 layers:

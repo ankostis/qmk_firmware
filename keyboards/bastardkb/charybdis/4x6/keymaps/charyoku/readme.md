@@ -20,12 +20,6 @@ like this:
   without layer;  space/tab for both sym & num layers.
 - outer columns: caps-lock keys and nice-to-have keys like `;` and `/`.
 
-## Deviations from Miryoku
- 
-- Swap `,` with `-`, the former being much usefull in programming, the latter's place
-  in the num+left thumb rhymes with `.` also there when num-typing.  
-- Navigation keys are layed-out in a "cross" pattern;  many changes in nav & pointer
-  layers are due to this.
 
 ## Features
 
@@ -72,11 +66,30 @@ pip install https://github.com/finrod09/keymap-drawer.git@bkb
 
 ## Tips
 
-- Some symbols in the toggling-side for SYM/NUM help type faster `!=`, regexes like
-  `/.*\\n|#.*//` and paths like `~/.*` without lifting the R-thumb.
+- Single-hand *mouse* use, "holding" it with the R-ring-finger and clicking with the R-thumb.
+- Single-hand cursor movement by holding the *nav-layer* with the R-pinky.
+- Navigation keys are layed-out in a "cross" pattern (unlike *miryoku*).
+  many changes in nav & mouse R-layers are due to this.
+- Some of the remaining R-positions of the nav-layer are occupied by editing keys
+  (eg. copy-paste/undo/redo);  those same key-positions have been adopted by all other layers,
+  painted as *cyan group* in the layer map.
+- Punctuation chars in the opposite R-side for the L-layers (num/sym/fun) help type 
+  paths like `~/.*` and regexes like `/.*\\n|#.*//` without lifting the R-thumb,
+  painted as *green group* in the layer map.
+- For then R-layers (nav/mouse) there are shared keys in the L-side for the
+  unreachable keys in the "holding" L-thumb;  also it mimics Ctrl+Z/X/C/V,
+  so the holding key acts as "Ctrl".
+- Moved the dash(`-`) from miryoku's L-thumb --> R middle-finger
+  (centrally, between `h` and `,.`), to facilitate pressing it successively in a row,
+  eg. `--help`.  
+- The use of **sym** layer is discouraged - all symbols exist on the **num** layer,
+  shifted, so that your muscle memory fits also *charybdis-3x5*, and that you can switch
+  from numbers to symbols without moving your R-thumb 
+  (important for those with thumbs less motile than the average millennial ;-);
+  besides, many apps list keyboard shortcuts  with the *Shift* key for symbols,
+  eg. `Shift+=` for the *Zoom In*.
 - [![accelaration-profiles](assets/maccel-curve.png)](https://www.desmos.com/calculator/xkhejelty8)
 
-enjoy!
 
 ---
 

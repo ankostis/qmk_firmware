@@ -111,7 +111,7 @@ enum my_keycodes {
 #define ________________HOME_ROW_GACS_L________________  _______,KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,XXXXXXX
 #define ________________HOME_ROW_GACS_R________________  XXXXXXX,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,_______
 #define ________________KEYB_CTRL_ROW_L________________  QK_BOOT, QK_RBT,EE_CLR ,DB_TOGG,XXXXXXX,KC_ESC
-#define ________________KEYB_CTRL_ROW_R________________   KC_ESC,KC_AGIN,DB_TOGG, EE_CLR, QK_RBT,QK_BOOT
+#define ________________KEYB_CTRL_ROW_R________________   KC_ESC,KC_AGIN, KC_TAB, EE_CLR, QK_RBT,QK_BOOT
 
 /*
  * Layers used on the Charybdis 4x6.
