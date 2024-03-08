@@ -119,7 +119,7 @@ layers:
   nav:
     - [Boot, Reboot, "eeprom Clear", "Debug toggle", "", "Esc ⎋"]
     - ["Esc ⎋", Redo, "Tab", "eeprom Clear", Reboot, "Boot loader"]
-    - ["", "", "", "", "", ""]
+    - ["", "", Esc, "$$mdi:keyboard-space$$", Tab, ""]
     - ["$$mdi:backspace$$", Undo, ▲, "Home ⇱", PgUp ▲, Tab]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
     - [Paste, ◀, ▼, ▶, PgDown ▼, "$$mdi:keyboard-space$$"]
@@ -184,7 +184,7 @@ layers:
   mouse:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
     - ["Esc ⎋", Redo, "Tab", "eeprom clear", Reboot, "maccel takeoff ±"]
-    - ["", "", "", "", "", ""]
+    - ["", "", Esc, "$$mdi:keyboard-space$$", Tab, ""]
     - ["$$mdi:backspace$$", Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
     - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]

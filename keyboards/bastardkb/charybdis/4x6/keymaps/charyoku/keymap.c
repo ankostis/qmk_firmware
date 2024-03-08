@@ -174,7 +174,7 @@ enum my_keycodes {
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
     ________________KEYB_CTRL_ROW_L________________,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MA_TKFF, \
-    _________________DEAD_HALF_ROW_________________,  KC_BSPC,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
+    _______,XXXXXXX, KC_ESC, KC_SPC, KC_TAB,XXXXXXX,  KC_BSPC,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,MA_SCAL,MA_OFST, \
     _______,XXXXXXX,XXXXXXX,XXXXXXX,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,LA2_NAV,MA_LIMT, \
                              KC_ESC,_______,TAB_PTR,                                   KC_ENT,KC_BSPC, \
@@ -192,7 +192,7 @@ enum my_keycodes {
  */
 #define LAYOUT_LAYER_NAVIGATION                                                                        \
     ________________KEYB_CTRL_ROW_L________________,  ________________KEYB_CTRL_ROW_R________________, \
-    _________________DEAD_HALF_ROW_________________,  KC_BSPC,KC_UNDO,  KC_UP,KC_HOME,KC_PGUP, KC_TAB, \
+    _______,XXXXXXX, KC_ESC, KC_SPC, KC_TAB,XXXXXXX,  KC_BSPC,KC_UNDO,  KC_UP,KC_HOME,KC_PGUP, KC_TAB, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_LEFT,KC_DOWN,KC_RGHT,KC_PGDN, KC_SPC, \
     _______,KC_UNDO, KC_CUT,KC_COPY,XXXXXXX,KC_PSTE,   KC_CUT,KC_COPY, KC_INS,LA3_PTR,_______,_______, \
                              KC_ESC,_______,_______,                                   KC_ENT,KC_BSPC, \
