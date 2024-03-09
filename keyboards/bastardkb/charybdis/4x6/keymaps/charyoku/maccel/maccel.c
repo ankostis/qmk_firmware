@@ -144,13 +144,10 @@ void maccel_toggle_enabled(void) {
 #define CONSTRAIN_REPORT(val) (mouse_xy_report_t) _CONSTRAIN(val, XY_REPORT_MIN, XY_REPORT_MAX)
 
 report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
-    static uint32_t last_report_time = 0;
     static uint32_t last_move_time = 0;
     static float rounding_carry_x = 0;
     static float rounding_carry_y = 0;
 
-    const uint16_t report_t_delta = timer_elapsed32(last_report_time);
-    last_report_time = timer_read32();
     const uint16_t move_t_delta = timer_elapsed32(last_move_time);
 
     if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
@@ -161,7 +158,6 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
 
     // Avoid expensive call to get-device-cpi unless mouse stationary for > 200ms.
     static uint16_t device_dpi = 300;
-    // if (report_t_delta > MACCEL_CPI_THROTTLE_MS) {
     if (move_t_delta > MACCEL_CPI_THROTTLE_MS) {
         device_dpi = pointing_device_get_cpi();
         // do the junk-fix until merge with qbk-upstream
@@ -176,8 +172,8 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     // it should print 10.
     const float d_inch_x = (float) mouse_report.x / device_dpi;
     const float d_inch_y = (float) mouse_report.y / device_dpi;
-    const float v_inch_x =  d_inch_x / report_t_delta;
-    const float v_inch_y =  d_inch_y / report_t_delta;
+    const float v_inch_x =  d_inch_x / move_t_delta;
+    const float v_inch_y =  d_inch_y / move_t_delta;
     printf("MACCEL: DPI:%5i Dinch: %7.3f Vinch: %7.3f\n",
     device_dpi, d_inch_x * 1000, v_inch_x * 1000);
     printf("MACCEL: DPI:%5i Dinch: %7.3f Vinch: %7.3f\n",
