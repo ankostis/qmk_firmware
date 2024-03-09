@@ -188,7 +188,7 @@ layers:
     - ["$$mdi:backspace$$", Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
     - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]
-    - [{ t: Caps word, type: trans }, "", "", "", "drag toggle", ""]
+    - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "drag toggle", Paste]
     - [
         Cut,
         Copy,

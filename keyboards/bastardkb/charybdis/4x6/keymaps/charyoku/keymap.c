@@ -176,7 +176,7 @@ enum my_keycodes {
     ________________KEYB_CTRL_ROW_L________________,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MA_TKFF, \
     _______,XXXXXXX, KC_ESC, KC_SPC, KC_TAB,XXXXXXX,  KC_BSPC,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
     ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,MA_SCAL,MA_OFST, \
-    _______,XXXXXXX,XXXXXXX,XXXXXXX,DRG_TOG,XXXXXXX,   KC_CUT,KC_COPY,DRGSCRL,_______,LA2_NAV,MA_LIMT, \
+    _______,KC_UNDO, KC_CUT,KC_COPY,DRG_TOG, KC_PSTE,   KC_CUT,KC_COPY,DRGSCRL,_______,LA2_NAV,MA_LIMT, \
                              KC_ESC,_______,TAB_PTR,                                   KC_ENT,KC_BSPC, \
                                     _______,_______,                                   KC_DEL
 
