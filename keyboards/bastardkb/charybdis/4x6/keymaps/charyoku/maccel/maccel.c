@@ -22,26 +22,26 @@ static uint32_t maccel_timer;
  */
 #ifndef MACCEL_CPI
 #    ifdef POINTING_DEVICE_DRIVER_pmw3360
-#        define MACCEL_CPI 180.0
+#        define MACCEL_CPI 120.0
 #    elif POINTING_DEVICE_DRIVER_cirque_pinnacle_spi
-#        define MACCEL_CPI 180.0
+#        define MACCEL_CPI 120.0
 #    else
 #        warning "Unsupported pointing device driver! Please manually set the scaling parameter MACCEL_CPI to achieve a consistent acceleration curve!"
-#        define MACCEL_CPI 180.0
+#        define MACCEL_CPI 120.0
 #    endif
 #endif
 #ifdef MACCEL_SCALE
 #  error "You must rename MACCEL_SCALE as MACCEL_CPI in your `config.h`!"
 #endif // MACCEL_SCALE
 #ifndef MACCEL_TAKEOFF
-// https://www.desmos.com/calculator/te5hi9za4c
-#    define MACCEL_TAKEOFF     1300    // (K) --/++ value --> curve starts smoothlier/abruptlier
+// https://www.desmos.com/calculator/vtfkbxwj8s
+#    define MACCEL_TAKEOFF     6.8     // (K) --/++ value --> curve starts smoothlier/abruptlier
 #endif
 #ifndef MACCEL_GROWTH_RATE
-#    define MACCEL_GROWTH_RATE 600     // (M) --/++ value --> max limit reached slower/faster
+#    define MACCEL_GROWTH_RATE 0.6     // (M) --/++ value --> max limit reached slower/faster
 #endif
 #ifndef MACCEL_OFFSET
-#    define MACCEL_OFFSET      0.0048  // (S) --/++ value --> growth kicks in earlier/later
+#    define MACCEL_OFFSET      1.0     // (S) --/++ value --> growth kicks in earlier/later
 #endif
 #ifndef MACCEL_LIMIT
 #    define MACCEL_LIMIT       9.6     // (M) maximum acceleration factor
@@ -50,8 +50,15 @@ static uint32_t maccel_timer;
 #    define MACCEL_CPI_THROTTLE_MS 200 // milliseconds to wait between requesting the device's current DPI
 #endif
 #ifndef MACCEL_ROUNDING_CURRY_TIMEOUT_MS
-#    define MACCEL_ROUNDING_CURRY_TIMEOUT_MS 12000 // mouse report delta time after which quantization carry gets reset
+#    define MACCEL_ROUNDING_CURRY_TIMEOUT_MS 300 // mouse report delta time after which quantization carry gets reset
 #endif
+/**
+ * Scale acceleration curve's v-input so that its params are not uncannily small
+ * and floats do not overflow in the accel formula (eg. `exp(709.8)` for doubles).
+ * Eventually the accel formula is calculated as if mouse reports @ 1000 DPI,
+ * but that being a float.
+ */
+#define MACCEL_MAGNIFICATION_DPI 1000
 
 maccel_config_t g_maccel_config = {
     // clang-format off
@@ -165,7 +172,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     const mouse_xy_report_t y_dots = mouse_report.y;
     // euclidean distance: sqrt(x^2 + y^2)
     const float distance_dots = sqrtf(x_dots * x_dots + y_dots * y_dots);
-    const float distance_inch = distance_dots / device_dpi;
+    const float distance_inch = MACCEL_MAGNIFICATION_DPI * distance_dots / device_dpi;
     const float velocity = distance_inch / time_delta;
     // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
     // Design generalised sigmoid: https://www.desmos.com/calculator/grd1ox94hm
@@ -193,9 +200,9 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     // const float distance_accel = sqrtf(x_new * x_new + y_new * x_new);
     const float distance_out = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
     const float velocity_out = velocity * maccel_factor;
-    printf("MACCEL: DPI:%5i Scl:%7.1f Tko: %6.3f Grw: %.3f Ofs: %.3f Lmt: %6.3f | Fct: %7.3f v.in: %7.3f v.out: %+7.3f d.in: %7.3f d.out: %7.3f\n",
+    printf("MACCEL: DPI:%5i Scl:%7.1f Tko:%6.3f Grw:%.3f Ofs:%.3f Lmt:%6.3f | Acc:%7.3f v.in:%7.3f v.out:%+8.3f t:%5i d.in:%7.3f d.out:%7.3f\n",
     device_dpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit,
-    maccel_factor, velocity * 1000, (velocity_out - velocity)  * 1000, distance_dots, distance_out);
+    maccel_factor, velocity, (velocity_out - velocity), time_delta, distance_dots, distance_out);
 #endif // MACCEL_DEBUG
 
     return mouse_report;
