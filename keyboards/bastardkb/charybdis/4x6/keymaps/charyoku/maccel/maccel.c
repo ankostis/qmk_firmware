@@ -26,13 +26,6 @@ static uint32_t maccel_timer;
 #ifndef MACCEL_LIMIT_UPPER
 #    define MACCEL_LIMIT_UPPER 1
 #endif
-/**
- * Scale acceleration curve's v-input so that its params are not uncannily small
- * and floats do not overflow in the accel formula (eg. `exp(709.8)` for doubles).
- * Eventually the accel formula is calculated as if mouse reports @ 1000 DPI,
- * but that being a float.
- */
-#define MACCEL_MAGNIFICATION_DPI 1000
 
 maccel_config_t g_maccel_config = {
     // clang-format off
@@ -85,7 +78,9 @@ void maccel_set_offset(float val) {
     g_maccel_config.offset = val;
 }
 void maccel_set_limit(float val) {
-    g_maccel_config.limit = val;
+    if (val >= 0) {
+        g_maccel_config.limit = val;
+    }
 }
 
 void maccel_enabled(bool enable) {
@@ -109,32 +104,27 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     static float rounding_carry_x = 0;
     static float rounding_carry_y = 0;
     // time since last mouse report:
-    const uint16_t time_delta = timer_elapsed32(maccel_timer);
+    const uint16_t delta_time = timer_elapsed32(maccel_timer);
     // skip maccel maths if report = 0, or if maccel not enabled.
     if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
         return mouse_report;
     }
     // reset timer:
     maccel_timer = timer_read32();
-
-    // Avoid expensive call to get-device-cpi unless mouse stationary for > 200ms.
-    static uint16_t device_cpi = 300;
-    if (time_delta > MACCEL_CPI_THROTTLE_MS) {
-        device_cpi = pointing_device_get_cpi();
-        // do the junk-fix until merge with qbk-upstream
-        pointing_device_set_cpi(device_cpi);
-    }
-
-    // Reset carry when pointer swaps direction, to quickly follow user's hand.
+    // Reset carry when pointer swaps direction, to follow user's hand.
     if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
     if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
-
+    // Limit expensive calls to get device cpi settings only when mouse stationary for > 200ms.
+    static uint16_t device_cpi = 300;
+    if (delta_time > MACCEL_CPI_THROTTLE_MS) {
+        device_cpi = pointing_device_get_cpi();
+    }
     // calculate dpi correction factor (for normalizing velocity range across different user dpi settings)
     const float dpi_correction = (float)1000.0f / device_cpi;
     // calculate euclidean distance moved (sqrt(x^2 + y^2))
     const float distance = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
     // calculate delta velocity: dv = distance/dt
-    const float velocity_raw = distance / time_delta;
+    const float velocity_raw = distance / delta_time;
     // correct raw velocity for dpi
     const float velocity = dpi_correction * velocity_raw;
     // letter variables for readability of maths:
@@ -159,9 +149,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
 #ifdef MACCEL_DEBUG
     const float distance_out = sqrtf(x * x + y * y);
     const float velocity_out = velocity * maccel_factor;
-    printf("MACCEL: DPI:%5i Scl:%7.1f Tko:%6.3f Grw:%.3f Ofs:%.3f Lmt:%6.3f | Acc:%7.3f v.in:%7.3f v.out:%+7.3f t:%5i d.in:%7.3f d.out:%7.3f\n",
-    device_cpi, g_maccel_config.scaling, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit,
-    maccel_factor, velocity, (velocity_out - velocity), time_delta, distance, distance_out);
+    printf("MACCEL: DPI:%4i Tko: %.3f Grw: %.3f Ofs: %.3f Lmt: %.3f | Fct: %.3f v.in: %.3f v.out: %.3f d.in: %3i d.out: %3i\n", device_cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity, velocity_out, CONSTRAIN_REPORT(distance), CONSTRAIN_REPORT(distance_out));
 #endif // MACCEL_DEBUG
 
     // report back accelerated values
