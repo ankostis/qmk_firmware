@@ -107,8 +107,6 @@ To aid in dialing in your settings just right, a debug mode exists to print math
 #define PRINTF_SUPPORT_DECIMAL_SPECIFIERS 1
 ```
 
-The debug console will print your current DPI setting and variable settings, as well as the acceleration factor, the input and output velocity, and the input and output distance.
-
 Finally, linearity across different user-CPI settings works better when pointer task throttling is enforced, ie. add something like this in your `config.h`:
 
 ```c
