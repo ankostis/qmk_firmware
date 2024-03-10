@@ -53,9 +53,9 @@
 
 // https://www.desmos.com/calculator/te5hi9za4c
 #define MACCEL_CPI         180     // --/++ faster/slower
-#define MACCEL_TAKEOFF     1300    // --/++ curve starts smoothlier/abruptlier
-#define MACCEL_GROWTH_RATE 600     // --/++ curve reaches max limit slower/faster
-#define MACCEL_OFFSET      0.0048  //--/++ growth kicks in earlier/later
+#define MACCEL_TAKEOFF     6.8     // --/++ curve starts smoothlier/abruptlier
+#define MACCEL_GROWTH_RATE 0.6     // --/++ curve reaches max limit slower/faster
+#define MACCEL_OFFSET      1.0     //--/++ growth kicks in earlier/later
 #define MACCEL_LIMIT       9.6     //maximum acceleration factor
 
 // If need, reduce mouse events frequency to cope with MCU load;
