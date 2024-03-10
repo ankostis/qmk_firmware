@@ -38,8 +38,12 @@
 
 #define CHARYBDIS_DRAGSCROLL_REVERSE_Y      // mimic up/down movement: scroll towards drag
 
-#define CHARYBDIS_MINIMUM_DEFAULT_DPI           100  // default(400)
-#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP       100  // default(200)
+/**
+ * Forbid low DPIs where PWM3360 misbehaves
+ * (ie. emits sudden V spikes in small movements)
+*/
+#define CHARYBDIS_MINIMUM_DEFAULT_DPI           400  // default(400)
+#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP       400  // default(200)
 
 // Drag-scroll changes DPI on activation, but this causes issues,
 // better keep both identical (400).  So have to compensate drag-scroll divider
