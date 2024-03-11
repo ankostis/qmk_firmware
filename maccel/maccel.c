@@ -194,7 +194,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
 #ifdef MACCEL_DEBUG
     const float distance_out = sqrtf(new_x * new_x + new_y * new_y);
     const float velocity_out = velocity_inches * maccel_factor;
-    printf("MACCEL: DPI:%5i Macpi:%7.1f Tko:%6.3f Grw:%6.3f Ofs:%6.3f Lmt:%6.3f | Acc:%7.3f Vin:%7.3f Vout:%+8.3f Din:%3i Dout:%3i\n", device_cpi, g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity_inches, velocity_out - velocity_inches, CONSTRAIN_REPORT(distance_counts), CONSTRAIN_REPORT(distance_out));
+    printf("MACCEL: DPI:%5i Macpi:%7.1f Tko:%6.3f Grw:%6.3f Ofs:%6.3f Lmt:%6.3f | Acc:%7.3f Vin:%7.3f Vout:%+8.3f Din:%3i Dout:%+8.3f\n", device_cpi, g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity_inches, velocity_out - velocity_inches, CONSTRAIN_REPORT(distance_counts), distance_out - CONSTRAIN_REPORT(distance_counts));
 #endif // MACCEL_DEBUG
 
     // report back accelerated values
