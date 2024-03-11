@@ -129,11 +129,13 @@ Finally, linearity for low CPI settings works better when pointer task throttlin
 ### Additional required installation steps
 
 To use keycodes to adjust the parameters without recompiling, two more build steps are required.
-First, add five keycodes to your keycode enum. You may choose different names, as long as you use the same names in the following step. If you are not yet using custom keycodes, add the following snippet to `keymap.c`:
+First, add six keycodes to your keycode enum. You may choose different names, as long as you use the same names in the following step. If you are not yet using custom keycodes, add the following snippet to `keymap.c`:
 ```c
 enum my_keycodes {
     MA_TOGGLE = QK_USER,    // toggle mouse acceleration
-    MA_TAKEOFF,   // mouse acceleration curve takeoff (initial acceleration) step key
+    MA_CPI,                 // maccel-CPI step key
+
+    MA_TAKEOFF,             // mouse acceleration curve takeoff (initial acceleration) step key
     MA_GROWTH_RATE,         // mouse acceleration curve growth rate step key
     MA_OFFSET,              // mouse acceleration curve offset step key
     MA_LIMIT,               // mouse acceleration curve limit step key
@@ -142,7 +144,7 @@ enum my_keycodes {
 Next, add another shim, this time to `process_record_user`. If you have not previously implemented this function, simply place the following snippet in your `keymap.c`:
 ```c
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_maccel(keycode, record, MA_TOGGLE, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
+    if (!process_record_maccel(keycode, record, MA_TOGGLE, MA_CPI, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
         return false;
     }
     /* insert your own macros here */
@@ -168,6 +170,7 @@ The step keys will adjust the parameters by the following amounts, which can opt
 
 | Parameter    | Default step value | Define name               |
 | ---          | ---                | ---                       |
+| Cpi          | `+10`              | `MACCEL_CPI_STEP`         |
 | Takeoff      | `+0.01`            | `MACCEL_TAKEOFF_STEP`     |
 | Growth rate  | `+0.01`            | `MACCEL_GROWTH_RATE_STEP` |
 | Offset       | `+0.1`             | `MACCEL_OFFSET_STEP`      |
@@ -206,7 +209,7 @@ Add the entire function to your keymap if not already present, or insert the cal
 
 You must also configure the size of the EEPROM user block by placing the following define in `config.h`:
 ```c
-#define EECONFIG_USER_DATA_SIZE 20
+#define EECONFIG_USER_DATA_SIZE 24
 ```
 
 Please be aware of the following caveats:
@@ -233,7 +236,7 @@ Finally, after flashing the firmware to your board, load the custom via definiti
 - Add configuration defines for parameters and optionally debugging
 - Optional: Config keycodes:
   - Enable keycode support by define
-  - Create five keycodes in the keycode enum
+  - Create six keycodes in the keycode enum
   - Shim `process_record_user`
 - Optional: VIA support:
   - Enable in `rules.mk`

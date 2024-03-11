@@ -9,7 +9,7 @@
 /**
  * MAccel Curve Parameters
  * https://www.desmos.com/calculator/rlh6o2kx2w
- * 
+ *
  * MACCEL_CPI (C)
  *
  * The CPI desired from the maccel algo, independent of device's CPI setting
@@ -17,9 +17,9 @@
  *
  * --/++ value --> pointer speedier/slower
  *
- * It may prove to be a device specific parameter, if sensors report 
+ * It may prove to be a device specific parameter, if sensors report
  * physical drift differently.
- * 
+ *
  * It is NOT fed into the curve, not to interfere with the tuning of it's parameters.
  */
 #ifndef MACCEL_CPI
@@ -54,6 +54,7 @@
 
 maccel_config_t g_maccel_config = {
     // clang-format off
+    .cpi =          MACCEL_CPI,
     .growth_rate =  MACCEL_GROWTH_RATE,
     .offset =       MACCEL_OFFSET,
     .limit =        MACCEL_LIMIT,
@@ -63,6 +64,9 @@ maccel_config_t g_maccel_config = {
 };
 
 #ifdef MACCEL_USE_KEYCODES
+#    ifndef MACCEL_CPI_STEP
+#        define MACCEL_CPI_STEP 10
+#    endif
 #    ifndef MACCEL_TAKEOFF_STEP
 #        define MACCEL_TAKEOFF_STEP 0.01f
 #    endif
@@ -77,6 +81,10 @@ maccel_config_t g_maccel_config = {
 #    endif
 #endif
 
+float maccel_get_cpi(void) {
+    return g_maccel_config.cpi;
+}
+
 float maccel_get_takeoff(void) {
     return g_maccel_config.takeoff;
 }
@@ -88,6 +96,11 @@ float maccel_get_offset(void) {
 }
 float maccel_get_limit(void) {
     return g_maccel_config.limit;
+}
+void maccel_set_cpi(float val) {
+    if (val >= 1) { // 0 zeroes all
+        g_maccel_config.cpi = val;
+    }
 }
 void maccel_set_takeoff(float val) {
     if (val >= 0.5) { // value less than 0.5 leads to nonsensical results
@@ -167,7 +180,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
     if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
     // Apply acceleration, convert hw-DPI-->sw-DPI and account previous quantization carry.
-    const float scale = MACCEL_CPI * maccel_factor / device_cpi;
+    const float scale = g_maccel_config.cpi * maccel_factor / device_cpi;
     const float new_x = rounding_carry_x + scale * mouse_report.x;
     const float new_y = rounding_carry_y + scale * mouse_report.y;
     // Accumulate carry from difference with next integers (quantization).
@@ -181,7 +194,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
 #ifdef MACCEL_DEBUG
     const float distance_out = sqrtf(new_x * new_x + new_y * new_y);
     const float velocity_out = velocity_inches * maccel_factor;
-    printf("MACCEL: DPI:%5i Tko:%6.3f Grw:%6.3f Ofs:%6.3f Lmt:%6.3f | Acc:%7.3f Vin:%7.3f Vout:%+8.3f Din:%3i Dout:%3i\n", device_cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity_inches, velocity_out - velocity_inches, CONSTRAIN_REPORT(distance_counts), CONSTRAIN_REPORT(distance_out));
+    printf("MACCEL: DPI:%5i Macpi:%7.1f Tko:%6.3f Grw:%6.3f Ofs:%6.3f Lmt:%6.3f | Acc:%7.3f Vin:%7.3f Vout:%+8.3f Din:%3i Dout:%3i\n", device_cpi, g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity_inches, velocity_out - velocity_inches, CONSTRAIN_REPORT(distance_counts), CONSTRAIN_REPORT(distance_out));
 #endif // MACCEL_DEBUG
 
     // report back accelerated values
@@ -203,37 +216,44 @@ static inline float get_mod_step(float step) {
     return step;
 }
 
-bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggle, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
+bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggle, uint16_t cpi, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
     if (record->event.pressed) {
         if (keycode == toggle) {
             maccel_toggle_enabled();
             return false;
         }
+        if (keycode == cpi) {
+            maccel_set_cpi(maccel_get_cpi() + get_mod_step(MACCEL_CPI_STEP));
+#    ifdef MACCEL_DEBUG
+            printf("MACCEL:keycode: MACPI: %.1f tko: %.3f gro: %.3f ofs: %.3f lmt: %.3f\n", g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
+#    endif // MACCEL_DEBUG
+            return false;
+        }
         if (keycode == takeoff) {
             maccel_set_takeoff(maccel_get_takeoff() + get_mod_step(MACCEL_TAKEOFF_STEP));
 #    ifdef MACCEL_DEBUG
-            printf("MACCEL:keycode: TKO: %.3f gro: %.3f ofs: %.3f lmt: %.3f\n", g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
+            printf("MACCEL:keycode: MaCpi: %.1f TKO: %.3f gro: %.3f ofs: %.3f lmt: %.3f\n", g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
 #    endif // MACCEL_DEBUG
             return false;
         }
         if (keycode == growth_rate) {
             maccel_set_growth_rate(maccel_get_growth_rate() + get_mod_step(MACCEL_GROWTH_RATE_STEP));
 #    ifdef MACCEL_DEBUG
-            printf("MACCEL:keycode: tko: %.3f GRO: %.3f ofs: %.3f lmt: %.3f\n", g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
+            printf("MACCEL:keycode: MaCpi: %.1f tko: %.3f GRO: %.3f ofs: %.3f lmt: %.3f\n", g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
 #    endif // MACCEL_DEBUG
             return false;
         }
         if (keycode == offset) {
             maccel_set_offset(maccel_get_offset() + get_mod_step(MACCEL_OFFSET_STEP));
 #    ifdef MACCEL_DEBUG
-            printf("MACCEL:keycode: tko: %.3f gro: %.3f OFS: %.3f lmt: %.3f\n", g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
+            printf("MACCEL:keycode: MaCpi: %.1f tko: %.3f gro: %.3f OFS: %.3f lmt: %.3f\n", g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
 #    endif // MACCEL_DEBUG
             return false;
         }
         if (keycode == limit) {
             maccel_set_limit(maccel_get_limit() + get_mod_step(MACCEL_LIMIT_STEP));
 #    ifdef MACCEL_DEBUG
-            printf("MACCEL:keycode: tko: %.3f gro: %.3f ofs: %.3f LMT: %.3f\n", g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
+            printf("MACCEL:keycode: MaCpi: %.1f tko: %.3f gro: %.3f ofs: %.3f LMT: %.3f\n", g_maccel_config.cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit);
 #    endif // MACCEL_DEBUG
             return false;
         }
@@ -241,7 +261,7 @@ bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggl
     return true;
 }
 #else
-bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggle, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
+bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggle, uint16_t cpi, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
     // provide a do-nothing keyrecord function so a user doesn't need to un-shim when disabling the keycodes
     return true;
 }
