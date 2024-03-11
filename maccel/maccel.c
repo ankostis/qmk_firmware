@@ -6,6 +6,25 @@
 #include "maccel.h"
 #include "math.h"
 
+/**
+ * MAccel Curve Parameters
+ * https://www.desmos.com/calculator/rlh6o2kx2w
+ * 
+ * MACCEL_CPI (C)
+ *
+ * The CPI desired from the maccel algo, independent of device's CPI setting
+ * (the latter is free to control mouse's hardware accuracy).
+ *
+ * --/++ value --> pointer speedier/slower
+ *
+ * It may prove to be a device specific parameter, if sensors report 
+ * physical drift differently.
+ * 
+ * It is NOT fed into the curve, not to interfere with the tuning of it's parameters.
+ */
+#ifndef MACCEL_CPI
+#    define MACCEL_CPI 120.0
+#endif
 #ifndef MACCEL_TAKEOFF
 #    define MACCEL_TAKEOFF 2.0 // (K) lower/higher value = curve starts more smoothly/abruptly
 #endif
@@ -129,29 +148,28 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     if (delta_time > MACCEL_CPI_THROTTLE_MS) {
         device_cpi = pointing_device_get_cpi();
     }
-    // calculate dpi correction factor (for normalizing velocity range across different user dpi settings)
-    const float dpi_correction = (float)MACCEL_MAGNIFICATION_DPI / device_cpi;
     // calculate euclidean distance moved (sqrt(x^2 + y^2))
-    const float distance = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
+    const float distance_counts = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
     // calculate delta velocity: dv = distance/dt
-    const float velocity_raw = distance / delta_time;
+    const float velocity_dots = distance_counts / delta_time;
     // correct raw velocity for dpi
-    const float velocity = dpi_correction * velocity_raw;
+    const float velocity_inches = MACCEL_MAGNIFICATION_DPI * velocity_dots / device_cpi;
     // calculate mouse acceleration factor: f(dv) = c - ((c-1) / ((1 + e^(x(x - b)) * a/z)))
     const float k = g_maccel_config.takeoff;
     const float g = g_maccel_config.growth_rate;
     const float s = g_maccel_config.offset;
     const float m = g_maccel_config.limit;
     // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
-    // Generalised Sigmoid Function, see https://www.desmos.com/calculator/xkhejelty8
-    const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity - s)), g / k);
+    // Generalised Sigmoid Function, see https://www.desmos.com/calculator/rlh6o2kx2w
+    const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity_inches - s)), g / k);
 
     // Reset carry when pointer swaps direction, to follow promptly user's hand.
     if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
     if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
-    // Multiply mouse reports by acceleration factor and account for previous quantization carry.
-    const float new_x = rounding_carry_x + maccel_factor * mouse_report.x;
-    const float new_y = rounding_carry_y + maccel_factor * mouse_report.y;
+    // Apply acceleration, convert hw-DPI-->sw-DPI and account previous quantization carry.
+    const float scale = MACCEL_CPI * maccel_factor / device_cpi;
+    const float new_x = rounding_carry_x + scale * mouse_report.x;
+    const float new_y = rounding_carry_y + scale * mouse_report.y;
     // Accumulate carry from difference with next integers (quantization).
     rounding_carry_x = new_x - (int)new_x;
     rounding_carry_y = new_y - (int)new_y;
@@ -161,9 +179,9 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
 
 // console output for debugging (enable/disable in config.h)
 #ifdef MACCEL_DEBUG
-    const float distance_out = sqrtf(x * x + y * y);
-    const float velocity_out = velocity * maccel_factor;
-    printf("MACCEL: DPI:%5i Tko:%6.3f Grw:%6.3f Ofs:%6.3f Lmt:%6.3f | Acc:%7.3f Vin:%7.3f Vout:%+8.3f Din:%3i Dout:%3i\n", device_cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity, velocity_out - velocity, CONSTRAIN_REPORT(distance), CONSTRAIN_REPORT(distance_out));
+    const float distance_out = sqrtf(new_x * new_x + new_y * new_y);
+    const float velocity_out = velocity_inches * maccel_factor;
+    printf("MACCEL: DPI:%5i Tko:%6.3f Grw:%6.3f Ofs:%6.3f Lmt:%6.3f | Acc:%7.3f Vin:%7.3f Vout:%+8.3f Din:%3i Dout:%3i\n", device_cpi, g_maccel_config.takeoff, g_maccel_config.growth_rate, g_maccel_config.offset, g_maccel_config.limit, maccel_factor, velocity_inches, velocity_out - velocity_inches, CONSTRAIN_REPORT(distance_counts), CONSTRAIN_REPORT(distance_out));
 #endif // MACCEL_DEBUG
 
     // report back accelerated values
