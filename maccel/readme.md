@@ -72,30 +72,34 @@ See the section on runtime adjusting by keycodes and on via support for installa
 
 ## Configuration
 
-This accel curve works in opposite direction from what you may be used to from other acceleration tools, due to technical limitations in QMK. It scales pointer sensitivity upwards rather than downwards, which means you will either have to lower your device DPI setting from what you'd normally do, or lower your mouse speed in your operating system's settings, or both.
+This acceleration curve can only scale the pointer sensitivity upwards.  Use the `MACCEL_CPI` parameter to scale it down and achieve the desired accuracy in the low speed movements ("snipping").  Your device's CPI setting is left undisturbed to control its accuracy.
 
 Several characteristics of the acceleration curve can be tweaked by adding relevant defines to `config.h`:
 ```c
-#define MACCEL_TAKEOFF 2.0      // (K) lower/higher value = curve takes off more smoothly/abruptly
-#define MACCEL_GROWTH_RATE 0.25 // (G) lower/higher value = curve reaches its upper limit slower/faster 
-#define MACCEL_OFFSET 2.2       // (S) lower/higher value = acceleration kicks in earlier/later
-#define MACCEL_LIMIT 6.0        // (M) upper limit of accel curve (maximum acceleration factor)
+/** MAccel Curve Parameters: https://www.desmos.com/calculator/rlh6o2kx2w */
+#define MACCEL_CPI          120.0   // (C) --/++ value --> pointer faster/slower
+#define MACCEL_TAKEOFF      2.0     // (K) --/++ value --> curve takes off more smoothly/abruptly
+#define MACCEL_GROWTH_RATE  0.25    // (G) --/++ value --> curve reaches its upper limit slower/faster 
+#define MACCEL_OFFSET       2.2     // (S) --/++ value --> acceleration kicks in earlier/later
+#define MACCEL_LIMIT        6.0     // (M) upper limit of accel curve (maximum acceleration factor)
 ```
-[![](assets/accel_curve.png)](https://www.desmos.com/calculator/g6zxh5rt44)
+[![](assets/accel_curve.png)](https://www.desmos.com/calculator/rlh6o2kx2w)
 
-The graph above shows the acceleration curve. You can interpret this graph as follows: the horizontal axis is input velocity (ie. how fast you are physically moving your mouse/trackball/trackpad); the vertical axis is the acceleration factor, which is the factor with which the input speed will be multiplied, resulting in your new output speed on screen. You can also understand this as a DPI scaling factor: at the start of the curve the factor is 1, and your mouse sensitivity will be equal to your default DPI setting. At the end of the curve, the factor approaches a limit which can be set by the LIMIT variable. The limit is 6 in this example and will result in a maximum mouse sensitivity of 6 times your default DPI.
+The graph above shows the acceleration curve. You can interpret this graph as follows: the horizontal axis is input velocity expressed in *1000th of an inch/ms* (ie. how fast you are physically moving your mouse/trackball/trackpad); the vertical axis is the acceleration factor, which is the factor with which the input speed will be multiplied, resulting in your new output speed on screen. What it missing from this graph is the `MACCEL_CPI` parameter which can both upscale & downscale your mouse (the former is important to control its sensitivity at the very low speeds).
 
+::: tip
 If you click on the image of the curve, you will be linked to Desmos, where you can play around with the variables to understand how each of them affect the shape of the curve. But in short:
+:::
 
-The TAKEOFF variable controls how smoothly or abruptly the acceleration curve takes off. A higher value will make it take off more abruptly, a lower value smoothens out the start of the curve.
+- The TAKEOFF variable controls how smoothly or abruptly the acceleration curve takes off. A higher value will make it take off more abruptly, a lower value smoothens out the start of the curve.
 
-The GROWTH_RATE variable sets the growth rate of the acceleration curve. A lower value will result in a flatter curve which takes longer to reach its LIMIT. A higher value will result in a steeper curve, which will reach its LIMIT faster.
+- GROWTH_RATE variable sets the growth rate of the acceleration curve. A lower value will result in a flatter curve which takes longer to reach its LIMIT. A higher value will result in a steeper curve, which will reach its LIMIT faster.
 
-The OFFSET variable moves the entire curve towards left/right. Offsetting the curve to the right means acceleration will kick in later, which is useful for low speed precision - in effect what you would otherwise have used SNIPING mode for. The maccel feature basically eliminates the need for a sniping mode.
+- The OFFSET variable moves the entire curve towards left/right. Offsetting the curve to the right means acceleration will kick in later, which is useful for low speed precision - in effect what you would otherwise have used SNIPING mode for. The maccel feature basically eliminates the need for a sniping mode.
 
-The LIMIT variable sets the upper limit for the acceleration curve. This is the maximum acceleration factor the curve will reach.
+- The LIMIT variable sets the upper limit for the acceleration curve. This is the maximum acceleration factor the curve will reach.
 
-A good starting point for tweaking your settings, is to set your default DPI to what you'd normally have set your sniping DPI. Then set the LIMIT variable to a factor that results in a bit higher than your usual default DPI. For example, if my usual settings are a default DPI of 1000 and a sniping DPI of 200, I would now set my default DPI to 200, and set my LIMIT variable to 6, which will result in an equivalent DPI scaling of 200*6=1200 at the upper limit of the acceleration curve. From there you can start playing around with the variables until you arrive at something to your liking.
+A good starting point for tweaking your settings, is to set the `MACCEL_CPI` to what you'd normally have set your sniping DPI. Then set the LIMIT variable to a factor that results in a bit higher than your usual default DPI. For example, if my usual settings are a default DPI of 1000 and a sniping DPI of 200, I would now set my `MACCEL_CPI` to 200, and set my LIMIT variable to 6, which will result in an equivalent DPI scaling of 200 x 6 = 1200 at the upper limit of the acceleration curve. From there you can start playing around with the variables until you arrive at something to your liking.
 
 To aid in dialing in your settings just right, a debug mode exists to print mathy details to the console. Refer to the QMK documentation on how to *enable the console and debugging*, then enable mouse acceleration debugging in `config.h`:
 ```c
