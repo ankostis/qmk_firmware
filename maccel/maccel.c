@@ -97,13 +97,18 @@ void maccel_toggle_enabled(void) {
 #define CONSTRAIN_REPORT(val) (mouse_xy_report_t) _CONSTRAIN(val, XY_REPORT_MIN, XY_REPORT_MAX)
 
 report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
-    if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
-        return mouse_report;
-    }
+    // rounding carry to recycle dropped floats from int mouse reports, to smoothen low speed movements (credit @ankostis)
+    static float rounding_carry_x = 0;
+    static float rounding_carry_y = 0;
 
     // time since last mouse report:
     const uint16_t delta_time = timer_elapsed32(maccel_timer);
     maccel_timer              = timer_read32();
+
+    if ((mouse_report.x == 0 && mouse_report.y == 0) || !g_maccel_config.enabled) {
+        return mouse_report;
+    }
+
     // get device cpi setting, only call when mouse hasn't moved since more than 200ms
     static uint16_t device_cpi = 300;
     if (delta_time > MACCEL_CPI_THROTTLE_MS) {
@@ -125,9 +130,19 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
     // Generalised Sigmoid Function, see https://www.desmos.com/calculator/xkhejelty8
     const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity - s)), g / k);
-    // calculate accelerated delta X and Y values and clamp:
-    const mouse_xy_report_t x = CONSTRAIN_REPORT(mouse_report.x * maccel_factor);
-    const mouse_xy_report_t y = CONSTRAIN_REPORT(mouse_report.y * maccel_factor);
+
+    // Reset carry when pointer swaps direction, to follow promptly user's hand.
+    if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
+    if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
+    // Multiply mouse reports by acceleration factor and account for previous quantization carry.
+    const float new_x = rounding_carry_x + maccel_factor * mouse_report.x;
+    const float new_y = rounding_carry_y + maccel_factor * mouse_report.y;
+    // Accumulate carry from difference with next integers (quantization).
+    rounding_carry_x = new_x - (int)new_x;
+    rounding_carry_y = new_y - (int)new_y;
+    // clamp values
+    const mouse_xy_report_t x = CONSTRAIN_REPORT(new_x);
+    const mouse_xy_report_t y = CONSTRAIN_REPORT(new_y);
 
 // console output for debugging (enable/disable in config.h)
 #ifdef MACCEL_DEBUG
