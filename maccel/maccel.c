@@ -161,18 +161,17 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     if (delta_time > MACCEL_CPI_THROTTLE_MS) {
         device_cpi = pointing_device_get_cpi();
     }
-    // calculate euclidean distance moved (sqrt(x^2 + y^2))
+    // euclidean distance: (sqrt(x^2 + y^2))
     const float distance_counts = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
-    // calculate delta velocity: dv = distance/dt
-    const float velocity_dots = distance_counts / delta_time;
-    // correct raw velocity for dpi
+    const float velocity_dots   = distance_counts / delta_time;
+    // Scale velocity in the range where the acceleration curve grows ~[0, 10].
     const float velocity_inches = MACCEL_MAGNIFICATION_DPI * velocity_dots / device_cpi;
     // calculate mouse acceleration factor: f(dv) = c - ((c-1) / ((1 + e^(x(x - b)) * a/z)))
     const float k = g_maccel_config.takeoff;
     const float g = g_maccel_config.growth_rate;
     const float s = g_maccel_config.offset;
     const float m = g_maccel_config.limit;
-    // acceleration factor: y(x) = M - (M - 1) / {1 + e^[K(x - S)]}^(G/K)
+    // acceleration factor: A(V) = M - (M - 1) / {1 + e^[K(V - S)]}^(G/K)
     // Generalised Sigmoid Function, see https://www.desmos.com/calculator/rlh6o2kx2w
     const float maccel_factor = m - (m - 1) / powf(1 + expf(k * (velocity_inches - s)), g / k);
 
