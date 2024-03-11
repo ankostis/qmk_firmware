@@ -6,7 +6,7 @@ layout:
   qmk_layout: LAYOUT
 layers:
   base:
-    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.5.0" }, F4, F5]
+    - [F11, F1, { t: F2, h: "charyoku" }, { t: F3, h: "v0.5.1" }, F4, F5]
     - [F6, F7, F8, F9, F10, F12]
     - [App, Q, W, F, P, B]
     - [J, L, U, Y, { t: "'", s: '"' }, { t: "/", s: "?", type: ghost }]
@@ -184,18 +184,18 @@ layers:
 
   mouse:
     - ["Boot loader", Reboot, "eeprom clear", "Debug toggle", "", "Esc ⎋"]
-    - ["Esc ⎋", Redo, "Tab", "eeprom clear", Reboot, "maccel takeoff ±"]
+    - ["Esc ⎋", Redo, "Tab", "eeprom clear", "maccel toggle", "maccel takeoff ±"]
     - ["", "", Esc, "$$mdi:keyboard-space$$", Tab, ""]
     - ["$$mdi:backspace$$", Undo, ❸M, ❺, "DPI ±", "maccel growth ±"]
     - [{ t: PrtSc, type: trans }, LGUI, LAlt, LCtrl, LShift, ""]
-    - [Paste, ❷R, ❶L, ❹, "maccel scale ±", "maccel offset ±"]
-    - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "drag toggle", Paste]
+    - [Paste, ❷R, ❶L, ❹, "maccel cpi ±", "maccel offset ±"]
+    - [{ t: Caps word, type: trans }, Undo, Cut, Copy, "", Paste]
     - [
         Cut,
         Copy,
         "drag scroll",
         { t: ",", s: "<", type: held },
-        "",
+        "maccel toggle",
         "maccel limit ±",
       ]
     - [

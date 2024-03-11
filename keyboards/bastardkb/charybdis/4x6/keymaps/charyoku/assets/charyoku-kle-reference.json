@@ -1,4 +1,4 @@
-[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.5.0</b>"],
+[{f:4,w:4,h:0.4,d:true},"<b>Charyoku-0.5.2</b>"],
 [{f:1,y:-0.7, d:true},"https://github.com/ankostis/qmk_firmware/tree/charyoku/keyboards/bastardkb/charybdis/4x6/keymaps/charyoku"],
 [
   {f:3,f2:2},
@@ -7,7 +7,7 @@
 ],
 [
   {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff"},"F11\nbtld\nbtld\nbtld","F1\nrbt\nrbt\nrbt",
-  {x:10.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F10\nrbt\nrbt\nrbt","F12\nrbt\nbtld\nbtld"
+  {x:10.5,t:"#000000\n#ff0000\n#ffff00\n#00ffff"},"F10\nrbt\nma<br>togl\nrbt","F12\nrbt\nma<br>tkff\nbtld"
 ],
 [
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"W\nF7\n&\n7","F\nF8\n*\n8","P\nF9\n(\n9","B\nPrtScn <i>SysRq</i>\n}\n]",
@@ -15,7 +15,7 @@
 ],
 [
   {y:-0.5,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#777777"},"App",{c:"#888888"},"Q\nF12\n{\n[",
-  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"'<b>\"</b>\nRGB speed\ndpi\nPg<br>▲",{c:"#777777"},"/?\nRGB tog\nTab\nTab"
+  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff"},"'<b>\"</b>\nRGB speed\ndpi\nPg<br>▲",{c:"#777777"},"/?\nRGB tog\nma<br>grw\nTab"
 ],
 [
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ffffff",c:"#888888"},"R\nF4\n$\n4\nAlt",{n:true},"S\nF5\n%\n5\nCtrl","T\nF6\n^\n6\nShift","G\nScroll Lock\n+\n=",
@@ -23,7 +23,7 @@
 ],
 [
   {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#777777"},"PrtScn",{c:"#888888"},"A\nF11\n:\n;\nSuper",
-  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffffff"},"O\n⏭\ndpi-s\nPg<br>▼\nSuper",{c:"#777777"},"<b>;:</b>\nRGB<br>fix\nSpc\nSpc"
+  {x:10.5,t:"#000000\n#ff00ff\n#ffff00\n#00ffff\n#ffffff"},"O\n⏭\nma<br>cpi\nPg<br>▼\nSuper",{c:"#777777"},"<b>;:</b>\nRGB<br>fix\nma<br>ofst\nSpc"
 ],
 [
   {y:-0.5,x:2,t:"#000000\n#ff0000\n#00ff00\n#0000ff",c:"#888888"},"X\nF1\n!\n1","C\nF2\n@\n2","D\nF3\n#\n3","V\nPause Break\n|\n\\",
@@ -31,7 +31,7 @@
 ],
 [
   {y:-0.5,t:"#000000\n#ff00ff\n\n#00ffff\n#ffffff",c:"#777777"},"Caps Word",{c:"#888888"},"Z\nF10\n~\n`",
-  {x:10.5,t:"#000000\n\n#ffff00\n\n#00ffff"},"<b>.></b>\n\nSnipe\n\n<b>Nav</b>",{c:"#777777"},"Caps Lock"
+  {x:10.5,t:"#000000\n\n#ffff00\n\n#00ffff"},"<b>.></b>\n\n\n\n<b>Nav</b>",{c:"#777777"},"\nCaps Lock\nma<br>lim"
 ],
 [
   {x:4,c:"#888888",t:"#000000\n#ff0000\n#00ff00\n#0000ff\n#ff00ff"},"Esc\n≣\n(\n.>\n<b>Media</b>",

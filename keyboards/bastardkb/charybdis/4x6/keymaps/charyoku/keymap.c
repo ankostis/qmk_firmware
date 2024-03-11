@@ -66,13 +66,14 @@ const uint16_t PROGMEM combo_layer_lock_sym[] = {ENT_SYM, KC_CAPS, COMBO_END};
 
 #ifdef MACCEL_ENABLE
 enum my_keycodes {
-    MA_SCALE = QK_USER,     // mouse acceleration curve scale step key
-    MA_TAKEOFF,             // mouse acceleration curve takeoff (initial acceleration) step key
-    MA_GROWTH_RATE,         // mouse acceleration curve growth rate step key
-    MA_OFFSET,              // mouse acceleration curve offset step key
-    MA_LIMIT,               // mouse acceleration curve limit step key
+    MA_TOGGLE = QK_USER, // mouse acceleration curve scale step key
+    MA_CPI,              // software CPI
+    MA_TAKEOFF,          // mouse acceleration curve takeoff (initial acceleration) step key
+    MA_GROWTH_RATE,      // mouse acceleration curve growth rate step key
+    MA_OFFSET,           // mouse acceleration curve offset step key
+    MA_LIMIT,            // mouse acceleration curve limit step key
 };
-#define MA_SCAL MA_SCALE
+#define MA_TOGL MA_TOGGLE
 #define MA_TKFF MA_TAKEOFF
 #define MA_GRWT MA_GROWTH_RATE
 #define MA_OFST MA_OFFSET
@@ -110,7 +111,7 @@ enum my_keycodes {
 #define _________________TRNS_HALF_ROW_________________  _______,_______,_______,_______,_______,_______
 #define ________________HOME_ROW_GACS_L________________  _______,KC_LGUI,KC_LALT,KC_LCTL,KC_LSFT,XXXXXXX
 #define ________________HOME_ROW_GACS_R________________  XXXXXXX,KC_LSFT,KC_LCTL,KC_LALT,KC_LGUI,_______
-#define ________________KEYB_CTRL_ROW_L________________  QK_BOOT, QK_RBT,EE_CLR ,DB_TOGG,XXXXXXX,KC_ESC
+#define ________________KEYB_CTRL_ROW_L________________  QK_BOOT, QK_RBT, EE_CLR,DB_TOGG,XXXXXXX,KC_ESC
 #define ________________KEYB_CTRL_ROW_R________________   KC_ESC,KC_AGIN, KC_TAB, EE_CLR, QK_RBT,QK_BOOT
 
 /*
@@ -173,10 +174,10 @@ enum my_keycodes {
  * anything on the 5th column unreachable (the original *charybdis 4x6 uses the pinky).
  */
 #define LAYOUT_LAYER_POINTER                                                                           \
-    ________________KEYB_CTRL_ROW_L________________,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,MA_TKFF, \
+    ________________KEYB_CTRL_ROW_L________________,   KC_ESC,QK_BOOT, QK_RBT, EE_CLR,MA_TOGL,MA_TKFF, \
     _______,XXXXXXX, KC_ESC, KC_SPC, KC_TAB,XXXXXXX,  KC_BSPC,KC_UNDO,KC_BTN3,KC_BTN5,DPI_MOD,MA_GRWT, \
-    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4,MA_SCAL,MA_OFST, \
-    _______,KC_UNDO, KC_CUT,KC_COPY,DRG_TOG, KC_PSTE,   KC_CUT,KC_COPY,DRGSCRL,_______,LA2_NAV,MA_LIMT, \
+    ________________HOME_ROW_GACS_L________________,  KC_PSTE,KC_BTN2,KC_BTN1,KC_BTN4, MA_CPI,MA_OFST, \
+    _______,KC_UNDO, KC_CUT,KC_COPY,DRG_TOG, KC_PSTE,  KC_CUT,KC_COPY,DRGSCRL,_______,XXXXXXX,MA_LIMT, \
                              KC_ESC,_______,TAB_PTR,                                   KC_ENT,KC_BSPC, \
                                     _______,_______,                                   KC_DEL
 
@@ -349,11 +350,11 @@ bool caps_word_press_user(uint16_t keycode) {
 // #define MACCEL_GROWTH_RATE 0.25  // --/++ curve reaches max limit slower/faster
 // #define MACCEL_OFFSET      2.2   // --/++ growth kicks in earlier/later
 // #define MACCEL_LIMIT       6.0   // maximum acceleration factor
-
-#   include "maccel/maccel.h"
-
+#include    "features/maccel/maccel.h" // Why is this needed?
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+#ifdef MACCEL_ENABLE
     return pointing_device_task_maccel(mouse_report);
+#endif
 }
 
 void keyboard_post_init_user(void) {
@@ -361,7 +362,7 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_maccel(keycode, record, MA_SCALE, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
+    if (!process_record_maccel(keycode, record, MA_TOGGLE, MA_CPI, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
         return false;
     }
     /* insert your own macros here */
