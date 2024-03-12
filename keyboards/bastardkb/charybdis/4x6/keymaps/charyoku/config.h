@@ -44,6 +44,7 @@
 */
 #define CHARYBDIS_MINIMUM_DEFAULT_DPI           400  // default(400)
 #define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP       400  // default(200)
+#define CHARYBDIS_DRAGSCROLL_DPI                400  // default(100)
 
 // Drag-scroll changes DPI on activation, but this causes issues,
 // better keep both identical (400).  So have to compensate drag-scroll divider
