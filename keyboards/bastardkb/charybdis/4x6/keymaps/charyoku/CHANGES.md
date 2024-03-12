@@ -6,6 +6,10 @@ maintain the `keylist.json` with the following command:
     qmk c2json | jq > keyboards/bastardkb/charybdis/4x6/keymaps/charyoku/assets/keylist.json 
 -->
 
+## v0.5.x, Max 2024 - MACCEL
+
+TODO: build `charyoku` branch: rebase `charyoku-dev-user` with **maccel** as userspace.
+
 ## v0.4.3, 29 Feb 2024 - swap Home/Insert keys
 
 - feat/break: swap  `Home` <--> `Insert`, to align in parallel with PgUp/PgDn keys.
