@@ -18,6 +18,14 @@
 #ifndef MACCEL_LIMIT
 #    define MACCEL_LIMIT 6.0 // (M) upper limit of accel curve (maximum acceleration factor)
 #endif
+/**
+ * Scale acceleration curve's v-input so that its params are not uncannily small
+ * and floats do not overflow in the accel formula (eg. `exp(709.8)` for doubles).
+ * Eventually the accel formula is calculated as if the pointer reports @ 1000 CPI,
+ * but "counts" are expressed as float (vs integer for the hw "counts").
+ */
+#define MACCEL_MAGNIFICATION_DPI 1000.0
+
 #ifndef MACCEL_CPI_THROTTLE_MS
 #    define MACCEL_CPI_THROTTLE_MS 200 // milliseconds to wait between requesting the device's current DPI
 #endif
@@ -122,7 +130,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
         device_cpi = pointing_device_get_cpi();
     }
     // calculate dpi correction factor (for normalizing velocity range across different user dpi settings)
-    const float dpi_correction = (float)1000.0f / device_cpi;
+    const float dpi_correction = (float)MACCEL_MAGNIFICATION_DPI / device_cpi;
     // calculate euclidean distance moved (sqrt(x^2 + y^2))
     const float distance = sqrtf(mouse_report.x * mouse_report.x + mouse_report.y * mouse_report.y);
     // calculate delta velocity: dv = distance/dt
