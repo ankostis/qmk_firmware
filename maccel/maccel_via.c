@@ -96,9 +96,9 @@ void maccel_config_get_value(uint8_t *data) {
 
     switch (*value_id) {
         case id_maccel_cpi: {
-            uint16_t cpi = g_maccel_config.cpi;
-            value_data[0]  = cpi >> 8;
-            value_data[1]  = cpi & 0xFF;
+            uint16_t cpi  = g_maccel_config.cpi;
+            value_data[0] = cpi >> 8;
+            value_data[1] = cpi & 0xFF;
             break;
         }
         case id_maccel_takeoff: {

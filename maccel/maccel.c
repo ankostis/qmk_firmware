@@ -206,7 +206,7 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     const mouse_xy_report_t x = CONSTRAIN_REPORT(new_x);
     const mouse_xy_report_t y = CONSTRAIN_REPORT(new_y);
 
-// console output for debugging (enable/disable in config.h)
+    // console output for debugging (enable/disable in config.h)
 #ifdef MACCEL_DEBUG
     const float distance_out = sqrtf(new_x * new_x + new_y * new_y);
     const float velocity_out = velocity_inches * maccel_factor;
@@ -232,7 +232,7 @@ static inline float get_mod_step(float step) {
     return step;
 }
 
-bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggle, uint16_t cpi, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
+bool process_record_maccel(uint16_t keycode, keyrecord_t* record, uint16_t toggle, uint16_t cpi, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
     if (record->event.pressed) {
         if (keycode == toggle) {
             maccel_toggle_enabled();
@@ -277,7 +277,7 @@ bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggl
     return true;
 }
 #else
-bool process_record_maccel(uint16_t keycode, keyrecord_t *record, uint16_t toggle, uint16_t cpi, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
+bool process_record_maccel(uint16_t keycode, keyrecord_t* record, uint16_t toggle, uint16_t cpi, uint16_t takeoff, uint16_t growth_rate, uint16_t offset, uint16_t limit) {
     // provide a do-nothing keyrecord function so a user doesn't need to un-shim when disabling the keycodes
     return true;
 }
