@@ -47,13 +47,18 @@ include $(USER_PATH)/features/maccel/rules.mk
 
 You may instead place `MACCEL_ENABLE = yes` in your keymap's `rules.mk` if you wish to only enable maccel for some boards.
 
-Add to your userspace source file, near the top:
+Add to your userspace header file, near the top:
 ```c
 #ifdef MACCEL_ENABLE
     #include "features/maccel/maccel.h"
 #endif
 ```
 
+Finally ensure you have included your userspace header file from your `keymap.c` file(s):
+```c
+#include "<userspace-name>.h"
+```
+ 
 Continue with "Installation (common)", below.
 
 ### Installation (common)
@@ -141,7 +146,7 @@ enum my_keycodes {
     MA_LIMIT,               // mouse acceleration curve limit step key
 };
 ```
-Next, add another shim, this time to `process_record_user`. If you have not previously implemented this function, simply place the following snippet in your `keymap.c`:
+Next, add another shim, this time to `process_record_user`. If you have not previously implemented this function, simply place the following snippet in your `keymap.c` or your userspace sources.
 ```c
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_maccel(keycode, record, MA_TOGGLE, MA_CPI, MA_TAKEOFF, MA_GROWTH_RATE, MA_OFFSET, MA_LIMIT)) {
@@ -151,7 +156,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 ```
-Take care to use the same names that you used in the previous step.
+Take care to use the same key-names that you used in the previous step.
 
 See the configuration section on how to enable this feature once you have set it up.
 
