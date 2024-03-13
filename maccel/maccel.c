@@ -12,8 +12,12 @@
  *
  * MACCEL_CPI (C)
  *
- * The CPI desired from the maccel algo, independent of device's CPI setting
- * (the latter is free to control mouse's hardware accuracy).
+ * The CPI desired from the maccel algo controlling the base speed of the mouse
+ * (at the lowest hand movement).  This can be either independent of the device's
+ * CPI setting (so hw-CPI is free to control mouse's hardware accuracy) or not,
+ * depending on the `MACCEL_CPI_MODE` parameter.
+ *
+ * Tunable on run-time by the `MA_CPI` key.
  *
  * --/++ value --> pointer speedier/slower
  *
@@ -24,6 +28,15 @@
  */
 #ifndef MACCEL_CPI
 #    define MACCEL_CPI 120.0
+#endif
+/**
+ * When `MACCEL_CPI_MODE == INDEPENDENT`, the parameter `MACCEL_CPI` controls
+ * the base speed of the mouse for all device hw-CPI settings.  When `DEPENDENT`,
+ * hw-CPI settings directly affects the base speed of the mouse and a different
+ * tuning for `MACCEL_CPI` for each hw-CFI to fine-tune it.
+ */
+#ifndef MACCEL_CPI_MODE
+#    define MACCEL_CPI_MODE INDEPENDENT
 #endif
 #ifndef MACCEL_TAKEOFF
 #    define MACCEL_TAKEOFF 2.0 // (K) lower/higher value = curve starts more smoothly/abruptly
@@ -178,8 +191,12 @@ report_mouse_t pointing_device_task_maccel(report_mouse_t mouse_report) {
     // Reset carry when pointer swaps direction, to follow promptly user's hand.
     if (mouse_report.x * rounding_carry_x < 0) rounding_carry_x = 0;
     if (mouse_report.y * rounding_carry_y < 0) rounding_carry_y = 0;
-    // Apply acceleration, convert hw-DPI-->sw-DPI and account previous quantization carry.
+// Apply acceleration, (optionally) convert hw-DPI-->sw-DPI and account previous quantization carry.
+#if MACCEL_CPI_MODE == INDEPENDENT
     const float scale = g_maccel_config.cpi * maccel_factor / device_cpi;
+#elif MACCEL_CPI_MODE == DEPENDENT
+    const float scale = g_maccel_config.cpi * maccel_factor;
+#endif
     const float new_x = rounding_carry_x + scale * mouse_report.x;
     const float new_y = rounding_carry_y + scale * mouse_report.y;
     // Accumulate carry from difference with next integers (quantization).
